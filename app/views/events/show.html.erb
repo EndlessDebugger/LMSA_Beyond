@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @event.event_id %>
+</p>
+
+<p>
+  <strong>Event name:</strong>
+  <%= @event.event_name %>
+</p>
+
+<p>
+  <strong>Event type:</strong>
+  <%= @event.event_type %>
+</p>
+
+<p>
+  <strong>Event date:</strong>
+  <%= @event.event_date %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event.description %>
+</p>
+
+<p>
+  <strong>Event creator:</strong>
+  <%= @event.event_creator %>
+</p>
+
+<p>
+  <strong>Virtual:</strong>
+  <%= @event.virtual %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @event.password %>
+</p>
+
+<p>
+  <strong>Meeting link:</strong>
+  <%= @event.meeting_link %>
+</p>
+
+<p>
+  <strong>Signin time:</strong>
+  <%= @event.signin_time %>
+</p>
+
+<p>
+  <strong>Point val:</strong>
+  <%= @event.point_val %>
+</p>
+
+<p>
+  <strong>Graphics:</strong>
+  <%= @event.graphics %>
+</p>
+
+<p>
+  <strong>Total event hr:</strong>
+  <%= @event.total_event_hr %>
+</p>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

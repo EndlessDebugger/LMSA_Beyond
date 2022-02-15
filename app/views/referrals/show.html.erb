@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Old member:</strong>
+  <%= @referral.old_member %>
+</p>
+
+<p>
+  <strong>New member:</strong>
+  <%= @referral.new_member %>
+</p>
+
+<p>
+  <strong>Guest first name:</strong>
+  <%= @referral.guest_first_name %>
+</p>
+
+<p>
+  <strong>Guest last name:</strong>
+  <%= @referral.guest_last_name %>
+</p>
+
+<p>
+  <strong>Medical prof:</strong>
+  <%= @referral.medical_prof %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @referral.email %>
+</p>
+
+<p>
+  <strong>Date referred:</strong>
+  <%= @referral.date_referred %>
+</p>
+
+<p>
+  <strong>Admin approved:</strong>
+  <%= @referral.admin_approved %>
+</p>
+
+<%= link_to 'Edit', edit_referral_path(@referral) %> |
+<%= link_to 'Back', referrals_path %>

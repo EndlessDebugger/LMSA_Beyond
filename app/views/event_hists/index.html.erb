@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Event Hists</h1>
+<br>
+Welcome to the Event History index. This page is to record user event attendance. To report a user's attendence, click on "Record User Attendance". To see the event's details, click show. To move around the website, and to edit it click edit. click "Navigation"
+<br>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>User</th>
+      <th>Sign in</th>
+      <th>Point recv</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_hists.each do |event_hist| %>
+      <tr>
+        <td><%= event_hist.event_id %></td>
+        <td><%= event_hist.user_id %></td>
+        <td><%= event_hist.sign_in %></td>
+        <td><%= event_hist.point_recv %></td>
+        <td><%= link_to 'Show', event_hist %></td>
+        <td><%= link_to 'Edit', edit_event_hist_path(event_hist) %></td>
+        <td><%= link_to 'Destroy', event_hist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Record User Attendance', new_event_hist_path %>
+<br>
+<%= link_to 'Navigation', home_index_path %>

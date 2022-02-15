@@ -1,0 +1,3 @@
+class EventHist < ApplicationRecord
+    
+end

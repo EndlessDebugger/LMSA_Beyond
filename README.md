@@ -7,5 +7,6 @@ Group Members:
 - Nikita Udodenko : Product Owner
 - Alec Hubacher
 - Matthew Mueller
+- Zeling Li
 
 Jira: https://door-keys.atlassian.net/jira/software/projects/G53/boards/4/backlog

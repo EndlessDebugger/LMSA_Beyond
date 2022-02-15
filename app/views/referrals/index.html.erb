@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+<br>
+Welcome to the Referrals index. This page is to record when a member recruits another member. To report a referral, click on "New Referral". To see a user's details, click show, and to edit it click edit. To move around the website, click "Navigation"
+<br>
+<br>
+<h1>Referrals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Old member</th>
+      <th>New member</th>
+      <th>Guest first name</th>
+      <th>Guest last name</th>
+      <th>Medical prof</th>
+      <th>Email</th>
+      <th>Date referred</th>
+      <th>Admin approved</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @referrals.each do |referral| %>
+      <tr>
+        <td><%= referral.old_member %></td>
+        <td><%= referral.new_member %></td>
+        <td><%= referral.guest_first_name %></td>
+        <td><%= referral.guest_last_name %></td>
+        <td><%= referral.medical_prof %></td>
+        <td><%= referral.email %></td>
+        <td><%= referral.date_referred %></td>
+        <td><%= referral.admin_approved %></td>
+        <td><%= link_to 'Show', referral %></td>
+        <td><%= link_to 'Edit', edit_referral_path(referral) %></td>
+        <td><%= link_to 'Destroy', referral, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Referral', new_referral_path %>
+<br>
+<%= link_to 'Navigation', home_index_path %>

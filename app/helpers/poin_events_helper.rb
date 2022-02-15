@@ -1,0 +1,2 @@
+module PoinEventsHelper
+end

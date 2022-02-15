@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @event_hist.event_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @event_hist.user_id %>
+</p>
+
+<p>
+  <strong>Sign in:</strong>
+  <%= @event_hist.sign_in %>
+</p>
+
+<p>
+  <strong>Point recv:</strong>
+  <%= @event_hist.point_recv %>
+</p>
+
+<%= link_to 'Edit', edit_event_hist_path(@event_hist) %> |
+<%= link_to 'Back', event_hists_path %>

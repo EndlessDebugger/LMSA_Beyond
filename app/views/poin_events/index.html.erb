@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Point Events</h1>
+<br>
+Welcome to the Point Events index. This page is to record points awarded to users in special cases, e.g. a merchandise purchase. To report a new Point Event, click on "New Point Event". To see the event's details, click show, and to edit it click edit. To move around the website, click "Navigation"
+<br>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Balance</th>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Admin award</th>
+      <th>Hours attend</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @poin_events.each do |poin_event| %>
+      <tr>
+        <td><%= poin_event.user_id %></td>
+        <td><%= poin_event.balance %></td>
+        <td><%= poin_event.date %></td>
+        <td><%= poin_event.description %></td>
+        <td><%= poin_event.admin_award_id %></td>
+        <td><%= poin_event.hours_attend %></td>
+        <td><%= link_to 'Show', poin_event %></td>
+        <td><%= link_to 'Edit', edit_poin_event_path(poin_event) %></td>
+        <td><%= link_to 'Destroy', poin_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Poin Event', new_poin_event_path %>
+<br>
+<%= link_to 'Navigation', home_index_path %>

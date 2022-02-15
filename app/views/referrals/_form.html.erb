@@ -1,0 +1,57 @@
+<%= form_with(model: referral) do |form| %>
+  <% if referral.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(referral.errors.count, "error") %> prohibited this referral from being saved:</h2>
+
+      <ul>
+        <% referral.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :old_member %>
+    <%= form.number_field :old_member %>
+  </div>
+
+  <div class="field">
+    <%= form.label :new_member %>
+    <%= form.number_field :new_member %>
+  </div>
+
+  <div class="field">
+    <%= form.label :guest_first_name %>
+    <%= form.text_field :guest_first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :guest_last_name %>
+    <%= form.text_field :guest_last_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :medical_prof %>
+    <%= form.check_box :medical_prof %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_referred %>
+    <%= form.datetime_select :date_referred %>
+  </div>
+
+  <div class="field">
+    <%= form.label :admin_approved %>
+    <%= form.text_field :admin_approved %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
