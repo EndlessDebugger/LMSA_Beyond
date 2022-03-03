@@ -26,9 +26,13 @@ class User < ApplicationRecord
   end
 
   def sum_points
-    poin_events.where("user_id = ?", id).sum(:balance)
+    poin_events.where("user_id = ?", id).sum(:balance) + event_hists.where("user_id = ?", id).sum(:point_recv)
   end
     
+  def getuser_points(userid)
+    poin_events.where("user_id = ?", userid).sum(:balance) + event_hists.where("user_id = ?", userid).sum(:point_recv)
+  end    
+
   def bod
       if birthdate.present?
         birthdate.strftime("%m/%d/%Y")

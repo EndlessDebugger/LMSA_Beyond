@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'myhistory/index'
+  get 'myhistory/points_leaderboard'
   root to: 'home#index'
   get '/home/adminDash' => "home#adminDash", :as => :admin_root
     devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: "users/sessions" }

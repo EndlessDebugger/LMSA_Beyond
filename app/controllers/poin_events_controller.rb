@@ -66,4 +66,12 @@ class PoinEventsController < ApplicationController
   def poin_event_params
     params.require(:poin_event).permit(:user_id, :balance, :date, :description, :admin_award_id, :hours_attend)
   end
+  def set_event_hist
+    @event_hist = EventHist.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def event_hist_params
+    params.require(:event_hist).permit(:event_id, :user_id, :sign_in, :point_recv)
+  end
 end

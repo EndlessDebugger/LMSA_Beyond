@@ -11,6 +11,7 @@
     </tr>
   </thead>
   <tbody>
+  <p> Points: <%= current_user.sum_points %> </p>
     <% @event_hists.each do |event_hist| %>
       <tr>
         <td><%= event_hist.event_id if event_hist.user_id == current_user.id %></td>
@@ -21,5 +22,6 @@
         <br>
       </tr>
     <% end %>
+
   </tbody>
 </table>
