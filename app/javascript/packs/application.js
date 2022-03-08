@@ -14,6 +14,8 @@ require("../stylesheets/application")
 
 import { Calendar } from '@fullcalendar/core'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
 
 Rails.start();
 Turbolinks.start();
@@ -24,16 +26,24 @@ document.addEventListener('turbolinks:load', function() {
   
     var calendar = new Calendar(calendarEl, {
       
-      plugins: [ dayGridPlugin ],
+      plugins: [ dayGridPlugin, timeGridPlugin, listPlugin ],
+
+      initialView: 'dayGridMonth',
+
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,listWeek'
+      },
   
-    //   eventSources: [
-    //     {        
-    //       url: "/users/<%= @user.id %>/jobs.json",
-    //     }
-    //   ]
+      events: "/events.json",
   
     });
   
     calendar.render();
-  
+
+    var list_view = document.getElementById('list_view');
+    list_view.addEventListener('click', (event) => {
+      list_view_function();
+    });  
 });

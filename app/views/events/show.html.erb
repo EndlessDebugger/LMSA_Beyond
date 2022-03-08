@@ -1,69 +1,107 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"><%= notice %></div>
 
-<p>
-  <strong>Event:</strong>
-  <%= @event.event_id %>
-</p>
+<div class="container">
 
-<p>
-  <strong>Event name:</strong>
-  <%= @event.event_name %>
-</p>
+  <h1><%= @event.event_name %></h1>
 
-<p>
-  <strong>Event type:</strong>
-  <%= @event.event_type %>
-</p>
+  <div class="d-flex flex-column bd-highlight mb-3">
 
-<p>
-  <strong>Event date:</strong>
-  <%= @event.event_date %>
-</p>
+    <div class="p-2 bd-highlight">
+      <strong>Event ID: </strong> 
+      <%= @event.event_id %>
+    </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
+    <div class="p-2 bd-highlight">
+      <strong>Event name:</strong>
+      <%= @event.event_name %>
+    </div>
 
-<p>
-  <strong>Event creator:</strong>
-  <%= @event.event_creator %>
-</p>
+    <div class="p-2 bd-highlight">
+      <strong>Event type:</strong>
+      <%= @event.event_type %>
+    </div>
 
-<p>
-  <strong>Virtual:</strong>
-  <%= @event.virtual %>
-</p>
+    <div class="p-2 bd-highlight">
+      <strong>Event date:</strong>
+      <%= @event.event_date %>
+    </div>
 
-<p>
-  <strong>Password:</strong>
-  <%= @event.password %>
-</p>
+    <div class="p-2 bd-highlight">
+      <strong>Description:</strong>
+      <%= @event.description %>
+    </div>
 
-<p>
-  <strong>Meeting link:</strong>
-  <%= @event.meeting_link %>
-</p>
+    <div class="p-2 bd-highlight">
+      <strong>Event creator:</strong>
+      <%= @event.event_creator %>
+    </div>
 
-<p>
-  <strong>Signin time:</strong>
-  <%= @event.signin_time %>
-</p>
+    <div class="p-2 bd-highlight">
+      <strong>Virtual:</strong>
+      <%= @event.virtual %>
+    </div>
 
-<p>
-  <strong>Point val:</strong>
-  <%= @event.point_val %>
-</p>
+    <div class="p-2 bd-highlight">
+      <strong>Password:</strong>
+      <%= @event.password %>
+    </div>
 
-<p>
-  <strong>Graphics:</strong>
-  <%= @event.graphics %>
-</p>
+    <div class="p-2 bd-highlight">
+      <strong>Meeting link:</strong>
+      <%= @event.meeting_link %>
+    </div>
 
-<p>
-  <strong>Total event hr:</strong>
-  <%= @event.total_event_hr %>
-</p>
+    <div class="p-2 bd-highlight">
+      <strong>Signin time:</strong>
+      <%= @event.signin_time %>
+    </div>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+    <div class="p-2 bd-highlight">
+      <strong>Point val:</strong>
+      <%= @event.point_val %>
+    </div>
+
+    <div class="p-2 bd-highlight">
+      <strong>Graphics:</strong>
+      <%= @event.graphics %>
+    </div>
+
+    <div class="p-2 bd-highlight">
+      <strong>Total event hr:</strong>
+      <%= @event.total_event_hr %>
+    </div>
+    
+  </div>
+
+
+  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Sign In to <%= @event.event_name %></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <label for="password" class="col-form-label">Password:</label>
+            <input type="text" class="form-control" id="password">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sing In</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<%= link_to 'Edit', edit_event_path(@event), class:"btn btn-secondary text-light" %>
+<%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-secondary text-light" %>
+<%= link_to 'Sign In',  event_hists_path(:event_hist => {:event_id => @event.event_id, :user_id => current_user.id, :sign_in => true, :point_recv => @event.point_val}), method: :post, class:"btn btn-secondary text-light" %>
+<%= link_to 'Back', events_path, class:"btn btn-secondary text-light" %>
+
+</div>

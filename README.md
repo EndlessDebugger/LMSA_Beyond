@@ -13,7 +13,7 @@ Making a web-app for the Latino Medical Student Association
 - Matthew Mueller
 - Zeling Li
 
-Jira: https://door-keys.atlassian.net/jira/software/projects/G53/boards/4/backlog
+Jira: https://lmsaplustracker.atlassian.net/jira/software/projects/G53/boards/4/backlog
 
 ## Requirements ##
 
@@ -37,7 +37,7 @@ This code has been run and tested on:
 
 Download this code repository by using git:
 
- `git clone https://github.com/your_github_here.git`
+ `git clone https://github.com/EndlessDebugger/LMSA_Beyond.git`
 
 
 ## Tests ##
@@ -50,7 +50,7 @@ An RSpec test suite is available and can be ran using:
 
 Run the following code in Powershell if using windows or the terminal using Linux/Mac
 
-  `cd your_github_here`
+  `cd local_app`
 
   `docker run --rm -it --volume "$(pwd):/rails_app" -e DATABASE_USER=test_app -e DATABASE_PASSWORD=test_password -p 3000:3000 dmartinez05/ruby_rails_postgresql:latest`
 
@@ -67,19 +67,15 @@ The application can be seen using a browser and navigating to http://localhost:3
 
 ## Environmental Variables/Files ##
 
-** Add instructions/description if your application requires it.
+This porject will require a .env file with the google secerets in order have the google authencation working.
+Contact the current collobators for more information.
+
 
 ## Deployment ##
-
-** Add instructions about how to deploy to Heroku
+In order for the App be deployed to heroku make an app on heroku and connect it to the repo, then add the site to the google cloud console.
 
 
 ## CI/CD ##
 
-TBD
-
-## Support ##
-
-Admins looking for support should first look at the application help page.
-Users looking for help seek out assistance from the customer.
+This repo has Rubocop and rspec testing intergated into the github workflows. This has a Heroku pipeline attached to continulsy deploy verfied changes from the test branch.
 
