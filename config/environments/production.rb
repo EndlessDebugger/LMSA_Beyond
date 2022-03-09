@@ -117,6 +117,5 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
-  ENV['GOOGLE_OAUTH_CLIENT_ID']='157983403743-rpi7b5i0sjeurl5qvhu10g03fpknof59.apps.googleusercontent.com'
-  ENV['GOOGLE_OAUTH_CLIENT_SECRET'] = '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'
+  ENV["SERVER_ROOT"]="https://lmsa-plus-tr-test-bqtawkpissmq.herokuapp.com"
 end
