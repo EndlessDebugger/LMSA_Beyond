@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Point Events</h1>
+<br>
+Welcome to the Point Events index. This page is to record points awarded to users in special cases, e.g. a merchandise purchase. To report a new Point Event, click on "New Point Event". To see the event's details, click show, and to edit it click edit. To move around the website, click "Navigation"
+<br>
+<br>
+
+<p> My Points: <%= current_user.sum_points %> </p>
+<table>
+    <thead>
+        <tr>
+          <th>User</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+    <br>
+      <tbody>
+        <% User.all.sort{|a,b| b.sum_points <=> a.sum_points}.each do |that_user| %>
+          <tr>
+            <td><%= that_user.id %></td>
+            <td><%= that_user.sum_points %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    <br>
+</table>

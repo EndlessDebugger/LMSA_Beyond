@@ -1,0 +1,44 @@
+<%= stylesheet_link_tag "signup.css" %>
+<% @title = "LMSA SignUp" %>
+
+<h1 style="color:white; text-align:center;">Please fill out before continuing</h1>
+
+<div class="container">
+    <div class="body d-md-flex align-items-center justify-content-between">
+        <div class=" box-2 d-flex flex-column h-100">
+            <div class="mt-5">
+                <div class="d-flex flex-column align-items-center">
+                  <div class="row">
+                    <div class="col-md-6 align-items-center" style="width: 100%;">
+
+                      <%= form_with(model: @user, local: true) do |f| %>
+
+
+                        <div class="field">
+                          <%= f.label :birthdate %>
+                          <%= f.date_field :birthdate %>
+                        </div>
+
+                        <div class="field">
+                          <%= f.label :major %>
+                          <%= f.text_field :major %>
+                        </div>
+                        
+                        <div class="field">
+                          <%= f.label :bio%>
+                          <%= f.text_field :bio %>
+                        </div>
+
+                        <div class="actions">
+                          <%= f.submit "Sign Up", class:"btn btn-outline-secondary text-dark"%>
+                        </div>
+                      <% end %>
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
+

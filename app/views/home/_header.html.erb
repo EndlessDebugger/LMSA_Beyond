@@ -1,0 +1,20 @@
+<%= stylesheet_link_tag "header.css" %>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light"style="font-size:28px;">
+  <div class="container-fluid">
+    <%= link_to image_tag("logo.png", :size => "80x80" ), root_path, class:"navbar-brand"%>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ms-auto">
+        <%= link_to "Event History", event_hists_path, class:"nav-link" %>
+        <%= link_to "Events", events_path, class:"nav-link" %>
+        <%= link_to "Point Events", poin_events_path, class:"nav-link" %>
+        <%= link_to "Referrals", referrals_path, class:"nav-link" %>
+        <%= image_tag(current_user.avatar_url, :size => "80x80" ) %>
+        <%= link_to "Sign Out", destroy_user_session_path, class:"nav-link" %>
+      </div>
+    </div>
+  </div>
+</nav>

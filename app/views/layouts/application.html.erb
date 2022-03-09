@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LMSAApp</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title><%= @title || "LMSA Plus" %></title>
+    <%= favicon_link_tag asset_path("logo.png") %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+        .flash__alert   { color: red; }
+        .flash__notice  { color: blue; }
+        .flash__success { color: green; }
+    </style>
   </head>
 
   <body>
+    <%= render "home/adminHeader" if user_signed_in? and current_user.admin==true and action_name!="edit" %>
+    <%= render "home/header" if user_signed_in? and current_user.admin==false and action_name!="edit"%>
+    <% if flash.any? %>
+      <% flash.each do |key, value| -%>
+        <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
+      <% end -%>
+    <% end %>
     <%= yield %>
   </body>
 </html>

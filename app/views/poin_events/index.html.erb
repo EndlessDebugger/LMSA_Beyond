@@ -19,6 +19,7 @@ Welcome to the Point Events index. This page is to record points awarded to user
   </thead>
 
   <tbody>
+  <p> Points: <%= current_user.sum_points %> </p>
     <% @poin_events.each do |poin_event| %>
       <tr>
         <td><%= poin_event.user_id %></td>

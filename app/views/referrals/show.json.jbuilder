@@ -1,1 +1,1 @@
-json.partial! "referrals/referral", referral: @referral
+json.partial! 'referrals/referral', referral: @referral

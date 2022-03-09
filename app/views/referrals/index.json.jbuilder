@@ -1,1 +1,1 @@
-json.array! @referrals, partial: "referrals/referral", as: :referral
+json.array! @referrals, partial: 'referrals/referral', as: :referral

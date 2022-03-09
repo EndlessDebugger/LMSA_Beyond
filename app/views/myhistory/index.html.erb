@@ -1,0 +1,57 @@
+<br>
+<h1>My Event History</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>User</th>
+      <th>Sign in</th>
+      <th>Point recv</th>
+      <th colspan="3"></th>
+      <br>
+    </tr>
+  </thead>
+  <tbody>
+  <p> Points: <%= current_user.sum_points %> </p>
+    <% @event_hists.each do |event_hist| %>
+      <tr>
+        <td><%= event_hist.event_id if event_hist.user_id == current_user.id %></td>
+        <td><%= event_hist.user_id if event_hist.user_id == current_user.id %></td>
+        <td><%= event_hist.sign_in if event_hist.user_id == current_user.id %></td>
+        <td><%= event_hist.point_recv if event_hist.user_id == current_user.id %></td>
+        <td><%= link_to 'Show', event_hist if event_hist.user_id == current_user.id %></td>
+        <br>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>Balance</th>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Admin award</th>
+      <th>Hours attend</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <p> Points: <%= current_user.sum_points %> </p>
+    <% @poin_events.each do |poin_event| %>
+      <tr>
+        <td><%= poin_event.balance if poin_event.user_id == current_user.id %></td>
+        <td><%= poin_event.date if poin_event.user_id == current_user.id %></td>
+        <td><%= poin_event.description if poin_event.user_id == current_user.id %></td>
+        <td><%= poin_event.admin_award_id if poin_event.user_id == current_user.id %></td>
+        <td><%= poin_event.hours_attend if poin_event.user_id == current_user.id %></td>
+        <td><%= link_to 'Show', poin_event if poin_event.user_id == current_user.id %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

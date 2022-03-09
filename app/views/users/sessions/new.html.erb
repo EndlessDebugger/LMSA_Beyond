@@ -1,0 +1,26 @@
+<%= stylesheet_link_tag "login.css" %>
+<% @title = "LMSA PLUS" %>
+<h1 style="color:white;">Welcome to LMSA PLUS Tracker</h1>
+
+<div class="container">
+    <div class="body d-md-flex align-items-center justify-content-between">
+        <div class="box-1 mt-md-0 mt-5"><%= image_tag "logo.png" %> </div>
+        <div class=" box-2 d-flex flex-column h-100">
+            <div class="mt-5">
+                <div class="d-flex flex-column align-items-center">
+                  <div class="row">
+                    <div class="col-md-6" style="width: 100%;">
+                      <a class="btn btn-outline-dark" href="<%=user_google_oauth2_omniauth_authorize_path%>" role="button" style="text-transform:none">
+                        <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+                          <h3>Sign in with Google</h3>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="mt-auto">
+                <p class="footer text-muted mb-0 mt-md-0 mt-4">By register you agree with our <span class="p-color me-1">terms and conditions</span>and <span class="p-color ms-1">privacy policy</span> </p>
+            </div>
+        </div> 
+    </div>
+</div>

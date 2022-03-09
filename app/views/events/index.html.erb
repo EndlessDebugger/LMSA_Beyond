@@ -1,56 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Events</h1>
-<br>
-Welcome to the Events index. This page is to record events. To record a new event, click on "New Event". To see the event's details, click show, and to edit it click edit. To move around the website, click "Navigation"
-<br>
-<br>
-<table>
-  <thead>
-    <tr>
-      <th>Event</th>
-      <th>Event name</th>
-      <th>Event type</th>
-      <th>Event date</th>
-      <th>Description</th>
-      <th>Event creator</th>
-      <th>Virtual</th>
-      <th>Password</th>
-      <th>Meeting link</th>
-      <th>Signin time</th>
-      <th>Point val</th>
-      <th>Graphics</th>
-      <th>Total event hr</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="container">
 
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= event.event_id %></td>
-        <td><%= event.event_name %></td>
-        <td><%= event.event_type %></td>
-        <td><%= event.event_date %></td>
-        <td><%= event.description %></td>
-        <td><%= event.event_creator %></td>
-        <td><%= event.virtual %></td>
-        <td><%= event.password %></td>
-        <td><%= event.meeting_link %></td>
-        <td><%= event.signin_time %></td>
-        <td><%= event.point_val %></td>
-        <td><%= event.graphics %></td>
-        <td><%= event.total_event_hr %></td>
-        <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <% if current_user.admin==true %>
+    <%= link_to "New Event", new_event_path, {class: "btn btn-secondary text-light", type: "button"} %>
+  <% end %>
 
-<br>
+  <br>
+  <br>
+  
+  <div id="calendar"></div>
 
-<%= link_to 'New Event', new_event_path %>
-<br>
-<%= link_to 'Navigation', home_index_path %>
+</div> 

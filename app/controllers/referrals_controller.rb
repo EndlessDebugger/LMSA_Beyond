@@ -1,5 +1,5 @@
 class ReferralsController < ApplicationController
-  before_action :set_referral, only: %i[ show edit update destroy ]
+  before_action :set_referral, only: %i[show edit update destroy]
 
   # GET /referrals or /referrals.json
   def index
@@ -7,8 +7,7 @@ class ReferralsController < ApplicationController
   end
 
   # GET /referrals/1 or /referrals/1.json
-  def show
-  end
+  def show; end
 
   # GET /referrals/new
   def new
@@ -16,8 +15,7 @@ class ReferralsController < ApplicationController
   end
 
   # GET /referrals/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /referrals or /referrals.json
   def create
@@ -25,7 +23,7 @@ class ReferralsController < ApplicationController
 
     respond_to do |format|
       if @referral.save
-        format.html { redirect_to referral_url(@referral), notice: "Referral was successfully created." }
+        format.html { redirect_to referral_url(@referral), notice: 'Referral was successfully created.' }
         format.json { render :show, status: :created, location: @referral }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +36,7 @@ class ReferralsController < ApplicationController
   def update
     respond_to do |format|
       if @referral.update(referral_params)
-        format.html { redirect_to referral_url(@referral), notice: "Referral was successfully updated." }
+        format.html { redirect_to referral_url(@referral), notice: 'Referral was successfully updated.' }
         format.json { render :show, status: :ok, location: @referral }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +50,21 @@ class ReferralsController < ApplicationController
     @referral.destroy
 
     respond_to do |format|
-      format.html { redirect_to referrals_url, notice: "Referral was successfully destroyed." }
+      format.html { redirect_to referrals_url, notice: 'Referral was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_referral
-      @referral = Referral.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def referral_params
-      params.require(:referral).permit(:old_member, :new_member, :guest_first_name, :guest_last_name, :medical_prof, :email, :date_referred, :admin_approved)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_referral
+    @referral = Referral.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def referral_params
+    params.require(:referral).permit(:old_member, :new_member, :guest_first_name, :guest_last_name, :medical_prof,
+                                     :email, :date_referred, :admin_approved)
+  end
 end
