@@ -41,9 +41,5 @@ document.addEventListener('turbolinks:load', function() {
     });
   
     calendar.render();
-
-    var list_view = document.getElementById('list_view');
-    list_view.addEventListener('click', (event) => {
-      list_view_function();
-    });  
+    
 });
