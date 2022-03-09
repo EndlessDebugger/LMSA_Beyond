@@ -28,13 +28,13 @@ RSpec.describe '/events', type: :request do
     #skip('Add a hash of attributes valid for your model')
     {
       event_id: Faker::Number.number(digits: 6),
-      event_name: Faker::String.random(length: 5..32),
+      event_name: Faker::ChuckNorris.fact,
       event_type: "",
       event_date: Faker::Date.forward(days: 99),
-      description: Faker::String.random(length: [(1..60), nil]),
+      description: Faker::ChuckNorris.fact,
       event_creator: Faker::Number.number(digits: 6),
       virtual: false,
-      password: Faker::String.random(length: [(1..12), nil]),
+      password: Faker::Internet.password,
       meeting_link: Faker::Internet.url,
       signin_time: nil,
       point_val: Faker::Number.number(digits: 3),
@@ -98,7 +98,7 @@ RSpec.describe '/events', type: :request do
       it 'creates a new Event' do
         expect do
           post events_url, params: { event: valid_attributes }
-          raise response.body
+          #raise response.body
         end.to change(Event, :count).by(1)
       end
 
@@ -124,13 +124,13 @@ RSpec.describe '/events', type: :request do
         #skip('Add a hash of attributes valid for your model')
         {
           event_id: Faker::Number.number(digits: 6),
-          event_name: Faker::String.random(length: 5..32),
+          event_name: Faker::ChuckNorris.fact,
           event_type: "",
           event_date: Faker::Date.forward(days: 99),
-          description: Faker::String.random(length: [(1..60), nil]),
+          description: Faker::ChuckNorris.fact,
           event_creator: Faker::Number.number(digits: 6),
           virtual: false,
-          password: Faker::String.random(length: [(1..12), nil]),
+          password: Faker::Internet.password,
           meeting_link: Faker::Internet.url,
           signin_time: nil,
           point_val: Faker::Number.number(digits: 3),
@@ -143,7 +143,11 @@ RSpec.describe '/events', type: :request do
         event = Event.create! valid_attributes
         patch event_url(event), params: { event: new_attributes }, as: :json
         event.reload
-        skip('Add assertions for updated state')
+        #skip('Add assertions for updated state')
+        expect(response.body).to include(new_attributes[:event_id].to_s)
+        expect(response.body).to include(new_attributes[:event_name].to_s)
+        expect(response.body).to include(new_attributes[:meeting_link].to_s)
+        expect(response.body).to include(new_attributes[:point_val].to_s)
       end
 
     end

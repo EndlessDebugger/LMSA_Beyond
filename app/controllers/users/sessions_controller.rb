@@ -15,9 +15,6 @@ class Users::SessionsController < Devise::SessionsController
       end
     end
 
-    def edit;  
-      puts("hecker")
-    end
 
     def update
 
@@ -28,8 +25,8 @@ class Users::SessionsController < Devise::SessionsController
         else
           # format.html { render :edit, status: :unprocessable_entity }
           # format.json { render json: current_user.errors, status: :unprocessable_entity }
-          render 'edit'
-          puts("Dummy")
+          # render 'edit'
+          # puts("Dummy")
         end
       end
     end

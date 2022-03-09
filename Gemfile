@@ -34,7 +34,7 @@ gem 'omniauth', '~>1.9.1'
 gem 'omniauth-google-oauth2'
 gem 'rexml'
 gem 'bootstrap', '~> 5.1.3'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.4.0'
 # gem 'fullcalendar-rails'
 # gem 'momentjs-rails'
 
