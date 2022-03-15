@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :announcements
   get 'myhistory/index'
   get 'myhistory/points_leaderboard'
   root to: 'home#index'
