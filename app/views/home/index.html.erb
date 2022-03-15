@@ -42,9 +42,7 @@
             </p>
         <% end %>
 
-        <a href="<%=edit_user_session_path%>">
-            <button class="btn btn-outline-secondary text-dark" type="button">Edit My Info</button>
-        </a>
+         <%= link_to "Edit my info", edit_user_session_path, {class: "btn btn-outline-secondary text-dark", type: "button"} %>
   
 
 

@@ -1,3 +1,6 @@
 class HomeController < ApplicationController
-  def index; end
+
+
+  def indexs
+  end
 end

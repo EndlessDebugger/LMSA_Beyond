@@ -1,93 +1,41 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'New Announcement', new_announcement_path %>
 <% @title = "LMSA Announce" %>
 <%= stylesheet_link_tag "home.css" %>
 
-<h1>Announcements</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @announcements.each do |announcement| %>
-      <tr>
-        <td><%= link_to 'Show', announcement %></td>
-        <td><%= link_to 'Edit', edit_announcement_path(announcement) %></td>
-        <td><%= link_to 'Destroy', announcement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
 
-
-<div class="container py-4">
-
-
-    <div class="p-5 mb-4 bg-light rounded-3" style="text-align: center;">
-      <div class="container-fluid py-5">
-        <h1 class="display-10 fw-bold">Welcome back <%= current_user.first_name %>!</h1>
-        <p> <strong>Points: </strong> <%= current_user.sum_points %> </p>
-        <p>
-            <strong>User Name: </strong>
-            <%= current_user.first_name %>
-            <%= current_user.last_name %>
-        </p>
-
-        <p>
-            <strong>User ID: </strong>
-            <%= current_user.id %>
-        </p>
-
-        <p>
-            <strong>User Email: </strong>
-            <%= current_user.email %>
-        </p>
-
-        <p>
-            <strong>User Birthdate: </strong>
-            <%= current_user.bod %>
-        </p>
-
-        <p>
-            <strong>User Bio: </strong>
-            <%= current_user.bioConfirmation %>
-        </p>
-
-         <% if current_user.major.present? %>
-            <p>
-                <strong>User Major: </strong>
-                <%= current_user.major %>
-            </p>
-        <% end %>
-
-        <a href="<%=edit_user_session_path%>">
-            <button class="btn btn-outline-secondary text-dark" type="button">Edit My Info</button>
-        </a>
-  
-
-
-      </div>
-    </div>
-
+<div class="container py-5 mx-auto">
     <div class="row align-items-md-stretch">
-      <div class="col-md-6">
-        <div class="h-100 p-5 text-white bg-dark rounded-3">
-          <h2>Change the background</h2>
-          <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.</p>
-          <button class="btn btn-outline-light" type="button">Example button</button>
+      <div class="col-md-7">
+        <div class="h-100 p-5 bg-light rounded-3">
+          <h1>Announcements</h1>
+
+          <table>
+            <thead>
+              <tr>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @announcements.each do |announcement| %>
+                <tr>
+                  <td><%= link_to announcement.name, announcement %></td>
+                  <td><%= announcement.time %></td>
+                  <td><%= link_to 'Destroy', announcement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
         </div>
       </div>
-      <div class="col-md-6">
+
+      <div class="col-md-4">
         <div class="h-100 p-5 bg-light border rounded-3">
-          <h2>Add borders</h2>
-          <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both column's content for equal-height.</p>
-          <button class="btn btn-outline-secondary" type="button">Example button</button>
+          <h2>Quick Create</h2>
+           <%= link_to "Announce", new_announcement_path, {class: "btn btn-secondary text-light", type: "button"} %>
         </div>
       </div>
     </div>
