@@ -1,14 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<div class="container">
+<% @title = "LMSA Events" %>
+<%= stylesheet_link_tag "home.css" %>
 
-  <% if current_user.admin==true %>
-    <%= link_to "New Event", new_event_path, {class: "btn btn-secondary text-light", type: "button"} %>
-  <% end %>
+<div class="container py-4">
+<h1 class="display-10 fw-bold text-light">Events</h1>
+<br>
+  <div class="p-5 mb-4 bg-light rounded-3" style="text-align: center;">
+    <div class="container-fluid py-5">
+      <%if current_user.admin?%>
+        <%= link_to "New Event", new_event_path, {class: "btn btn-secondary text-light", type: "button"} %>
+      <%end%>
 
-  <br>
-  <br>
-  
-  <div id="calendar"></div>
-
+      <div id="calendar"></div>
+    </div> 
+  </div> 
 </div> 
