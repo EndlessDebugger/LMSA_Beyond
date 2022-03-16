@@ -35,7 +35,7 @@
     <%= form.label :date_referred %>
     <%= form.datetime_select :date_referred %>
   </div>-->
-  <%= form.hidden_field :date_referred, value:  DateTime.local%>
+  <%= form.hidden_field :date_referred, value:  DateTime.now%>
 
   <div class="actions">
     <%= form.submit %>
