@@ -15,7 +15,9 @@ class ReferralsController < ApplicationController
   end
 
   # GET /referrals/1/edit
-  def edit; end
+  def edit
+    redirect_to referral_path unless (current_user.admin? || !@referral.admin_approved?)
+  end
 
   # POST /referrals or /referrals.json
   def create

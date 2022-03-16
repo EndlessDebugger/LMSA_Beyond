@@ -11,15 +11,6 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :old_member %>
-    <%= form.number_field :old_member %>
-  </div>
-
-  <div class="field">
-    <%= form.label :new_member %>
-    <%= form.number_field :new_member %>
-  </div>
 
   <div class="field">
     <%= form.label :guest_first_name %>
@@ -46,10 +37,12 @@
     <%= form.datetime_select :date_referred %>
   </div>
 
-  <div class="field">
-    <%= form.label :admin_approved %>
-    <%= form.text_field :admin_approved %>
-  </div>
+  <%if current_user.admin?%>
+    <div class="field">
+      <%= form.label :admin_approved %>
+      <%= form.select :admin_approved, [[' ', nil], ['Yes', true], ['No', false]] %>
+    </div>
+  <%end%>
 
   <div class="actions">
     <%= form.submit %>
