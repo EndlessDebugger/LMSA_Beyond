@@ -2,6 +2,11 @@
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
+//= require jquery
+//= require popper
+//= require turbolinks
+//= require bootstrap
+//= require_tree.
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
@@ -43,3 +48,6 @@ document.addEventListener('turbolinks:load', function() {
     calendar.render();
     
 });
+
+$("#modal-window").find(".modal-content").html("<%= j (render 'new') %>");
+$("#modal-window").modal();

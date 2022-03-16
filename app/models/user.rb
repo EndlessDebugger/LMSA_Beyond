@@ -29,9 +29,6 @@ class User < ApplicationRecord
     poin_events.where("user_id = ?", id).sum(:balance) + event_hists.where("user_id = ?", id).sum(:point_recv)
   end
     
-  def getuser_points(userid)
-    poin_events.where("user_id = ?", userid).sum(:balance) + event_hists.where("user_id = ?", userid).sum(:point_recv)
-  end    
 
   def bod
       if birthdate.present?
@@ -49,6 +46,9 @@ class User < ApplicationRecord
     end
   end
 
+  def userReferrals
+    referrals.where("oldmember = ?", id)
+  end
 
 
 end

@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
+  resources :helps
   resources :announcements
-  get 'myhistory/index'
-  get 'myhistory/points_leaderboard'
   root to: 'home#index'
   get '/home/adminDash' => "home#adminDash", :as => :admin_root
     devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: "users/sessions" }
@@ -10,6 +9,9 @@ Rails.application.routes.draw do
       post 'users/edit', to: 'users/sessions#update'
       get 'users/sign_in', to: 'users/sessions#new', as: :new_user_session
       get 'users/sign_out', to: 'users/sessions#destroy', as: :destroy_user_session
+      get 'referrals/admin', :as => :admin_approve
+      get 'myhistory/index'
+      get 'myhistory/points_leaderboard'
   end
 
   resources :home
