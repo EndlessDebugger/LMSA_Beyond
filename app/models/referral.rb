@@ -14,6 +14,10 @@ class Referral < ApplicationRecord
     else
       "Rejected"
     end
-    
   end
+
+  def friendReferralPoints
+    1
+  end
+
 end

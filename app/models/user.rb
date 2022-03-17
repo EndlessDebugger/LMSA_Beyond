@@ -6,18 +6,10 @@ class User < ApplicationRecord
   has_many :poin_events
   has_many :referrals
   #validates :admin, presence: true
-  #validates :email, presence: true
+  validates :email, presence: true
   #validates :first_name, presence: true
   #validates :last_name, presence: true
 
-  # def first_name
-  #   self.full_name.blank? ? "" : self.full_name.split(" ")[0]
-  # end
-
-  # def last_name
-  #   self.full_name.blank? ? "" : self.full_name.split(" ")[1]
-  # end
-  
   def self.from_google(email:, first_name:, last_name:, full_name:, uid:, avatar_url:)
     return nil unless email =~ /@gmail.com || @tamu.edu\z/
     # find_or_create_by(email: email)
@@ -49,6 +41,5 @@ class User < ApplicationRecord
   def userReferrals
     referrals.where("oldmember = ?", id)
   end
-
 
 end

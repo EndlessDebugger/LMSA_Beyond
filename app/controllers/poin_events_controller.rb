@@ -51,12 +51,15 @@ class PoinEventsController < ApplicationController
 
   # DELETE /poin_events/1 or /poin_events/1.json
   def destroy
-    redirect_to poin_events_path unless current_user.admin?
-    @poin_event.destroy
+    if current_user.admin?
+      @poin_event.destroy
 
-    respond_to do |format|
-      format.html { redirect_to poin_events_url, notice: 'Poin event was successfully destroyed.' }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to poin_events_url, notice: 'Poin event was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to poin_events_url
     end
   end
 
