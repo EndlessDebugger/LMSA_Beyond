@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_16_175401) do
+ActiveRecord::Schema.define(version: 2022_03_17_225705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 2022_03_16_175401) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.integer "event_id"
     t.string "event_name"
     t.string "event_type"
     t.datetime "event_date"
@@ -54,6 +53,9 @@ ActiveRecord::Schema.define(version: 2022_03_16_175401) do
   create_table "helps", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
+    t.integer "creator_id"
+    t.string "desc"
   end
 
   create_table "poin_events", force: :cascade do |t|
@@ -69,7 +71,6 @@ ActiveRecord::Schema.define(version: 2022_03_16_175401) do
 
   create_table "referrals", force: :cascade do |t|
     t.integer "old_member"
-    t.integer "new_member"
     t.string "guest_first_name"
     t.string "guest_last_name"
     t.boolean "medical_prof"
@@ -82,7 +83,6 @@ ActiveRecord::Schema.define(version: 2022_03_16_175401) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "user_id"
     t.string "major"
     t.boolean "admin", default: false
     t.string "email"
@@ -92,8 +92,6 @@ ActiveRecord::Schema.define(version: 2022_03_16_175401) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "uid"
     t.string "avatar_url"
-    t.string "password"
-    t.boolean "ismember"
     t.datetime "birthdate"
     t.text "bio"
     t.integer "signInCount", default: 0

@@ -79,6 +79,7 @@ class ReferralsController < ApplicationController
   def referralMax(id)
     # This doesn't account for if the referral was in a previous semester, as the client wants the system to reset every semester
     if Referral.where("old_member = ?", id).count < 4
+      puts(Referral.where("old_member = ?", id).count)
       return false
     else
       return true
