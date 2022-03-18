@@ -110,6 +110,16 @@
     </tbody>
   </table>
 
+  <div class="form_input">
+			<%= form.label :categories %>
+			<%= form.collection_select :categories, Category.all, :id, :name,
+															:include_blank => "Please select a category" %>
+  </div>
+
+  <%= form.hidden_field :event_creator, value: current_user.id%>
+  <%= form.hidden_field :event_id, value: @event.id%>
+  <%= form.hidden_field :created_at, value: DateTime.now%>
+
   <%= link_to 'Back', events_path ,class:"btn btn-secondary text-light"%>
   <%= form.submit "Submit", class:"btn btn-secondary" %>
   

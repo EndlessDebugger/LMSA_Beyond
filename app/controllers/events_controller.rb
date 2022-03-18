@@ -64,8 +64,9 @@ class EventsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def event_params
-    params.require(:event).permit(:event_id, :event_name, :event_type, :event_date, :description, :event_creator,
-                                  :virtual, :password, :meeting_link, :signin_time, :point_val, :graphics, :total_event_hr)
+    params.require(:event).permit(:id, :event_name, :event_type, :event_date, :description, :event_creator,
+                                  :virtual, :password, :meeting_link, :start_time, :end_time, :point_val, :graphics, :total_event_hr,
+                                  :categories, :created_at)
   end
 
   def add_category
@@ -74,5 +75,13 @@ class EventsController < ApplicationController
 
     @event.categories << @category #->> as to be two ActiveRecord objects
   end
-  
+
+  def find_resource
+    scoped_collection.friendly.find(params[:id])
+  end
+
+  def event_id
+    id
+  end
+
 end

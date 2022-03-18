@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2022_03_18_181305) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "start_time"
     t.datetime "end_time"
+    t.boolean "virtual", default: false
   end
 
   create_table "helps", force: :cascade do |t|
@@ -111,7 +112,6 @@ ActiveRecord::Schema.define(version: 2022_03_18_181305) do
     t.datetime "birthdate"
     t.text "bio"
     t.integer "signInCount", default: 0
-    t.boolean "virtual", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
