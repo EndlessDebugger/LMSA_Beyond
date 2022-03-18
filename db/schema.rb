@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_17_225705) do
+ActiveRecord::Schema.define(version: 2022_03_18_041921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,10 +36,8 @@ ActiveRecord::Schema.define(version: 2022_03_17_225705) do
   create_table "events", force: :cascade do |t|
     t.string "event_name"
     t.string "event_type"
-    t.datetime "event_date"
     t.string "description"
     t.integer "event_creator"
-    t.boolean "virtual"
     t.string "password"
     t.string "meeting_link"
     t.datetime "signin_time"
@@ -48,6 +46,8 @@ ActiveRecord::Schema.define(version: 2022_03_17_225705) do
     t.float "total_event_hr"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   create_table "helps", force: :cascade do |t|
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 2022_03_17_225705) do
     t.datetime "birthdate"
     t.text "bio"
     t.integer "signInCount", default: 0
+    t.boolean "virtual", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
