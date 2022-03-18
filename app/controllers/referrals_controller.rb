@@ -26,18 +26,19 @@ class ReferralsController < ApplicationController
     if (referralMax(current_user.id) && !@referral.medical_prof?)
       puts("fuck")
       redirect_to referrals_path, {alert: 'You\'ve reached your friend referral limit, you can only refer medical professionals for now'}
-      return
-    end
-
-    respond_to do |format|
-      if @referral.save
-        format.html { redirect_to referrals_path }
-        # format.json { render :show, status: :created, location: @referral }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @referral.errors, status: :unprocessable_entity }
+    
+    else
+      respond_to do |format|
+        if @referral.save
+          format.html { redirect_to referrals_path }
+          # format.json { render :show, status: :created, location: @referral }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @referral.errors, status: :unprocessable_entity }
+        end
       end
     end
+
   end
 
   # PATCH/PUT /referrals/1 or /referrals/1.json
@@ -72,18 +73,13 @@ class ReferralsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def referral_params
-    params.require(:referral).permit(:old_member, :new_member, :guest_first_name, :guest_last_name, :medical_prof,
+    params.require(:referral).permit(:old_member, :guest_first_name, :guest_last_name, :medical_prof,
                                      :email, :date_referred, :admin_approved)
   end
 
   def referralMax(id)
     # This doesn't account for if the referral was in a previous semester, as the client wants the system to reset every semester
-    if Referral.where("old_member = ?", id).count < 4
-      puts(Referral.where("old_member = ?", id).count)
-      return false
-    else
-      return true
-    end
+    (Referral.where("old_member = ?", id).count > 2)
   end
 
 end

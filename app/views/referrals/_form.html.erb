@@ -1,15 +1,6 @@
 <%= form_with(model: @referral) do |form| %>
 
-    <!--<div class="field">
-    <%= form.label :old_member %>
-    <%= form.number_field :old_member %>
-  </div>-->
   <%= form.hidden_field :old_member, value: current_user.id%>
-
-  <div class="field">
-    <%= form.label :new_member %>
-    <%= form.number_field :new_member %>
-  </div>
 
   <div class="field">
     <%= form.label :guest_first_name %>
@@ -31,10 +22,6 @@
     <%= form.text_field :email %>
   </div>
 
-  <!--<div class="field">
-    <%= form.label :date_referred %>
-    <%= form.datetime_select :date_referred %>
-  </div>-->
   <%= form.hidden_field :date_referred, value:  DateTime.now%>
 
   <div class="actions">
