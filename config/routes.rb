@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'award_points/index'
   get 'myhistory/index'
   get 'myhistory/points_leaderboard'
   root to: 'home#index'
