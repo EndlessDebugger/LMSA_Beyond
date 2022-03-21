@@ -11,114 +11,85 @@
       </ul>
     </div>
   <% end %>
+  
+  <div class="mb-3">
 
-  <table class="table">
-    <tbody>
+    <%= form.label :event_name, class: "form-label" %>
+    <%= form.text_field :event_name, {class: "form-control", placeholder: "Event Name"} %>
 
-        <tr>
-          <td scope="row">
-            <div class="mb-3">
-              <%= form.label :event_name, class: "form-label" %>
-              <%= form.text_field :event_name, {class: "form-control", placeholder: "Event Name"} %>
-            </div>
-          </td>
+  </div>
 
-          <td scope="row">
-            <div class="mb-3">
-              <%= form.label :description, class: "form-label" %>
-              <%= form.text_field :description, {class: "form-control", placeholder: "Description"} %>
-            </div>
-          </td>
+  <div class="mb-3">
 
-          <td scope="row">
-            <div class="mb-3">
-              <%= form.label :point_val, class: "form-label" %>
-              <%= form.number_field :point_val, {class: "form-control", placeholder: "Value"} %>
-            </div>
-          </td>
-        </tr>
+    <%= form.label :event_type, class: "form-label" %>
+    <%= form.text_field :event_type, {class: "form-control", placeholder: "Event Type"} %>
+    
+  </div>
 
-        <tr>
-          <td scope="row">
-            <div class="mb-3">
-              <%= form.label :event_type, class: "form-label" %>
-              <%= form.text_field :event_type, {class: "form-control", placeholder: "Event Type"} %>
-            </div>
-          </td>
+  <div class="mb-3">
 
-          <td scope="row">
-            <div class="mb-3">
-              <%= form.label :password, class: "form-label" %>
-              <%= form.text_field :password, {class: "form-control", placeholder: "Password"} %>
-            </div>
-          </td>
+    <%= form.label :event_date, class: "form-label" %>
+    <%= form.datetime_select :event_date, {class: "form-control", placeholder: "Event Date"} %>
 
-          <td scope="row">
-            <div class="mb-3">
-              <%= form.label :total_event_hr, class: "form-label" %>
-              <%= form.text_field :total_event_hr, {class: "form-control", placeholder: "Hours"} %>
-            </div>
-          </td>
+  </div>
 
-        </tr>
+  <div class="mb-3">
 
-        <tr>
-          <td scope="row">
-            <div class="mb-3">
-              <%= form.label :start_time %>
-              <div class="d-flex justify-content-start">
-                <%= form.datetime_select :start_time, { ampm: true, order: [:day, :month, :year], start_year: Date.today.year }, { placeholder: "Start Time"} %>
-              </div>
-            </div>
-          </td>
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_field :description, {class: "form-control", placeholder: "Description"} %>
 
-          <td scope="row">
-            <div class="d-flex justify-content-start">
-                <div class="mb-3 form-check align-middle">
-                  <%= form.label :virtual, class: "form-label" %>
-                  <%= form.select :virtual, [ ['No', false], ['Yes', true]], {class: "form-control", placeholder: "Meeting Link"} %>
-                </div>
+  </div>
 
-                <div class="mb-3">
-                  <%= form.label :meeting_link, class: "form-label" %>
-                  <%= form.text_field :meeting_link, {class: "form-control", placeholder: "Meeting Link"} %>
-                </div>
-            </div>
-          </td>
-        </tr>
+  <div class="mb-3 form-check">
 
-        <tr>
-          <td scope="row">
-            <div class="mb-3">
-              <%= form.label :end_time, class: "form-label" %>
-              <div class="d-flex justify-content-start">
-                <%= form.datetime_select :end_time, { ampm: true, order: [:day, :month, :year], start_year: Date.today.year }, {class: "form-control", placeholder: "End Time"} %>
-              </div>           
-            </div>
-          </td>
+    <%= form.label :virtual, class: "form-check-label" %>
+    <%= form.check_box :virtual, class: "form-check-input" %>
 
-          <td scope="row">
-            <div class="mb-3">
-              <%= form.label :graphics, class: "form-label" %>
-              <%= form.text_field :graphics, {class: "form-control", placeholder: "Graphics"} %>
-            </div>
-          </td>
-        </tr>
+  </div>
 
-        
-        
-    </tbody>
-  </table>
+  <div class="mb-3">
 
-  <div class="form_input">
-			<%= form.label :categories %>
-			<%= form.collection_select :categories, Category.all, :id, :name,
-															:include_blank => "Please select a category" %>
+    <%= form.label :password, class: "form-label" %>
+    <%= form.text_field :password, {class: "form-control", placeholder: "Password"} %>
+
+  </div>
+
+  <div class="mb-3">
+
+    <%= form.label :meeting_link, class: "form-label" %>
+    <%= form.text_field :meeting_link, {class: "form-control", placeholder: "Meeting Link"} %>
+
+  </div>
+
+  <div class="mb-3">
+
+    <%= form.label :signin_time, class: "form-label" %>
+    <%= form.time_select :signin_time, {class: "form-control", placeholder: "Sign In Time"} %>
+
+  </div>
+
+  <div class="mb-3">
+
+    <%= form.label :point_val, class: "form-label" %>
+    <%= form.text_field :point_val, {class: "form-control", placeholder: "Value"} %>
+
+  </div>
+
+  <div class="mb-3">
+
+    <%= form.label :graphics, class: "form-label" %>
+    <%= form.text_field :graphics, {class: "form-control", placeholder: "Graphics"} %>
+
+  </div>
+
+  <div class="mb-3">
+
+    <%= form.label :total_event_hr, class: "form-label" %>
+    <%= form.text_field :total_event_hr, {class: "form-control", placeholder: "Hours"} %>
+
   </div>
 
   <%= form.hidden_field :event_creator, value: current_user.id%>
-  <%= form.hidden_field :event_id, value: @event.id%>
-  <%= form.hidden_field :created_at, value: DateTime.now%>
 
   <%= link_to 'Back', events_path ,class:"btn btn-secondary text-light"%>
   <%= form.submit "Submit", class:"btn btn-secondary" %>

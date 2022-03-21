@@ -46,8 +46,19 @@ document.addEventListener('turbolinks:load', function() {
     });
   
     calendar.render();
-    
+   
 });
+
+var password_check = function(real_password){
+  var password_typed = document.getElementById('password');
+  alert("Hello From Password Check!");
+  if (password_typed == real_password){
+    return true;
+  }
+  return false;
+}
+
+password_check.render();
 
 $("#modal-window").find(".modal-content").html("<%= j (render 'new') %>");
 $("#modal-window").modal();

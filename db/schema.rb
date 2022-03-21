@@ -49,30 +49,26 @@ ActiveRecord::Schema.define(version: 2022_03_18_181305) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "event_name"
     t.string "event_type"
+    t.datetime "event_date"
     t.string "description"
-    t.integer "event_creator"
+    t.string "event_creator"
+    t.boolean "virtual"
     t.string "password"
     t.string "meeting_link"
-    t.datetime "signin_time"
+    t.time "signin_time"
     t.integer "point_val"
     t.string "graphics"
     t.float "total_event_hr"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.boolean "virtual", default: false
   end
 
   create_table "helps", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "title"
-    t.integer "creator_id"
-    t.string "desc"
   end
 
   create_table "poin_events", force: :cascade do |t|
@@ -88,6 +84,7 @@ ActiveRecord::Schema.define(version: 2022_03_18_181305) do
 
   create_table "referrals", force: :cascade do |t|
     t.integer "old_member"
+    t.integer "new_member"
     t.string "guest_first_name"
     t.string "guest_last_name"
     t.boolean "medical_prof"
@@ -100,6 +97,7 @@ ActiveRecord::Schema.define(version: 2022_03_18_181305) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.integer "user_id"
     t.string "major"
     t.boolean "admin", default: false
     t.string "email"
@@ -109,6 +107,8 @@ ActiveRecord::Schema.define(version: 2022_03_18_181305) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "uid"
     t.string "avatar_url"
+    t.string "password"
+    t.boolean "ismember"
     t.datetime "birthdate"
     t.text "bio"
     t.integer "signInCount", default: 0

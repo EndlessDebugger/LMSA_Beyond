@@ -8,7 +8,7 @@
 
     <div class="p-2 bd-highlight">
       <strong>Event ID: </strong> 
-      <%= @event.event_id %>
+      <%= @event.id %>
     </div>
 
     <div class="p-2 bd-highlight">
@@ -88,22 +88,22 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <%= link_to 'Sign In',  event_hists_path(:event_hist => 
-            {:event_id => @event.event_id, :user_id => current_user.id, :sign_in => true, :point_recv => @event.point_val}),
-            method: :post,
-            {class:"btn btn-secondary", type:"button", data-bs-dismiss:"modal"} %>
+          <%= link_to_if password_check(@event.password), 'Sign In',  event_hists_path(:event_hist => 
+          {:event_id => @event.id, :user_id => current_user.id, :sign_in => true, :point_recv => @event.point_val}),
+          method: :post, 
+          :class=>"btn btn-secondary text-light", :type=>"button", "data-bs-dismiss": "modal" %>
         </div>
       </div>
     </div>
   </div>
 
-<%= link_to 'Edit', edit_event_path(@event), class:"btn btn-secondary text-light" %>
-<%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-secondary text-light" %>
+  <%= link_to 'Edit', edit_event_path(@event), class:"btn btn-secondary text-light" %>
+  <%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-secondary text-light" %>
 
-<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Sign In
-</button>
+  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Sign In
+  </button>
 
-<%= link_to 'Back', events_path, class:"btn btn-secondary text-light" %>
+  <%= link_to 'Back', events_path, class:"btn btn-secondary text-light" %>
 
 </div>
