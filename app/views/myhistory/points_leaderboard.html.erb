@@ -10,7 +10,9 @@ Welcome to the Point Events index. This page is to record points awarded to user
 <table>
     <thead>
         <tr>
-          <th>User</th>
+          <th>User Id</th>
+          <th>First Name</th>
+          <th>Last Name</th>          
           <th>Points</th>
         </tr>
       </thead>
@@ -19,6 +21,8 @@ Welcome to the Point Events index. This page is to record points awarded to user
         <% User.all.sort{|a,b| b.sum_points <=> a.sum_points}.each do |that_user| %>
           <tr>
             <td><%= that_user.id %></td>
+            <td><%= that_user.first_name %></td>
+            <td><%= that_user.last_name %></td>
             <td><%= that_user.sum_points %></td>
           </tr>
         <% end %>
