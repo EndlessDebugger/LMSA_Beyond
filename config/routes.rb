@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   get 'award_points/index'
   get 'myhistory/index'
   get 'myhistory/points_leaderboard'
+  resources :helps
+  resources :announcements
   root to: 'home#index'
+  post '/sign_in_event', to: "events#sign_in_event"
   get '/home/adminDash' => "home#adminDash", :as => :admin_root
     devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: "users/sessions" }
     devise_scope :user do
@@ -10,12 +13,16 @@ Rails.application.routes.draw do
       post 'users/edit', to: 'users/sessions#update'
       get 'users/sign_in', to: 'users/sessions#new', as: :new_user_session
       get 'users/sign_out', to: 'users/sessions#destroy', as: :destroy_user_session
+      get 'referrals/admin', :as => :admin_approve
+      get 'myhistory/index'
+      get 'myhistory/points_leaderboard'
   end
 
   resources :home
   resources :poin_events
   resources :referrals
   resources :events
+  resources :categories
   resources :event_hists
   resources :users
   resources :sessions

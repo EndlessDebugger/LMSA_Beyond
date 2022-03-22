@@ -1,7 +1,9 @@
 <% @title = "LMSA Admin" %>
 <%= stylesheet_link_tag "home.css" %>
 
-
+<% if !current_user.admin? %>
+  <meta http-equiv="refresh" content="0; URL=<%= root_path %>" />
+<%else%>
 <div class="container py-4">
 
 
@@ -68,3 +70,4 @@
       </div>
     </div>
   </div>
+<% end %>

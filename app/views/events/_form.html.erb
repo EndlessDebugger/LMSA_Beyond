@@ -11,13 +11,6 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="mb-3">
-
-    <%= form.label :event_id, class: "form-label" %>
-    <%= form.text_field :event_id, {class: "form-control", placeholder: "Event ID"} %>
-
-  </div>
   
   <div class="mb-3">
 
@@ -71,14 +64,14 @@
   <div class="mb-3">
 
     <%= form.label :signin_time, class: "form-label" %>
-    <%= form.datetime_select :signin_time, {class: "form-control", placeholder: "Sign In Time"} %>
+    <%= form.time_select :signin_time, {class: "form-control", placeholder: "Sign In Time"} %>
 
   </div>
 
   <div class="mb-3">
 
     <%= form.label :point_val, class: "form-label" %>
-    <%= form.number_field :point_val, {class: "form-control", placeholder: "Value"} %>
+    <%= form.text_field :point_val, {class: "form-control", placeholder: "Value"} %>
 
   </div>
 
@@ -96,6 +89,9 @@
 
   </div>
 
+  <%= form.hidden_field :event_creator, value: current_user.id%>
+
+  <%= link_to 'Back', events_path ,class:"btn btn-secondary text-light"%>
   <%= form.submit "Submit", class:"btn btn-secondary" %>
   
 <% end %>

@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  # before_action :event_id
   before_action :set_event, only: %i[show edit update destroy]
 
   # GET /events or /events.json
@@ -55,6 +56,24 @@ class EventsController < ApplicationController
     end
   end
 
+  def sign_in_event
+    event_id = params[:event_id]
+    password = params[:password]
+    user_id = params[:user_id]
+    sign_in = params[:sign_in]
+    point_recv = params[:point_recv]
+
+    event = Event.find(event_id)
+    if event.password == password
+      redirect_to event_hists_path(:event_hist => {:event_id => @event.id, :user_id => current_user.id, :sign_in => true, :point_recv => @event.point_val}),
+      notice: 'The sign in event is handled!'
+    else
+      flash.alert = "Wrong Password!"
+    end
+
+
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -64,7 +83,26 @@ class EventsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def event_params
-    params.require(:event).permit(:event_id, :event_name, :event_type, :event_date, :description, :event_creator,
-                                  :virtual, :password, :meeting_link, :signin_time, :point_val, :graphics, :total_event_hr)
+    # params.require(:event).permit(:event_name, :event_type, :event_date, :description, :event_creator,
+    #                               :virtual, :password, :meeting_link, :start_time, :end_time, :point_val, :graphics, :total_event_hr,
+    #                               :categories, :created_at)
+    params.require(:event).permit(:event_name, :event_type, :event_date, :description, :event_creator,
+                                  :virtual, :password, :meeting_link, :point_val, :graphics, :total_event_hr)
   end
+
+  # def add_category
+  #   @event = Event.find(params[:id])
+  #   @category = Category.find(params[:category_id])
+
+  #   @event.categories << @category #->> as to be two ActiveRecord objects
+  # end
+
+  # def find_resource
+  #   scoped_collection.friendly.find(params[:id])
+  # end
+
+  # def event_id
+  #   event_id: request.uuid
+  # end
+
 end
