@@ -62,13 +62,23 @@ class EventsController < ApplicationController
     user_id = params[:user_id]
     sign_in = params[:sign_in]
     point_recv = params[:point_recv]
+    new_event_hist_params = {:event_id => event_id, :user_id => user_id, :sign_in => sign_in, :point_recv => point_recv}
 
     event = Event.find(event_id)
-    if event.password == password
-      redirect_to event_hists_path(:event_hist => {:event_id => @event.id, :user_id => current_user.id, :sign_in => true, :point_recv => @event.point_val}),
-      notice: 'The sign in event is handled!'
-    else
-      flash.alert = "Wrong Password!"
+    event_hist = EventHist.find_by(event_id: event_id, user_id: user_id)
+    if event_hist.present?
+      redirect_to event_hists_path, 
+      notice: "You already signed in!"
+    else 
+      if event.password == password
+        new_event_hist = EventHist.new(new_event_hist_params)
+        new_event_hist.save
+        redirect_to event_hist_url(new_event_hist),
+        notice: 'You are signed in!'
+      else
+        redirect_to event_url(event_id),
+        alert: "Wrong Password!"
+      end
     end
 
 
