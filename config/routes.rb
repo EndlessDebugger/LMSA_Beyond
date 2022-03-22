@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :helps
   resources :announcements
   root to: 'home#index'
+  post '/sign_in_event', to: "events#sign_in_event"
   get '/home/adminDash' => "home#adminDash", :as => :admin_root
     devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: "users/sessions" }
     devise_scope :user do

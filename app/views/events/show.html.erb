@@ -80,19 +80,20 @@
           <h5 class="modal-title" id="exampleModalLabel">Sign In to <%= @event.event_name %></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <form>
-            <label for="password" class="col-form-label">Password:</label>
-            <input type="text" class="form-control" id="password">
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <%= link_to_if password_check(@event.password), 'Sign In',  event_hists_path(:event_hist => 
-          {:event_id => @event.id, :user_id => current_user.id, :sign_in => true, :point_recv => @event.point_val}),
-          method: :post, 
-          :class=>"btn btn-secondary text-light", :type=>"button", "data-bs-dismiss": "modal" %>
-        </div>
+        <%= form_with url: "/sign_in_event" do |form| %>
+          <div class="modal-body">
+            <% form.label :password, class: "form-label" %>
+            <%= form.text_field :password, {class: "form-control", placeholder: "Password"} %>
+            <%= form.hidden_field :user_id, value: current_user.id%>
+            <%= form.hidden_field :event_id, value: @event.id%>
+            <%= form.hidden_field :sign_in, value: true%>
+            <%= form.hidden_field :point_recv, value: @event.point_val%>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <%= form.submit "Sign In", {class:"btn btn-secondary", "data-bs-dismiss":"modal"} %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

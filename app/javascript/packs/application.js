@@ -16,6 +16,7 @@ import "channels"
 require("@popperjs/core")
 import "bootstrap"
 require("../stylesheets/application")
+require("jquery")
 
 import { Calendar } from '@fullcalendar/core'
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -27,6 +28,8 @@ Turbolinks.start();
 ActiveStorage.start();
 
 document.addEventListener('turbolinks:load', function() {
+
+    ////////////// CALENDAR HANDLING /////////////////////
     var calendarEl = document.getElementById('calendar');
   
     var calendar = new Calendar(calendarEl, {
@@ -46,19 +49,23 @@ document.addEventListener('turbolinks:load', function() {
     });
   
     calendar.render();
-   
+
+    
 });
 
-var password_check = function(real_password){
-  var password_typed = document.getElementById('password');
-  alert("Hello From Password Check!");
-  if (password_typed == real_password){
-    return true;
-  }
-  return false;
-}
+////////////// PASSWORD CHECH FOR SIGN IN ///////////////////// 
+document.addEventListener('DOMContentLoaded', function(){
 
-password_check.render();
+  var password_typed = document.getElementById('sign_in_event');
+  password_typed.addEventListener('click', function() {
+    var password = document.getElementById('password').value;
+    console.log("Password is clicked! " + password);
+    alert("Hello From Password Check!");
+  });
 
-$("#modal-window").find(".modal-content").html("<%= j (render 'new') %>");
-$("#modal-window").modal();
+  
+});
+
+
+// $("#modal-window").find(".modal-content").html("<%= j (render 'new') %>");
+// $("#modal-window").modal();
