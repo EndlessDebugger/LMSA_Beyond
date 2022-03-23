@@ -59,6 +59,7 @@ yarn-debug.log*
 /.env
 
 
+/yarn.lock
 /public/packs
 /public/packs-test
 /node_modules
