@@ -1,25 +1,6 @@
-<%= form_with(model: referral) do |form| %>
-  <% if referral.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(referral.errors.count, "error") %> prohibited this referral from being saved:</h2>
+<%= form_with(model: @referral) do |form| %>
 
-      <ul>
-        <% referral.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :old_member %>
-    <%= form.number_field :old_member %>
-  </div>
-
-  <div class="field">
-    <%= form.label :new_member %>
-    <%= form.number_field :new_member %>
-  </div>
+  <%= form.hidden_field :old_member, value: current_user.id%>
 
   <div class="field">
     <%= form.label :guest_first_name %>
@@ -33,7 +14,7 @@
 
   <div class="field">
     <%= form.label :medical_prof %>
-    <%= form.check_box :medical_prof %>
+    <%= form.select :medical_prof, [['No', false],['Yes', true]] %>
   </div>
 
   <div class="field">
@@ -41,15 +22,7 @@
     <%= form.text_field :email %>
   </div>
 
-  <div class="field">
-    <%= form.label :date_referred %>
-    <%= form.datetime_select :date_referred %>
-  </div>
-
-  <div class="field">
-    <%= form.label :admin_approved %>
-    <%= form.text_field :admin_approved %>
-  </div>
+  <%= form.hidden_field :date_referred, value:  DateTime.now%>
 
   <div class="actions">
     <%= form.submit %>

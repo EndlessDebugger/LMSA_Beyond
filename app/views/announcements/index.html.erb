@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<% @title = "LMSA Announce" %>
+<%= stylesheet_link_tag "home.css" %>
+
+
+
+<div class="container py-5 mx-auto">
+<h1 class="display-10 fw-bold text-light">Announcements</h1>
+<br>
+    <div class="row align-items-md-stretch">
+      <div class="col-md-7">
+        <div class="h-100 p-5 bg-light rounded-3">
+
+          <table>
+            <thead>
+              <tr>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @announcements.each do |announcement| %>
+                <tr>
+                  <td><%= link_to announcement.name, announcement %></td>
+                  <td><%= announcement.time %></td>
+                  <td><%= link_to 'Destroy', announcement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="h-100 p-5 bg-light border rounded-3">
+          <h2>Quick Create</h2>
+           <%= link_to "Announce", new_announcement_path, {class: "btn btn-secondary text-light", type: "button"} %>
+        </div>
+      </div>
+    </div>
+  </div>
+
