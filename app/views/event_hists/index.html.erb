@@ -17,6 +17,7 @@
           <th>User</th>
           <th>Sign in</th>
           <th>Point recv</th>
+          <th>Date</th>
           <th colspan="6"></th>
         </tr>
       </thead>
@@ -28,6 +29,7 @@
             <td><%= event_hist.user_id %></td>
             <td><%= event_hist.sign_in %></td>
             <td><%= event_hist.point_recv %></td>
+            <td><%= event_hist.event_date %></td>
             <td><%= link_to 'Show', event_hist %></td>
             <td><%= link_to 'Edit', edit_event_hist_path(event_hist) %></td>
             <td><%= link_to 'Destroy', event_hist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
