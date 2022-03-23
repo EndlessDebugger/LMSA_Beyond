@@ -42,4 +42,8 @@ class User < ApplicationRecord
     referrals.where("oldmember = ?", id)
   end
 
+  def counter
+    User.count
+  end
+
 end

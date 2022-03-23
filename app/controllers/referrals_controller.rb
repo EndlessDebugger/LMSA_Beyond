@@ -24,7 +24,6 @@ class ReferralsController < ApplicationController
     
     @referral = Referral.new(referral_params)
     if (referralMax(current_user.id) && !@referral.medical_prof?)
-      puts("fuck")
       redirect_to referrals_path, {alert: 'You\'ve reached your friend referral limit, you can only refer medical professionals for now'}
     
     else
