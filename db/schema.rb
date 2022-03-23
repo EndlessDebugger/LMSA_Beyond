@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2022_03_18_181305) do
   end
 
   create_table "event_hists", force: :cascade do |t|
-    t.integer "event_id"
+    t.string "event_id"
     t.integer "user_id"
     t.boolean "sign_in"
     t.integer "point_recv"
