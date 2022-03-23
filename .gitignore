@@ -61,8 +61,8 @@ yarn-debug.log*
 #ignore webpacker stuff
 /bin/webpack
 /bin/webpack-dev-server
-/config/initializers/devise.rb
-/config/webpack/environment.js
+#/config/initializers/devise.rb
+#/config/webpack/environment.js
 /yarn.lock
 
 /public/packs
