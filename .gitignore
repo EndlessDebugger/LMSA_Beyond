@@ -57,3 +57,17 @@ yarn-debug.log*
 .yarn-integrity
 /*.txt
 /.env
+
+#ignore webpacker stuff
+/bin/webpack
+/bin/webpack-dev-server
+/config/initializers/devise.rb
+/config/webpack/environment.js
+/yarn.lock
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
