@@ -11,14 +11,11 @@ class PoinEventsController < ApplicationController
 
   # GET /poin_events/new
   def new
-    redirect_to poin_events_path unless current_user.admin?
     @poin_event = PoinEvent.new
   end
 
   # GET /poin_events/1/edit
-  def edit 
-    redirect_to poin_events_path unless current_user.admin?
-  end
+  def edit; end
 
   # POST /poin_events or /poin_events.json
   def create
@@ -37,7 +34,6 @@ class PoinEventsController < ApplicationController
 
   # PATCH/PUT /poin_events/1 or /poin_events/1.json
   def update
-    redirect_to poin_events_path unless current_user.admin?
     respond_to do |format|
       if @poin_event.update(poin_event_params)
         format.html { redirect_to poin_event_url(@poin_event), notice: 'Poin event was successfully updated.' }
@@ -51,15 +47,11 @@ class PoinEventsController < ApplicationController
 
   # DELETE /poin_events/1 or /poin_events/1.json
   def destroy
-    if current_user.admin?
-      @poin_event.destroy
+    @poin_event.destroy
 
-      respond_to do |format|
-        format.html { redirect_to poin_events_url, notice: 'Poin event was successfully destroyed.' }
-        format.json { head :no_content }
-      end
-    else
-      redirect_to poin_events_url
+    respond_to do |format|
+      format.html { redirect_to poin_events_url, notice: 'Poin event was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 

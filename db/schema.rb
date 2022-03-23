@@ -10,38 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_18_181305) do
+ActiveRecord::Schema.define(version: 2022_02_27_222556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "announcements", force: :cascade do |t|
-    t.string "name"
-    t.integer "creator_id"
-    t.datetime "time"
-    t.string "desc"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.string "color"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "catergories_events", force: :cascade do |t|
-    t.bigint "category_id"
-    t.bigint "event_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_catergories_events_on_category_id"
-    t.index ["event_id"], name: "index_catergories_events_on_event_id"
-  end
-
   create_table "event_hists", force: :cascade do |t|
-    t.string "event_id"
+    t.integer "event_id"
     t.integer "user_id"
     t.boolean "sign_in"
     t.integer "point_recv"
@@ -49,24 +24,20 @@ ActiveRecord::Schema.define(version: 2022_03_18_181305) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "events", force: :cascade do |t|
+    t.integer "event_id"
     t.string "event_name"
     t.string "event_type"
     t.datetime "event_date"
     t.string "description"
-    t.string "event_creator"
+    t.integer "event_creator"
     t.boolean "virtual"
     t.string "password"
     t.string "meeting_link"
-    t.time "signin_time"
+    t.datetime "signin_time"
     t.integer "point_val"
     t.string "graphics"
     t.float "total_event_hr"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "helps", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -93,7 +64,6 @@ ActiveRecord::Schema.define(version: 2022_03_18_181305) do
     t.string "admin_approved"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_referrals_on_email", unique: true
   end
 
   create_table "users", force: :cascade do |t|

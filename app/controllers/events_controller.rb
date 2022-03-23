@@ -1,5 +1,4 @@
 class EventsController < ApplicationController
-  # before_action :event_id
   before_action :set_event, only: %i[show edit update destroy]
 
   # GET /events or /events.json
@@ -56,34 +55,6 @@ class EventsController < ApplicationController
     end
   end
 
-  def sign_in_event
-    event_id = params[:event_id]
-    password = params[:password]
-    user_id = params[:user_id]
-    sign_in = params[:sign_in]
-    point_recv = params[:point_recv]
-    new_event_hist_params = {:event_id => event_id, :user_id => user_id, :sign_in => sign_in, :point_recv => point_recv}
-
-    event = Event.find(event_id)
-    event_hist = EventHist.find_by(event_id: event_id, user_id: user_id)
-    if event_hist.present?
-      redirect_to event_hists_path, 
-      notice: "You already signed in!"
-    else 
-      if event.password == password
-        new_event_hist = EventHist.new(new_event_hist_params)
-        new_event_hist.save
-        redirect_to event_hist_url(new_event_hist),
-        notice: 'You are signed in!'
-      else
-        redirect_to event_url(event_id),
-        alert: "Wrong Password!"
-      end
-    end
-
-
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -93,26 +64,7 @@ class EventsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def event_params
-    # params.require(:event).permit(:event_name, :event_type, :event_date, :description, :event_creator,
-    #                               :virtual, :password, :meeting_link, :start_time, :end_time, :point_val, :graphics, :total_event_hr,
-    #                               :categories, :created_at)
-    params.require(:event).permit(:event_name, :event_type, :event_date, :description, :event_creator,
-                                  :virtual, :password, :meeting_link, :point_val, :graphics, :total_event_hr)
+    params.require(:event).permit(:event_id, :event_name, :event_type, :event_date, :description, :event_creator,
+                                  :virtual, :password, :meeting_link, :signin_time, :point_val, :graphics, :total_event_hr)
   end
-
-  # def add_category
-  #   @event = Event.find(params[:id])
-  #   @category = Category.find(params[:category_id])
-
-  #   @event.categories << @category #->> as to be two ActiveRecord objects
-  # end
-
-  # def find_resource
-  #   scoped_collection.friendly.find(params[:id])
-  # end
-
-  # def event_id
-  #   event_id: request.uuid
-  # end
-
 end

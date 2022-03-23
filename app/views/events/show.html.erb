@@ -8,7 +8,7 @@
 
     <div class="p-2 bd-highlight">
       <strong>Event ID: </strong> 
-      <%= @event.id %>
+      <%= @event.event_id %>
     </div>
 
     <div class="p-2 bd-highlight">
@@ -73,6 +73,11 @@
     
   </div>
 
+
+  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button>
+
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -80,31 +85,23 @@
           <h5 class="modal-title" id="exampleModalLabel">Sign In to <%= @event.event_name %></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <%= form_with url: "/sign_in_event" do |form| %>
-          <div class="modal-body">
-            <% form.label :password, class: "form-label" %>
-            <%= form.text_field :password, {class: "form-control", placeholder: "Password"} %>
-            <%= form.hidden_field :user_id, value: current_user.id%>
-            <%= form.hidden_field :event_id, value: @event.id%>
-            <%= form.hidden_field :sign_in, value: true%>
-            <%= form.hidden_field :point_recv, value: @event.point_val%>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <%= form.submit "Sign In", {class:"btn btn-secondary", "data-bs-dismiss":"modal"} %>
-          </div>
-        <% end %>
+        <div class="modal-body">
+          <form>
+            <label for="password" class="col-form-label">Password:</label>
+            <input type="text" class="form-control" id="password">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sing In</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <%= link_to 'Edit', edit_event_path(@event), class:"btn btn-secondary text-light" %>
-  <%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-secondary text-light" %>
-
-  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Sign In
-  </button>
-
-  <%= link_to 'Back', events_path, class:"btn btn-secondary text-light" %>
+<%= link_to 'Edit', edit_event_path(@event), class:"btn btn-secondary text-light" %>
+<%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-secondary text-light" %>
+<%= link_to 'Sign In',  event_hists_path(:event_hist => {:event_id => @event.event_id, :user_id => current_user.id, :sign_in => true, :point_recv => @event.point_val}), method: :post, class:"btn btn-secondary text-light" %>
+<%= link_to 'Back', events_path, class:"btn btn-secondary text-light" %>
 
 </div>
