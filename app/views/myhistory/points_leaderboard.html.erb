@@ -11,10 +11,11 @@
     <p>Welcome to the Leaderboard, here you can compar your point earnings to everyone else.</p>
     <!-- need to add check within new of the referal controller to make sure the user only makes up to 3 friend referals-->
     <p> My Points: <%= current_user.sum_points %> </p>
+    <p> My rank: <%= @rank%></p>
     <table class="table table-striped">
         <thead>
             <tr>
-              <th>User Rank of <%=current_user.counter%> </th>
+              <th>Rank of <%=current_user.counter%> </th>
               <th>User</th>          
               <th>Points</th>
             </tr>
@@ -27,6 +28,11 @@
                 <td><%= @count += 1 %></td>
                 <td><p><%= that_user.first_name%> <%=that_user.last_name %></p></td>
                 <td><%= that_user.sum_points %></td>
+
+                <% if that_user.id == current_user.id%>
+                  <%= @rank = @count %>
+                <%end%>
+                
               </tr>
             <% end %>
           </tbody>
