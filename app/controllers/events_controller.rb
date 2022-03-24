@@ -12,6 +12,7 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
+    redirect_to events_path unless current_user.admin?
     @event = Event.new
   end
 
