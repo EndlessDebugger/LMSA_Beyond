@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'award_points/index'
   get 'myhistory/index'
   get 'myhistory/points_leaderboard'
+  get 'home/info'
   resources :helps
   resources :announcements
   root to: 'home#index'
