@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'award_points/index'
   get 'myhistory/index'
   get 'myhistory/points_leaderboard'
+  get 'home/info'
   resources :helps
   resources :announcements
   root to: 'home#index'
@@ -16,6 +17,8 @@ Rails.application.routes.draw do
       get 'referrals/admin', :as => :admin_approve
       get 'myhistory/index'
       get 'myhistory/points_leaderboard'
+      post 'users/dev/:id' => 'users#dev', :as => "dev"
+      post 'users/nodev/:id' => 'users#nodev', :as => "nodev"
   end
 
   resources :home
