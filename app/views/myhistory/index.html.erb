@@ -28,7 +28,7 @@
                 <td><%= event_hist.user_id if event_hist.user_id == current_user.id %></td>
                 <td><%= event_hist.sign_in if event_hist.user_id == current_user.id %></td>
                 <td><%= event_hist.point_recv if event_hist.user_id == current_user.id %></td>
-                <td><%= event_hist.event_date if event_hist.user_id == current_user.id %></td>
+                <td><%= Event.find_by("id = ?",event_hist.event_id).event_date if event_hist.user_id == current_user.id %></td>
                 <td><%= link_to 'Show', event_hist if event_hist.user_id == current_user.id %></td>
                 <br>
               </tr>

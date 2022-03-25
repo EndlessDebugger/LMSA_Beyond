@@ -26,6 +26,22 @@ class UsersController < ApplicationController
     #puts("hecker")
   end
 
+  def dev
+    user = User.find(params[:id])
+    if Rails.env.development?
+      user.update_attribute(:admin,true)
+      redirect_to :admin_root
+    end
+  end
+
+  def nodev
+    user = User.find(params[:id])
+    if Rails.env.development?
+      user.update_attribute(:admin,false)
+      redirect_to :root
+    end
+  end
+
   # POST /users or /users.json
   #def create
     #@user = User.new(user_params)

@@ -23,8 +23,15 @@
   </div>
 
   <%= form.hidden_field :date_referred, value:  DateTime.now%>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="d-flex justify-content-start">
+  
+    <div class="col-4">
+      <%= link_to 'Back', referrals_path , {class: "btn btn-secondary text-light", type: "button"}%>
+    </div>
+    <div class="actions col-4">
+      <%= form.submit "Submit", class: "btn btn-secondary text-light"%>
+    </div>
   </div>
+
+  
 <% end %>

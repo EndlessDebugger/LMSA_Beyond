@@ -4,6 +4,7 @@ class CreateAnnouncements < ActiveRecord::Migration[6.1]
       t.string :name
       t.integer :creator_id
       t.datetime :time
+      t.references :event_id
       t.string :desc
 
       t.timestamps

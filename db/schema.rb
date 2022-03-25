@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_18_181305) do
+ActiveRecord::Schema.define(version: 2022_03_18_181031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,25 +19,19 @@ ActiveRecord::Schema.define(version: 2022_03_18_181305) do
     t.string "name"
     t.integer "creator_id"
     t.datetime "time"
+    t.bigint "event_id_id"
     t.string "desc"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id_id"], name: "index_announcements_on_event_id_id"
   end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
+    t.string "desc"
     t.string "color"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "catergories_events", force: :cascade do |t|
-    t.bigint "category_id"
-    t.bigint "event_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_catergories_events_on_category_id"
-    t.index ["event_id"], name: "index_catergories_events_on_event_id"
   end
 
   create_table "event_hists", force: :cascade do |t|
@@ -68,6 +62,8 @@ ActiveRecord::Schema.define(version: 2022_03_18_181305) do
   end
 
   create_table "helps", force: :cascade do |t|
+    t.string "title"
+    t.string "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -85,7 +81,6 @@ ActiveRecord::Schema.define(version: 2022_03_18_181305) do
 
   create_table "referrals", force: :cascade do |t|
     t.integer "old_member"
-    t.integer "new_member"
     t.string "guest_first_name"
     t.string "guest_last_name"
     t.boolean "medical_prof"
@@ -108,8 +103,6 @@ ActiveRecord::Schema.define(version: 2022_03_18_181305) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "uid"
     t.string "avatar_url"
-    t.string "password"
-    t.boolean "ismember"
     t.datetime "birthdate"
     t.text "bio"
     t.integer "signInCount", default: 0
