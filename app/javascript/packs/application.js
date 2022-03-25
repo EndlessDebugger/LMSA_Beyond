@@ -52,20 +52,3 @@ document.addEventListener('turbolinks:load', function() {
 
     
 });
-
-////////////// PASSWORD CHECH FOR SIGN IN ///////////////////// 
-document.addEventListener('DOMContentLoaded', function(){
-
-  var password_typed = document.getElementById('sign_in_event');
-  password_typed.addEventListener('click', function() {
-    var password = document.getElementById('password').value;
-    console.log("Password is clicked! " + password);
-    alert("Hello From Password Check!");
-  });
-
-  
-});
-
-
-// $("#modal-window").find(".modal-content").html("<%= j (render 'new') %>");
-// $("#modal-window").modal();

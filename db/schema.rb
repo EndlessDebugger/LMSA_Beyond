@@ -58,10 +58,11 @@ ActiveRecord::Schema.define(version: 2022_03_18_181305) do
     t.boolean "virtual"
     t.string "password"
     t.string "meeting_link"
-    t.time "signin_time"
+    t.datetime "signin_time"
     t.integer "point_val"
     t.string "graphics"
     t.float "total_event_hr"
+    t.boolean "enable_sign_in", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
