@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
   def dev
     user = User.find(params[:id])
-    if Rails.env.development?
+    if current_user.allowed
       user.update_attribute(:admin,true)
       redirect_to :admin_root
     end
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 
   def nodev
     user = User.find(params[:id])
-    if Rails.env.development?
+    if current_user.allowed
       user.update_attribute(:admin,false)
       redirect_to :root
     end
