@@ -46,4 +46,17 @@ class User < ApplicationRecord
     User.count
   end
 
+  def allowed
+    val = false
+    okay_emails =["zli2018@tamu.edu","avalos672918@tamu.edu","dortizchaves@tamu.edu", "nudodenko99@tamu.edu"]
+
+
+    okay_emails.each do |x|
+        if x == email
+          val=true
+        end
+    end
+    return val
+  end
+
 end

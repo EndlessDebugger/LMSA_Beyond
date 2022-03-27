@@ -47,7 +47,7 @@
         <a href="<%=edit_user_session_path%>">
             <button class="btn btn-outline-secondary text-dark" type="button">Edit My Info</button>
         </a>
-        <%if Rails.env.development?%>
+        <%if current_user.allowed%>
           <%=button_to "Make me a normal user",{controller: "users", action: "nodev",id: current_user.id }, {class: "btn btn-outline-secondary text-dark", type: "button"} %>
         <%end%>
   
