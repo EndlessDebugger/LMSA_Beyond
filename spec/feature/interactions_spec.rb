@@ -48,7 +48,7 @@ RSpec.describe 'updating user information', type: :feature do
     expect(page).to have_text("Sign in with Google")
     visit user_google_oauth2_omniauth_authorize_path
     expect(page).to have_text("Successfully authenticated from Google account.")
-    click_on 'Sign Up'
+    click_on 'Skip'
     expect(page).to have_text("Welcome back")
     expect(page).to have_text("No Birthdate Given")
     expect(page).to have_text("No Bio Given")
@@ -58,7 +58,7 @@ RSpec.describe 'updating user information', type: :feature do
     expect(page).to have_text("Sign in with Google")
     visit user_google_oauth2_omniauth_authorize_path
     expect(page).to have_text("Successfully authenticated from Google account.")
-    click_on 'Sign Up'
+    click_on 'Skip'
     expect(page).to have_text("Welcome back")
     expect(page).to have_text("No Birthdate Given")
     expect(page).to have_text("No Bio Given")
@@ -78,7 +78,7 @@ RSpec.describe 'visiting leaderboard page', type: :feature do
     expect(page).to have_text("Sign in with Google")
     visit user_google_oauth2_omniauth_authorize_path
     expect(page).to have_text("Successfully authenticated from Google account.")
-    click_on 'Sign Up'
+    click_on 'Skip'
     visit myhistory_points_leaderboard_path
     expect(page).to have_text("My Points: 0")
   end

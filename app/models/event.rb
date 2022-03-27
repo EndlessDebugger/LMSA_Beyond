@@ -4,4 +4,5 @@ class Event < ApplicationRecord
   validates :event_name, presence: true
   validates :event_date, presence: true
   validates :point_val, presence: true
+  validates :total_event_hr, presence: true
 end

@@ -4,13 +4,16 @@
 <%= stylesheet_link_tag "home.css" %>
 
 <div class="container py-4">
-<h1 class="display-10 fw-bold text-light">Events</h1>
-<br>
-  <div class="p-5 mb-4 bg-light rounded-3" style="text-align: center;">
+  <h1 class="display-10 fw-bold text-light">Events</h1>
+  <br>
+  <div class="p-5 mb-4 bg-light rounded-3">
     <div class="container-fluid py-5">
-      <%if current_user.admin?%>
+      <% if current_user.admin? %>
         <%= link_to "New Event", new_event_path, {class: "btn btn-secondary text-light", type: "button"} %>
-      <%end%>
+      <% end %>
+
+      <br>
+      <br>
 
       <div id="calendar"></div>
     </div> 

@@ -29,7 +29,7 @@
   <div class="mb-3">
 
     <%= form.label :event_date, class: "form-label" %>
-    <%= form.datetime_select :event_date, {class: "form-control", placeholder: "Event Date"} %>
+    <%= form.datetime_select :event_date, {class: "form-control"} %>
 
   </div>
 
@@ -64,13 +64,13 @@
   <div class="mb-3">
 
     <%= form.label :signin_time, class: "form-label" %>
-    <%= form.time_select :signin_time, {class: "form-control", placeholder: "Sign In Time"} %>
+    <%= form.time_select :signin_time, {class: "form-control"} %>
 
   </div>
 
   <div class="mb-3">
 
-    <%= form.label :point_val, class: "form-label" %>
+    <%= form.label "Points value", class: "form-label" %>
     <%= form.text_field :point_val, {class: "form-control", placeholder: "Value"} %>
 
   </div>
@@ -84,12 +84,12 @@
 
   <div class="mb-3">
 
-    <%= form.label :total_event_hr, class: "form-label" %>
+    <%= form.label "Total event hours", class: "form-label" %>
     <%= form.text_field :total_event_hr, {class: "form-control", placeholder: "Hours"} %>
 
   </div>
 
-  <%= form.hidden_field :event_creator, value: current_user.id%>
+  <%= form.hidden_field :event_creator, value: (current_user.first_name + " " + current_user.last_name)%>
 
   <%= link_to 'Back', events_path ,class:"btn btn-secondary text-light"%>
   <%= form.submit "Submit", class:"btn btn-secondary" %>

@@ -9,10 +9,11 @@ class CreateEvents < ActiveRecord::Migration[6.1]
       t.boolean :virtual
       t.string :password
       t.string :meeting_link
-      t.time :signin_time
+      t.datetime :signin_time
       t.integer :point_val
       t.string :graphics
       t.float :total_event_hr
+      t.boolean :enable_sign_in, default: false
 
       t.timestamps
     end
