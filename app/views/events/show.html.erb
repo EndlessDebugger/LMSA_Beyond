@@ -1,10 +1,12 @@
 <p id="notice"><%= notice %></div>
+<% @title = "LMSA Events" %>
+<%= stylesheet_link_tag "home.css" %>
 
-<div class="container">
+<div class="container py-4">
 
-  <h1><%= @event.event_name %></h1>
+  <h1 class="display-10 fw-bold text-light"><%= @event.event_name %></h1>
 
-  <div class="d-flex flex-column bd-highlight mb-3">
+  <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
 
     <% if current_user.admin? %>
 
@@ -30,29 +32,16 @@
       <%= @event.description %>
     </div>
 
-    <div class="p-2 bd-highlight">
-      <strong>Virtual:</strong>
-      <%= @event.virtual %>
-    </div>
-
-    <div class="p-2 bd-highlight">
-      <strong>Meeting link:</strong>
-      <%= @event.meeting_link %>
-    </div>
+    <% if @event.virtual? %>
+      <div class="p-2 bd-highlight">
+        <strong>Meeting link:</strong>
+        <%= @event.meeting_link %>
+      </div>
+    <% end %>
 
     <div class="p-2 bd-highlight">
       <strong>Signin time:</strong>
       <%= @event.signin_time.strftime("%Y-%m-%d %H:%M") %>
-    </div>
-
-    <div class="p-2 bd-highlight">
-      <strong>Time Current:</strong>
-      <%= Time.current.to_time %>
-    </div>
-
-    <div class="p-2 bd-highlight">
-      <strong>The difference in min:</strong>
-      <%= (Time.current.to_time.min - @event.signin_time.to_time.min) %>
     </div>
 
     <div class="p-2 bd-highlight">
@@ -82,10 +71,17 @@
         <%= @event.password %>
       </div>
 
-      <div class="p-2 bd-highlight">
-        <strong>Enable Sign In:</strong>
-        <%= @event.enable_sign_in %>
-      </div>
+      <% if @event.enable_sign_in == false %>
+        <%= form_with(model: @event) do |form| %>
+          <%= form.hidden_field :enable_sign_in, value: true %>
+          <%= form.submit "Enable Sign In", class: "btn btn-secondary" %>
+        <% end %>
+      <% else %>
+        <%= form_with(model: @event) do |form| %>
+          <%= form.hidden_field :enable_sign_in, value: false %>
+          <%= form.submit "Disable Sign In", class: "btn btn-secondary" %>
+        <% end %>
+      <% end %>
 
     <% end %>
     
@@ -117,26 +113,9 @@
   </div>
 
   <div>
-    <% if current_user.admin? %>
 
-      <% if @event.enable_sign_in == false %>
-        <%= form_with(model: @event) do |form| %>
-          <%= form.hidden_field :enable_sign_in, value: true %>
-          <%= form.submit "Enable Sign In", class: "btn btn-secondary" %>
-        <% end %>
-      <% else %>
-        <%= form_with(model: @event) do |form| %>
-          <%= form.hidden_field :enable_sign_in, value: false %>
-          <%= form.submit "Disable Sign In", class: "btn btn-secondary" %>
-        <% end %>
-      <% end %>
-
-      <br>
-
-      <%= link_to 'Edit', edit_event_path(@event), class:"btn btn-secondary text-light" %>
-      <%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-secondary text-light" %>
-
-    <% end %>
+    <%= link_to 'Edit', edit_event_path(@event), class:"btn btn-secondary text-light" %>
+    <%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-secondary text-light" %>
 
     <% time_difference = (Time.current.to_time.min - @event.signin_time.to_time.min) %>
     <% if current_user.admin == false && ((time_difference <= 5 && time_difference >= 0) || @event.enable_sign_in == true) %>
