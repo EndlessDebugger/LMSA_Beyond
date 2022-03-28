@@ -24,8 +24,8 @@
 
   <div class="mb-3">
 
-    <%= form.label :event_type, class: "form-label" %>
-    <%= form.text_field :event_type, {class: "form-control", placeholder: "Event Type"} %>
+    <%= form.label :e_type, 'Type', class: "form-label" %>
+    <%= form.select :e_type, Event.e_types.values, {class: "form-control", placeholder: "Event Type"} %>
     
   </div>
 

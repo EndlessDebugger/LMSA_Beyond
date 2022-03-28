@@ -4,4 +4,15 @@ class Event < ApplicationRecord
   validates :event_date, presence: true
   validates :point_val, presence: true
   validates :total_event_hr, presence: true
+
+
+  enum e_type: {
+      other: 'Other',
+      volunteer: 'Volunteering',
+      familia: 'Familia Social',
+      study: 'Study Social', 
+      general: 'General Meeting',
+      fund: 'Fundraising'
+  }, _prefix: true, _default: :other
+
 end
