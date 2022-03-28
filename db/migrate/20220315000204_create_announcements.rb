@@ -3,7 +3,6 @@ class CreateAnnouncements < ActiveRecord::Migration[6.1]
     create_table :announcements do |t|
       t.string :name
       t.integer :creator_id
-      t.datetime :time
       t.references :event_id
       t.string :desc
 

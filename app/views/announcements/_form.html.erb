@@ -23,11 +23,6 @@
       <%= form.label :desc, class: "form-label" %>
       <%= form.text_field :desc, {class: "form-control", placeholder: "Description"} %>
     </div>
-
-    <div class="mb-3">
-      <%= form.label "Date", class: "form-label" %>
-      <%= form.date_field :time, {class: "form-control"} %>
-    </div>
           
     <%= link_to "Back", announcements_path, class:"btn btn-secondary text-light" %>
     <%= form.submit "Announce", class:"btn btn-secondary" %>
