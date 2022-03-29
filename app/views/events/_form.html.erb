@@ -1,4 +1,7 @@
-<div class="container">
+<% @title = "LMSA Events" %>
+<%= stylesheet_link_tag "home.css" %>
+
+<div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
 <%= form_with(model: event) do |form| %>
   <% if event.errors.any? %>
     <div id="error_explanation">
@@ -21,8 +24,8 @@
 
   <div class="mb-3">
 
-    <%= form.label :event_type, class: "form-label" %>
-    <%= form.text_field :event_type, {class: "form-control", placeholder: "Event Type"} %>
+    <%= form.label :e_type, 'Type', class: "form-label" %>
+    <%= form.select :e_type, Event.e_types.values, {class: "form-control", placeholder: "Event Type"} %>
     
   </div>
 
@@ -40,13 +43,6 @@
 
   </div>
 
-  <div class="mb-3 form-check">
-
-    <%= form.label :virtual, class: "form-check-label" %>
-    <%= form.check_box :virtual, class: "form-check-input" %>
-
-  </div>
-
   <div class="mb-3">
 
     <%= form.label :password, class: "form-label" %>
@@ -54,7 +50,14 @@
 
   </div>
 
-  <div class="mb-3">
+   <div class="mb-3 form-check">
+
+    <%= form.label :virtual, class: "form-check-label" %>
+    <%= form.check_box :virtual, {class: "form-check-input", id: "virtual"} %>
+
+  </div>
+
+  <div class="mb-3" id="link">
 
     <%= form.label :meeting_link, class: "form-label" %>
     <%= form.text_field :meeting_link, {class: "form-control", placeholder: "Meeting Link"} %>
@@ -64,14 +67,14 @@
   <div class="mb-3">
 
     <%= form.label :signin_time, class: "form-label" %>
-    <%= form.time_select :signin_time, {class: "form-control"} %>
+    <%= form.datetime_select :signin_time, {class: "form-control"} %>
 
   </div>
 
   <div class="mb-3">
 
     <%= form.label "Points value", class: "form-label" %>
-    <%= form.text_field :point_val, {class: "form-control", placeholder: "Value"} %>
+    <%= form.number_field :point_val,{class: "form-control", placeholder: "Value"} %>
 
   </div>
 

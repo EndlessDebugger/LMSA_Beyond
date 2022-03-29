@@ -1,5 +1,8 @@
-<h1>New Announcement</h1>
+<% @title = "LMSA Announce" %>
+<%= stylesheet_link_tag "home.css" %>
 
-<%= render 'form', announcement: @announcement %>
+<div class="container py-4">
+    <h1 class="display-10 fw-bold text-light">New Announcement</h1>
 
-<%= link_to 'Back', announcements_path %>
+    <%= render 'form', announcement: @announcement %>
+</div>
