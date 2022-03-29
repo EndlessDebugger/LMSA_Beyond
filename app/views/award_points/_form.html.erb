@@ -1,0 +1,47 @@
+<%= form_with(model: poin_event) do |form| %>
+  <% if poin_event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(poin_event.errors.count, "error") %> prohibited this poin_event from being saved:</h2>
+
+      <ul>
+        <% poin_event.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :balance %>
+    <%= form.number_field :balance %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.datetime_select :date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :admin_award_id %>
+    <%= form.number_field :admin_award_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hours_attend %>
+    <%= form.text_field :hours_attend %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
