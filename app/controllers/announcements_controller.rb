@@ -68,6 +68,6 @@ class AnnouncementsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def announcement_params
-      params.require(:announcement).permit(:name, :desc,:time)
+      params.require(:announcement).permit(:name, :desc)
     end
 end
