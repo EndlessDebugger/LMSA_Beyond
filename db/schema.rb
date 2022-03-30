@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 2022_03_28_031459) do
   create_table "announcements", force: :cascade do |t|
     t.string "name"
     t.integer "creator_id"
-    t.datetime "time"
     t.bigint "event_id_id"
     t.string "desc"
     t.datetime "created_at", precision: 6, null: false
