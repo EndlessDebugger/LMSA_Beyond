@@ -6,11 +6,6 @@
 </p>
 
 <p>
-  <strong>New member:</strong>
-  <%= @referral.new_member %>
-</p>
-
-<p>
   <strong>Guest first name:</strong>
   <%= @referral.guest_first_name %>
 </p>
@@ -40,5 +35,4 @@
   <%= @referral.admin_approved %>
 </p>
 
-<%= link_to 'Edit', edit_referral_path(@referral) %> |
 <%= link_to 'Back', referrals_path %>
