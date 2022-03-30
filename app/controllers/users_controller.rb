@@ -7,14 +7,15 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1 or /users/1.json
-  def show; 
+  def show
     user = User.find(params[:id])
-    if user.admin == true
-      redirect_to :admin_root
-    else
-      redirect_to :root
-    end
+    # if user.admin == true
+    #   redirect_to :admin_root
+    # else
+    #   redirect_to :root
+    # end
   end
+
 
   # GET /users/new
   #def new
