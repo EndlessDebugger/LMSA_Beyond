@@ -29,7 +29,7 @@
     <tbody>
         <% Referral.where("medical_prof=?",true).each do |referral|%>
             <tr>
-              <td scope="row"><%= (User.find_by(referral.old_member)).email %></td>
+              <td scope="row"><%= User.find_by(referral.old_member).email %></td>
               <td scope="row"><%= referral.guest_first_name %></td>
               <td scope="row"><%= referral.guest_last_name %></td>
               <td scope="row"><%= referral.medical_prof %></td>
