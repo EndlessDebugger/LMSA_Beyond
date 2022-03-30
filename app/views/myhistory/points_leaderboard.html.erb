@@ -8,11 +8,10 @@
 <br>
   <div class="p-5 mb-4 bg-light rounded-3" style="text-align: center;">
     <div class="container-fluid py-5">
-    <p>Welcome to the Leaderboard, here you can compar your point earnings to everyone else.</p>
+    <p>Welcome to the Leaderboard, here you can compare your point earnings to everyone else.</p>
     <p> My Points: <%= current_user.sum_points %> </p>
     <p> My rank: <%=@rank%></p>
-    <br>
-    <p>hi</p>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -27,7 +26,7 @@
             <% User.all.sort{|a,b| b.sum_points <=> a.sum_points}.each do |that_user| %>
               <tr>
                 <td><%= @count += 1 %></td>
-                <td><p><%= that_user.first_name%> <%=that_user.last_name %></p></td>
+                <td><p><%= link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), {class:"nav-link"}%> </p></td>
                 <td><%= that_user.sum_points %></td>
 
                 <% if that_user.id == current_user.id%>
