@@ -5,7 +5,16 @@
 
 <div class="container py-4">
 <br>
-    <h1  class="display-10 fw-bold text-light">My Event History</h1>
+    <!--<h1  class="display-10 fw-bold text-light">My Event History</h1>-->
+    <ul class="nav nav-tabs display-10 fw-bold text-light">
+      <li class="nav-item">
+        <h1><%= link_to "Events", events_path, {class: "nav-link display-10 fw-bold text-light"} %></h1>
+      </li>
+      <li>
+        <h1 class="nav-link active display-10 fw-bold text-secondary">Event History</h1>
+      </li>
+    </ul>
+
     <div class="p-5 mb-4 bg-light rounded-3" style="text-align: center;">
       <div class="container-fluid py-5">
         <table  class="table table-striped">
