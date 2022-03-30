@@ -27,8 +27,7 @@
     </thead>
 
     <tbody>
-      <% Referral.all.each do |referral|%>
-        <% if referral.medical_prof%>
+      <% Referral.all.where("medical_prof=?",true).each do |referral|%>
           <tr>
             <td scope="row"><%= (User.find_by(referral.old_member)).email %></td>
             <td scope="row"><%= referral.guest_first_name %></td>
@@ -41,7 +40,6 @@
             <td scope="row"><%= link_to 'Edit', edit_referral_path(referral) %></td>
             <td scope="row"><%= link_to 'Destroy', referral, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
-        <%end%>
       <% end %>
     </tbody>
   </table>

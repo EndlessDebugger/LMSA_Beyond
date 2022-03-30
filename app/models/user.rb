@@ -49,7 +49,7 @@ class User < ApplicationRecord
   def allowed
     val = false
     okay_emails =["zli2018@tamu.edu","avalos672918@tamu.edu","dortizchaves@tamu.edu", "nudodenko99@tamu.edu","alec_hubacher@tamu.edu","lanceabuan@tamu.edu",
-                  "HollandMcQ2@gmail.com ","subr809@tamu.edu","jhassmann@tamu.edu", "yk7335@tamu.edu"]
+                  "HollandMcQ2@gmail.com ","subr809@tamu.edu","jhassmann@tamu.edu", "yk7335@tamu.edu", "mjmueller@tamu.edu"]
 
 
     okay_emails.each do |x|
