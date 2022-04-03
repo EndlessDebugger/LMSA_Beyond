@@ -1,6 +1,7 @@
-<h1>Editing Poin Event</h1>
+<% @title = "LMSA Points" %>
+<%= stylesheet_link_tag "home.css" %>
+<div class="container py-4">
+    <h1 class="display-10 fw-bold text-light">Editing Poin Event</h1>
 
-<%= render 'form', poin_event: @poin_event %>
-
-<%= link_to 'Show', @poin_event %> |
-<%= link_to 'Back', poin_events_path %>
+    <%= render 'form', poin_event: @poin_event %>
+</div>

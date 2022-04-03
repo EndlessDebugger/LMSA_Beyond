@@ -4,17 +4,13 @@
 <%= stylesheet_link_tag "home.css" %>
 
 <div class="container py-4">
-  <h1 class="display-10 fw-bold text-light">Points</h1>
-  <br>
-
-  <div class="p-5 mb-4 bg-light rounded-3">
-
-      <% if current_user.admin? %>
-        <div class="pb-5 text-center">
-          <%= link_to 'Award Points', new_poin_event_path, {class: "btn btn-secondary text-light btn-lg", type: "button"} %>
-        </div>
-      <% end %>
-
+<h1 class="display-10 fw-bold text-light">Points</h1>
+<br>
+  <div class="p-5 mb-4 bg-light rounded-3" style="text-align: center;">
+    <div class="container-fluid py-5">
+      <%if current_user.admin?%>
+        <%= link_to 'Award Points', new_poin_event_path,{class: "btn btn-secondary text-light", type: "button"} %>
+      <%end%>
       <table class="table">
       <thead>
         <tr>
@@ -28,6 +24,7 @@
       </thead>
 
       <tbody>
+      <p> Points: <%= current_user.sum_points %> </p>
         <% PoinEvent.where(user_id: current_user.id).find_each do |poin_event| %>
           <tr>
             <td scope="row"><%= poin_event.balance %></td>
@@ -42,6 +39,6 @@
         <% end %>
       </tbody>
     </table>
-
+    </div> 
   </div> 
 </div> 

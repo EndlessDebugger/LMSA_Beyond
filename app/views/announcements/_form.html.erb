@@ -1,5 +1,6 @@
 <% @title = "LMSA Events" %>
 <%= stylesheet_link_tag "home.css" %>
+
 <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
   <%= form_with(model: announcement) do |form| %>
     <% if announcement.errors.any? %>
