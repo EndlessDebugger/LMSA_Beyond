@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @poin_event.user_id %>
+</p>
+
+<p>
+  <strong>Balance:</strong>
+  <%= @poin_event.balance %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @poin_event.date %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @poin_event.description %>
+</p>
+
+<p>
+  <strong>Admin award:</strong>
+  <%= @poin_event.admin_award_id %>
+</p>
+
+<p>
+  <strong>Hours attend:</strong>
+  <%= @poin_event.hours_attend %>
+</p>
+
+<%= link_to 'Edit', edit_poin_event_path(@poin_event) %> |
+<%= link_to 'Back', poin_events_path %>

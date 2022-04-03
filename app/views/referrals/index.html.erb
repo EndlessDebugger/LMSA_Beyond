@@ -33,7 +33,7 @@
           <td scope="row"><%= referral.guest_last_name %></td>
           <td scope="row"><%= referral.medical_prof %></td>
           <td scope="row"><%= referral.email %></td>
-          <td scope="row"><%= referral.date_referred.in_time_zone('Central Time (US & Canada)').strftime("%m/%d/%Y") %></td>
+          <td scope="row"><%= referral.date_referred.strftime("%m/%d/%Y") %></td>
           <td scope="row"><%= referral.approved %></td>
           <td scope="row"><%= link_to 'More Details', referral %></td>
 

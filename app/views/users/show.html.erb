@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <strong>Last Name:</strong>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <strong>Points:</strong>
+  <%= @user.sum_points %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Bio:</strong>
+  <%= @user.bioConfirmation %>
+</p>
+
+<p>
+  <strong>Birthdate:</strong>
+  <%= @user.bod %>
+</p>
+
+<p>
+  <strong>Major:</strong>
+  <%= @user.major %>
+</p>
+
+<%= link_to 'Back', myhistory_points_leaderboard_path %>
