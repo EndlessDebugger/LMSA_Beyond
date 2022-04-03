@@ -4,11 +4,11 @@
 <%= stylesheet_link_tag "home.css" %>
 
 <div class="container py-4">
-<h1 class="display-10 fw-bold text-light">Points</h1>
+<h1 class="display-10 fw-bold text-light">Award Points</h1>
 <br>
   <div class="p-5 mb-4 bg-light rounded-3" style="text-align: center;">
     <div class="container-fluid py-5">
-      <p>Welcome to the Point Events index. This page is to record points awarded to users in special cases, e.g. a merchandise purchase. To report a new Point Event, click on "New Point Event". To see the event's details, click show, and to edit it click edit. To move around the website, click "Navigation"</p>
+      <p>Welcome to the Award Points index. This page allows admins to reward points to users for special cases. To award a user points, click on "New Point Event". To see the event's details, click show, and to edit it click edit. To move around the website, click "Navigation"</p>
       <%if current_user.admin?%>
         <%= link_to 'Award Points', new_poin_event_path,{class: "btn btn-secondary text-light", type: "button"} %>
       <%end%>
