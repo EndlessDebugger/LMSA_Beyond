@@ -44,11 +44,15 @@ document.addEventListener('turbolinks:load', function() {
         right: 'dayGridMonth,timeGridWeek,listWeek'
       },
   
-      events: "/events.json",
+      events: async function() {
+        const response = await fetch("/events.json");
+        const data = await response.json();
+        console.log("Current data: ", data);
+        return data;
+      }
   
     });
   
     calendar.render();
 
-    
 });
