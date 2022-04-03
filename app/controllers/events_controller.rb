@@ -73,6 +73,16 @@ class EventsController < ApplicationController
       if event.password == password
         new_event_hist = EventHist.new(new_event_hist_params)
         new_event_hist.save
+
+        gen  = Events.where(e_type: Event.e_types[:general]).joins(:event_hist).where(event_hists: {user_id: user_id}).count #EventHist.where(user_id: user_id), e_type: Event.e_types[:general]
+        fun  = Events.where(e_type: Event.e_types[:fund]).joins(:event_hist).where(event_hists: {user_id: user_id}).count 
+        vol  = Events.where(e_type: Event.e_types[:volunteer]).joins(:event_hist).where(event_hists: {user_id: user_id}).count 
+
+        if(gen == 4 && fun==3 && vol == 3)
+          User.find_by(id:user_id).update_attribute(:active_mem, true)
+        end
+        
+
         redirect_to event_hist_url(new_event_hist),
         notice: 'You are signed in!'
       else
