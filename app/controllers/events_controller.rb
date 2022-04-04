@@ -74,11 +74,12 @@ class EventsController < ApplicationController
         new_event_hist = EventHist.new(new_event_hist_params)
         new_event_hist.save
 
-        gen  = Events.where(e_type: Event.e_types[:general]).joins(:event_hist).where(event_hists: {user_id: user_id}).count #EventHist.where(user_id: user_id), e_type: Event.e_types[:general]
-        fun  = Events.where(e_type: Event.e_types[:fund]).joins(:event_hist).where(event_hists: {user_id: user_id}).count 
-        vol  = Events.where(e_type: Event.e_types[:volunteer]).joins(:event_hist).where(event_hists: {user_id: user_id}).count 
+        gen  = Event.where(e_type: Event.e_types[:general]).joins(:event_hists).where(event_hists: {user_id: user_id}).count
+        fun  = Event.where(e_type: Event.e_types[:fund]).joins(:event_hists).where(event_hists: {user_id: user_id}).count 
+        vol  = Event.where(e_type: Event.e_types[:volunteer]).joins(:event_hists).where(event_hists: {user_id: user_id}).count 
 
-        if(gen == 4 && fun==3 && vol == 3)
+        puts("Gen: "+gen.to_s+" fun:"+fun.to_s+" vol:"+vol.to_s)
+        if(gen >= 4 && fun>=3 && vol >= 3)
           User.find_by(id:user_id).update_attribute(:active_mem, true)
         end
         
