@@ -23,17 +23,15 @@
               <th scope="col">Event</th>
               <th scope="col">Points recieved</th>
               <th scope="col">Date</th>
-              <th colspan="3"></th>
             </tr>
           </thead>
           <tbody>
           <p> Your Points: <%= current_user.sum_points %> </p>
             <% Event.joins(:event_hists).where(event_hists: {user_id: current_user.id}).order("event_date DESC").each do |hist| %>
               <tr>
-                <td scope="row"><%= hist.event_name %></td>
+                <td scope="row"><%= link_to hist.event_name, EventHist.find_by(id: hist.event_hists)  %></td>
                 <td scope="row"><%= hist.point_val %></td>
                 <td scope="row"><%= hist.event_date.strftime("%m/%d/%Y") + " "+hist.event_date.strftime("%l:%M %p")  %></td>
-                <td scope="row"><%= link_to 'Show', hist  %></td>
               </tr>
             <% end %>
 
