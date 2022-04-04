@@ -2,7 +2,8 @@
 
 <p>
   <strong>Event:</strong>
-  <%= @event_hist.event_id %>
+  <% @eventer = Event.find_by(id: @event_hist.event_id) %>
+  <%= link_to @eventer.event_name, @eventer %>
 </p>
 
 <p>

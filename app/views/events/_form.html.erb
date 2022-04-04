@@ -92,6 +92,13 @@
 
   </div>
 
+  <div class="mb-3">
+
+    <%= form.label "Active Members Only", class: "form-check-label" %>
+    <%= form.check_box :total_event_hr, {class: "form-check-input", id: "active"} %>
+
+  </div>
+
   <%= form.hidden_field :event_creator, value: (current_user.first_name + " " + current_user.last_name)%>
 
   <%= link_to 'Back', events_path ,class:"btn btn-secondary text-light"%>
