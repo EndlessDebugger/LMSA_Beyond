@@ -15,10 +15,8 @@ require 'faker'
 
 RSpec.describe '/poin_events', type: :request do
   before do
-    Rails.application.env_config["devise.mapping"] = Devise.mappings[:user] # If using Devise
-    Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
-    get user_google_oauth2_omniauth_authorize_path
-    get user_google_oauth2_omniauth_callback_url
+    lmsa_sign_in
+    lmsa_make_admin
   end
   # This should return the minimal set of attributes required to create a valid
   # PoinEvent. As you add validations to PoinEvent, be sure to

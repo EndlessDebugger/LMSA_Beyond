@@ -11,6 +11,7 @@ RSpec.describe 'authenicating as user', type: :feature do
     #fill_in 'Bio', with: Faker::ChuckNorris.fact
     click_on 'Skip'
     expect(page).to have_text("Welcome back")
+    visit '/'
   end
   scenario 'successful sign out' do
     visit '/'
@@ -65,5 +66,15 @@ RSpec.describe 'authenicating as admin', type: :feature do
     expect(page).to have_text("Approval List")
     click_on 'Sign Out'
     expect(page).to have_text("Sign in with Google")
+  end
+end
+RSpec.describe 'dev feature', type: :feature do
+  scenario 'make admin button' do
+    visit user_google_oauth2_omniauth_authorize_path
+    visit '/'
+    click_on 'Make me an admin'
+    User.where(uid: 1).where(admin: true).should exist
+    click_on 'Make me a normal user'
+    User.where(uid: 1).where(admin: false).should exist
   end
 end
