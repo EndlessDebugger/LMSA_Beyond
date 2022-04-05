@@ -62,3 +62,16 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+def lmsa_sign_in
+    Rails.application.env_config["devise.mapping"] = Devise.mappings[:user] # If using Devise
+    Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
+    get user_google_oauth2_omniauth_authorize_path
+    get user_google_oauth2_omniauth_callback_url
+end
+def lmsa_make_admin
+    User.where(uid: 1).update(admin: true)
+end
+def lmsa_make_non_admin
+  User.where(uid: 1).update(admin: true)
+end

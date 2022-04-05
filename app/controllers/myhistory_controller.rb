@@ -1,7 +1,7 @@
 class MyhistoryController < ApplicationController
   def index
-    @event_hists = EventHist.all
-    @poin_events = PoinEvent.all
+    #@event_hists = EventHist.all
+    #@poin_events = PoinEvent.all
   end
 
   # GET /event_hists/1 or /event_hists/1.json
