@@ -26,7 +26,7 @@ RSpec.describe '/events', type: :request do
   let(:valid_attributes) do
     #skip('Add a hash of attributes valid for your model')
     {
-      event_name: Faker::ChuckNorris.fact,
+      event_name: "Meeting",
       e_type: "General Meeting",
       event_date: Faker::Date.forward(days: 99),
       description: Faker::ChuckNorris.fact,
@@ -122,12 +122,12 @@ RSpec.describe '/events', type: :request do
       let(:new_attributes) do
         #skip('Add a hash of attributes valid for your model')
         {
-          #event_id: Faker::Number.number(digits: 6),
-          event_name: Faker::ChuckNorris.fact,
+          event_name: "Meeting",
           e_type: "General Meeting",
           event_date: Faker::Date.forward(days: 99),
           description: Faker::ChuckNorris.fact,
-          event_creator: Faker::Number.number(digits: 6),
+          event_creator: 1,
+          #event_creator: User.where(uid: 1)[:email],
           virtual: false,
           password: Faker::Internet.password,
           meeting_link: Faker::Internet.url,
