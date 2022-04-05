@@ -32,6 +32,21 @@ RSpec.describe 'updating user information', type: :feature do
   end
 
 end
+RSpec.describe 'visiting admin root path', type: :feature do
+  scenario 'as non-admin' do
+    visit user_google_oauth2_omniauth_authorize_path
+    visit admin_root_path
+    #visit '/home/adminDash'
+    expect(page).to have_http_status(:ok)
+  end
+  scenario 'as admin' do
+    visit user_google_oauth2_omniauth_authorize_path
+    lmsa_make_admin
+    visit admin_root_path
+    #visit '/home/adminDash'
+    expect(page).to have_http_status(:ok)
+  end
+end
 RSpec.describe 'visiting leaderboard page', type: :feature do
   scenario 'no points' do
     visit user_google_oauth2_omniauth_authorize_path

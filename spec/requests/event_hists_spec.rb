@@ -20,9 +20,27 @@ RSpec.describe '/event_hists', type: :request do
     #get user_google_oauth2_omniauth_authorize_path
     #get user_google_oauth2_omniauth_callback_url
   #end
+  let(:event_attributes) do
+    {
+      event_name: "Meeting",
+      e_type: "General Meeting",
+      event_date: Faker::Date.forward(days: 99),
+      description: Faker::ChuckNorris.fact,
+      event_creator: 1,
+      #event_creator: User.where(uid: 1)[:email],
+      virtual: false,
+      password: Faker::Internet.password,
+      meeting_link: Faker::Internet.url,
+      signin_time: :event_date,
+      point_val: Faker::Number.number(digits: 3),
+      graphics: Faker::Internet.url,
+      total_event_hr: Faker::Number.decimal(l_digits: 2)
+    }
+  end
   before do
     lmsa_sign_in
     lmsa_make_admin
+    Event.create! event_attributes
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -31,10 +49,10 @@ RSpec.describe '/event_hists', type: :request do
   let(:valid_attributes) do
     # skip("Add a hash of attributes valid for your model")
     {
-      event_id: 7776898,
-      user_id:  7776899,
+      event_id: Event.where(event_name: "Meeting").first.id,
+      user_id:  1,
       sign_in: true,
-      point_recv: 221
+      point_recv: event_attributes[:point_val]
     }
   end
 
@@ -108,10 +126,10 @@ RSpec.describe '/event_hists', type: :request do
       let(:new_attributes) do
         #skip('Add a hash of attributes valid for your model')
         {
-          event_id: 333489,
-          user_id:  333488,
+          event_id: Event.where(event_name: "Meeting").first.id,
+          user_id:  1,
           sign_in: true,
-          point_recv: 331
+          point_recv: Faker::Number.number(digits: 3)
         }
       end
 
