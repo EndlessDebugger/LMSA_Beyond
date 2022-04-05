@@ -1,47 +1,48 @@
-<%= form_with(model: poin_event) do |form| %>
-  <% if poin_event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(poin_event.errors.count, "error") %> prohibited this poin_event from being saved:</h2>
+<% @title = "LMSA Points" %>
+<%= stylesheet_link_tag "home.css" %>
 
-      <ul>
-        <% poin_event.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
+  <%= form_with(model: poin_event) do |form| %>
+    <% if poin_event.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(poin_event.errors.count, "error") %> prohibited this poin_event from being saved:</h2>
+
+        <ul>
+          <% poin_event.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= form.label :user_id, class: "form-label" %>
+      <%= form.text_field :user_id, {class: "form-control", placeholder: "User ID"} %>
     </div>
+
+    <div class="mb-3">
+      <%= form.label :balance, class: "form-label" %>
+      <%= form.text_field :balance, {class: "form-control", placeholder: "Balance"} %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :date, class: "form-label" %>
+      <%= form.datetime_select :date, {class: "form-control"} %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :description, class: "form-label" %>
+      <%= form.text_field :description, {class: "form-control", placeholder: "Description"} %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :hours_attend, class: "form-label" %>
+      <%= form.text_field :hours_attend, {class: "form-control", placeholder: "Hours"} %>
+    </div>
+
+    <%= form.hidden_field :admin_award_id, value: current_user.id %>
+
+    <%= link_to 'Back', poin_events_path, class:"btn btn-secondary text-light" %>
+    <%= form.submit "Submit", class:"btn btn-secondary" %>
   <% end %>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :balance %>
-    <%= form.number_field :balance %>
-  </div>
-
-  <div class="field">
-    <%= form.label :date %>
-    <%= form.datetime_select :date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :admin_award_id %>
-    <%= form.number_field :admin_award_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :hours_attend %>
-    <%= form.text_field :hours_attend %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

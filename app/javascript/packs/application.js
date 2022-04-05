@@ -44,11 +44,30 @@ document.addEventListener('turbolinks:load', function() {
         right: 'dayGridMonth,timeGridWeek,listWeek'
       },
   
-      events: "/events.json",
+      events: async function() {
+        const response = await fetch("/events.json");
+        const data = await response.json();
+        let active_mem = document.getElementById("active_mem").innerHTML;
+        console.log("Active members status:", active_mem);
+        if (active_mem === true){
+          console.log("Current data: ", data);
+          return data;
+        }
+        else {
+          let data_not_active = [];
+          for(let i = 0; i < data.length; ++i){
+            if (data[i].active_mem == false){
+              data_not_active.push(data[i]);
+            }
+          }
+          console.log("Current data: ", data_not_active);
+          return data_not_active;
+        }
+        
+      }
   
     });
   
     calendar.render();
 
-    
 });

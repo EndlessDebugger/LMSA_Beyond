@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_28_031459) do
+ActiveRecord::Schema.define(version: 2022_04_03_222010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,12 +26,13 @@ ActiveRecord::Schema.define(version: 2022_03_28_031459) do
   end
 
   create_table "event_hists", force: :cascade do |t|
-    t.string "event_id"
     t.integer "user_id"
     t.boolean "sign_in"
     t.integer "point_recv"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "event_id"
+    t.index ["event_id"], name: "index_event_hists_on_event_id"
   end
 
   create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -50,6 +51,7 @@ ActiveRecord::Schema.define(version: 2022_03_28_031459) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "e_type", null: false
+    t.boolean "active_mem", default: false
   end
 
   create_table "helps", force: :cascade do |t|
@@ -97,7 +99,9 @@ ActiveRecord::Schema.define(version: 2022_03_28_031459) do
     t.datetime "birthdate"
     t.text "bio"
     t.integer "signInCount", default: 0
+    t.boolean "active_mem", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "event_hists", "events"
 end

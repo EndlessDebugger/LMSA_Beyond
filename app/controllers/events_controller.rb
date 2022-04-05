@@ -73,6 +73,17 @@ class EventsController < ApplicationController
       if event.password == password
         new_event_hist = EventHist.new(new_event_hist_params)
         new_event_hist.save
+
+        gen  = Event.where(e_type: Event.e_types[:general]).joins(:event_hists).where(event_hists: {user_id: user_id}).count
+        fun  = Event.where(e_type: Event.e_types[:fund]).joins(:event_hists).where(event_hists: {user_id: user_id}).count 
+        vol  = Event.where(e_type: Event.e_types[:volunteer]).joins(:event_hists).where(event_hists: {user_id: user_id}).count 
+
+        puts("Gen: "+gen.to_s+" fun:"+fun.to_s+" vol:"+vol.to_s)
+        if(gen >= 4 && fun>=3 && vol >= 3)
+          User.find_by(id:user_id).update_attribute(:active_mem, true)
+        end
+        
+
         redirect_to event_hist_url(new_event_hist),
         notice: 'You are signed in!'
       else
@@ -94,7 +105,7 @@ class EventsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def event_params
     params.require(:event).permit(:event_name, :e_type, :event_date, :description, :event_creator, :signin_time,
-                                  :virtual, :password, :meeting_link, :point_val, :graphics, :total_event_hr, :enable_sign_in)
+                                  :virtual, :password, :meeting_link, :point_val, :graphics, :total_event_hr, :enable_sign_in, :active_mem)
   end
 
 end

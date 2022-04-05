@@ -71,6 +71,12 @@
         <%= @event.password %>
       </div>
 
+      <% if @event.active_mem == true %>
+        <div class="p-2 bd-highlight">
+          <strong>Active Memebers Only</strong>
+        </div>
+      <% end %>
+
       <% if @event.enable_sign_in == false %>
         <%= form_with(model: @event) do |form| %>
           <%= form.hidden_field :enable_sign_in, value: true %>
@@ -113,8 +119,10 @@
 
     <div class="pt-2">
 
-      <%= link_to 'Edit', edit_event_path(@event), class:"btn btn-secondary text-light" %>
-      <%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-secondary text-light" %>
+      <%if current_user.admin%>
+        <%= link_to 'Edit', edit_event_path(@event), class:"btn btn-secondary text-light" %>
+        <%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-secondary text-light" %>
+      <%end%>
 
       <% time_difference = (Time.current.to_time.min - @event.signin_time.to_time.min) %>
       <% if current_user.admin == false && ((time_difference <= 5 && time_difference >= 0) || @event.enable_sign_in == true) %>
