@@ -11,7 +11,8 @@ class User < ApplicationRecord
   #validates :last_name, presence: true
 
   def self.from_google(email:, first_name:, last_name:, full_name:, uid:, avatar_url:)
-    return nil unless email =~ /@gmail.com || @tamu.edu\z/
+    # this check is not valid, google will determine if an address is a real google account
+    #return nil unless email =~ /@gmail.com || @tamu.edu\z/
     # find_or_create_by(email: email)
 
     create_with(uid: uid, first_name: first_name, last_name: last_name, admin: false, avatar_url: avatar_url).find_or_create_by!(email: email)

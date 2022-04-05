@@ -24,7 +24,12 @@
 
     <div class="p-2 bd-highlight">
       <strong>Event date:</strong>
-      <%= @event.event_date.strftime("%Y-%m-%d %H:%M") %>
+      <%#<%= @event.event_date.strftime("%Y-%m-%d %H:%M") %>%>
+      <%= if @event.event_date.present?
+            @event.event_date.strftime("%Y-%m-%d %H:%M")
+          else
+            'nil'
+          end%>
     </div>
 
     <div class="p-2 bd-highlight">
@@ -41,7 +46,12 @@
 
     <div class="p-2 bd-highlight">
       <strong>Signin time:</strong>
-      <%= @event.signin_time.strftime("%Y-%m-%d %H:%M") %>
+      <%#<%= @event.signin_time.strftime("%Y-%m-%d %H:%M") %>%>
+      <%= if @event.signin_time.present?
+            @event.signin_time.strftime("%Y-%m-%d %H:%M")
+          else
+            'nil'
+          end%>
     </div>
 
     <div class="p-2 bd-highlight">
@@ -124,7 +134,11 @@
         <%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-secondary text-light" %>
       <%end%>
 
-      <% time_difference = (Time.current.to_time.min - @event.signin_time.to_time.min) %>
+      <% if @event.signin_time.present?
+           time_difference = (Time.current.to_time.min - @event.signin_time.to_time.min)
+           else
+             time_difference = -1
+         end %>
       <% if current_user.admin == false && ((time_difference <= 5 && time_difference >= 0) || @event.enable_sign_in == true) %>
         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Sign In
