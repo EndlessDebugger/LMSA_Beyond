@@ -71,6 +71,12 @@
         <%= @event.password %>
       </div>
 
+      <% if @event.active_mem == true %>
+        <div class="p-2 bd-highlight">
+          <strong>Active Memebers Only</strong>
+        </div>
+      <% end %>
+
       <% if @event.enable_sign_in == false %>
         <%= form_with(model: @event) do |form| %>
           <%= form.hidden_field :enable_sign_in, value: true %>
