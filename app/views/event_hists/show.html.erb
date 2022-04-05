@@ -1,25 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Event:</strong>
-  <% @eventer = Event.find_by(id: @event_hist.event_id) %>
-  <%= link_to @eventer.event_name, @eventer %>
-</p>
 
-<p>
-  <strong>User:</strong>
-  <%= @event_hist.user_id %>
-</p>
+<%= stylesheet_link_tag "home.css" %>
+<% @eventer = Event.find_by(id: @event_hist.event_id) %>
 
-<p>
-  <strong>Sign in:</strong>
-  <%= @event_hist.sign_in %>
-</p>
+<div class="container py-4">
+    <h1 class="display-10 fw-bold text-light"><%= @eventer.event_name %></h1>
+    <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
+        <p>
+          <strong>Event:</strong>
+          <% @eventer = Event.find_by(id: @event_hist.event_id) %>
+          <%= link_to @eventer.event_name, @eventer %>
+        </p>
 
-<p>
-  <strong>Point recv:</strong>
-  <%= @event_hist.point_recv %>
-</p>
+        <p>
+          <strong>Date:</strong>
+          <% @eventer = Event.find_by(id: @event_hist.event_id) %>
+          <%= link_to @eventer.event_date, @eventer %>
+        </p>
 
-<%= link_to 'Edit', edit_event_hist_path(@event_hist) %> |
-<%= link_to 'Back', event_hists_path %>
+
+        <p>
+          <strong>Point recv:</strong>
+          <%= @event_hist.point_recv %>
+        </p>
+
+        <%= link_to 'Back', event_hists_path %>
+    </div>
+</div>
