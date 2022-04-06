@@ -64,4 +64,28 @@ class User < ApplicationRecord
     return val
   end
 
+  def activeMem_Check
+    @gen  = Event.where(e_type: Event.e_types[:general]).joins(:event_hists).where(event_hists: {user_id: id}).count
+    @fun  = Event.where(e_type: Event.e_types[:fund]).joins(:event_hists).where(event_hists: {user_id: id}).count 
+    @vol  = Event.where(e_type: Event.e_types[:volunteer]).joins(:event_hists).where(event_hists: {user_id: id}).count 
+
+    puts("Gen: "+@gen.to_s+" fun:"+@fun.to_s+" vol:"+@vol.to_s)
+
+    val = (((@gen+@fun+@vol).to_f/10).to_f*100)
+
+    return val
+  end
+
+  def get_gen
+    return @gen
+  end
+
+  def get_fun
+    return @fun
+  end
+
+  def get_vol
+    return @vol
+  end
+
 end
