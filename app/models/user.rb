@@ -88,4 +88,28 @@ class User < ApplicationRecord
     return @vol
   end
 
+  def leaderboard
+    count = 0
+    @rank = 1
+
+    @list = User.all.sort{|a,b| b.sum_points <=> a.sum_points}
+    @list.each do |that_user|
+      count += 1
+
+      if that_user.id == id
+        @rank = count
+      end
+
+    end
+
+    return @list
+
+  end
+
+  def get_rank
+    return @rank
+  end
+
+
+
 end
