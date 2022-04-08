@@ -22,11 +22,12 @@ class PoinEventsController < ApplicationController
 
   # POST /poin_events or /poin_events.json
   def create
-    userID = User.find_by(email: "alec_hubacher@tamu.edu").id
-    puts(userID, params[:balance], params[:description], params[:admin_award_id])
-    #@poin_event = PoinEvent.new(poin_event_params)
-    #@poin_event = PoinEvent.new(user_id: userID, balance: params[:balance],created_at: params[:created_at],description: params[:description],admin_award_id: params[:admin_award_id])
-    new_poin_event_params = {:user_id => userID, :balance => params[:balance], :description => params[:description], :admin_award_id => params[:admin_award_id]}
+    userID = User.find_by(params[:email]).id
+    # redirect_to poin_events_path, notice: String(poin_event_params[:balance])
+    # puts(userID, params[:balance], params[:description], params[:admin_award_id])
+    # @poin_event = PoinEvent.new(poin_event_params)
+    # @poin_event = PoinEvent.new(user_id: userID, balance: params[:balance],created_at: params[:created_at],description: params[:description],admin_award_id: params[:admin_award_id])
+    new_poin_event_params = {:user_id => userID, :balance => poin_event_params[:balance], :description => poin_event_params[:description], :admin_award_id => poin_event_params[:admin_award_id]}
     @poin_event = PoinEvent.new(new_poin_event_params)
     respond_to do |format|
       if @poin_event.save
@@ -76,15 +77,15 @@ class PoinEventsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def poin_event_params
-
-    params.require(:poin_event).permit(:user_id, :balance, :date, :description, :admin_award_id, :hours_attend)
+    params.require(:poin_event).permit(:email, :user_id, :balance, :date, :description, :admin_award_id, :hours_attend)
   end
+
   def set_event_hist
     @event_hist = EventHist.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
-  def event_hist_params
-    params.require(:event_hist).permit(:event_id, :user_id, :sign_in, :point_recv)
-  end
+  # def event_hist_params
+  #   params.require(:event_hist).permit(:event_id, :user_id, :sign_in, :point_recv)
+  # end
 end
