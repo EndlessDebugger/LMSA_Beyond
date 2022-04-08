@@ -22,8 +22,12 @@ class PoinEventsController < ApplicationController
 
   # POST /poin_events or /poin_events.json
   def create
-    @poin_event = PoinEvent.new(poin_event_params)
-
+    userID = User.find_by(email: "alec_hubacher@tamu.edu").id
+    puts(userID, params[:balance], params[:description], params[:admin_award_id])
+    #@poin_event = PoinEvent.new(poin_event_params)
+    #@poin_event = PoinEvent.new(user_id: userID, balance: params[:balance],created_at: params[:created_at],description: params[:description],admin_award_id: params[:admin_award_id])
+    new_poin_event_params = {:user_id => userID, :balance => params[:balance], :description => params[:description], :admin_award_id => params[:admin_award_id]}
+    @poin_event = PoinEvent.new(new_poin_event_params)
     respond_to do |format|
       if @poin_event.save
         format.html { redirect_to poin_event_url(@poin_event), notice: 'Poin event was successfully created.' }
@@ -72,6 +76,7 @@ class PoinEventsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def poin_event_params
+
     params.require(:poin_event).permit(:user_id, :balance, :date, :description, :admin_award_id, :hours_attend)
   end
   def set_event_hist

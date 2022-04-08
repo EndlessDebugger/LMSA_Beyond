@@ -18,11 +18,10 @@
       <table class="table">
       <thead>
         <tr>
-          <th scope="col">Balance</th>
+          <th scope="col">Points Added this is a test</th>
           <th scope="col">Date</th>
           <th scope="col">Description</th>
           <th scope="col">Admin award</th>
-          <th scope="col">Hours attend</th>
           <th colspan="3"></th>
         </tr>
       </thead>
@@ -31,13 +30,14 @@
         <% PoinEvent.where(user_id: current_user.id).find_each do |poin_event| %>
           <tr>
             <td scope="row"><%= poin_event.balance %></td>
-            <td scope="row"><%= poin_event.date %></td>
+            <td scope="row"><%= poin_event.created_at %></td>
             <td scope="row"><%= poin_event.description %></td>
             <td scope="row"><%= poin_event.admin_award_id %></td>
-            <td scope="row"><%= poin_event.hours_attend %></td>
-            <td scope="row"><%= link_to 'Show', poin_event %></td>
-            <td scope="row"><%= link_to 'Edit', edit_poin_event_path(poin_event) %></td>
-            <td scope="row"><%= link_to 'Destroy', poin_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% if current_user.admin? %>
+              <td scope="row"><%= link_to 'Show', poin_event %></td>
+              <td scope="row"><%= link_to 'Edit', edit_poin_event_path(poin_event) %></td>
+              <td scope="row"><%= link_to 'Destroy', poin_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
