@@ -1,38 +1,53 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Old member:</strong>
-  <%= @referral.old_member %>
-</p>
+<% @title = "Editing Referral" %>
+<%= stylesheet_link_tag "home.css" %>
 
-<p>
-  <strong>Guest first name:</strong>
-  <%= @referral.guest_first_name %>
-</p>
+<div class="container py-4">
+<h1 class="display-10 fw-bold text-light">Referrals</h1>
+<br>
+  <div class="p-5 mb-4 bg-light rounded-3" style="text-align: center;">
+    <div class="container-fluid py-5">
 
-<p>
-  <strong>Guest last name:</strong>
-  <%= @referral.guest_last_name %>
-</p>
 
-<p>
-  <strong>Medical prof:</strong>
-  <%= @referral.medical_prof %>
-</p>
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @referral.email %>
-</p>
+    <p>
+      <strong>Old member:</strong>
+      <%= @referral.old_member %>
+    </p>
 
-<p>
-  <strong>Date referred:</strong>
-  <%= @referral.date_referred %>
-</p>
+    <p>
+      <strong>Guest first name:</strong>
+      <%= @referral.guest_first_name %>
+    </p>
 
-<p>
-  <strong>Admin approved:</strong>
-  <%= @referral.admin_approved %>
-</p>
+    <p>
+      <strong>Guest last name:</strong>
+      <%= @referral.guest_last_name %>
+    </p>
 
-<%= link_to 'Back', referrals_path %>
+    <p>
+      <strong>Medical prof:</strong>
+      <%= @referral.medical_prof %>
+    </p>
+
+    <p>
+      <strong>Email:</strong>
+      <%= @referral.email %>
+    </p>
+
+    <p>
+      <strong>Date referred:</strong>
+      <%= @referral.date_referred %>
+    </p>
+
+    <p>
+      <strong>Admin approved:</strong>
+      <%= @referral.admin_approved %>
+    </p>
+
+    <%= link_to 'Back', referrals_path %>
+    </div> 
+  </div> 
+</div> 
