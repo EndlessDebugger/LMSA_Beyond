@@ -16,28 +16,23 @@
     <% end %>
 
     <div class="mb-3">
-      <%= form.label :user_id, class: "form-label" %>
-      <%= form.text_field :user_id, {class: "form-control", placeholder: "User ID"} %>
+      <%= form.label :email, class: "form-label" %>
+      <%= form.text_field :email, {class: "form-control", placeholder: "email"} %>
     </div>
 
     <div class="mb-3">
       <%= form.label :balance, class: "form-label" %>
-      <%= form.text_field :balance, {class: "form-control", placeholder: "Balance"} %>
+      <%= form.number_field :balance, {class: "form-control", placeholder: "Balance"} %>
     </div>
 
     <div class="mb-3">
-      <%= form.label :date, class: "form-label" %>
-      <%= form.datetime_select :date, {class: "form-control"} %>
+      <%= form.label :created_at, class: "form-label" %>
+      <%= form.datetime_select :created_at, {class: "form-control"} %>
     </div>
 
     <div class="mb-3">
       <%= form.label :description, class: "form-label" %>
       <%= form.text_field :description, {class: "form-control", placeholder: "Description"} %>
-    </div>
-
-    <div class="mb-3">
-      <%= form.label :hours_attend, class: "form-label" %>
-      <%= form.text_field :hours_attend, {class: "form-control", placeholder: "Hours"} %>
     </div>
 
     <%= form.hidden_field :admin_award_id, value: current_user.id %>

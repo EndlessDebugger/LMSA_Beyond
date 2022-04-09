@@ -1,6 +1,22 @@
-<h1>Editing Referral</h1>
 
-<%= render 'eform', referral: @referral %>
+<p id="notice"><%= notice %></p>
 
-<%= link_to 'Show', @referral %> |
-<%= link_to 'Back', referrals_path %>
+<% @title = "Editing Referral" %>
+<%= stylesheet_link_tag "home.css" %>
+
+<div class="container py-4">
+<h1 class="display-10 fw-bold text-light">Referrals</h1>
+<br>
+  <div class="p-5 mb-4 bg-light rounded-3" style="text-align: center;">
+    <div class="container-fluid py-5">
+
+
+    <%= render 'eform', referral: @referral %>
+
+    <%= link_to 'Show', @referral %> |
+    <%= link_to 'Back', referrals_path %>
+
+
+    </div> 
+  </div> 
+</div> 
