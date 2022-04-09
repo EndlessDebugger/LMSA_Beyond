@@ -39,6 +39,14 @@ class User < ApplicationRecord
     end
   end
 
+  def majorConfirmation
+    if major.present?
+      major
+    else
+      "No Major Given"
+    end
+  end
+
   def userReferrals
     referrals.where("oldmember = ?", id)
   end

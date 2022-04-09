@@ -8,9 +8,10 @@
   <h1 class="display-10 fw-bold text-light">Awarded Points Info</h1>
 
   <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
+
     <div class="p-2 bd-highlight">
-      <strong>User:</strong>
-      <%= @poin_event.user_id %>
+      <strong>Admin award:</strong>
+      <%= User.find_by("id=?",@poin_event.admin_award_id).email %>
     </div>
 
     <div class="p-2 bd-highlight">
@@ -28,18 +29,10 @@
       <%= @poin_event.description %>
     </div>
 
-    <div class="p-2 bd-highlight">
-      <strong>Admin award:</strong>
-      <%= @poin_event.admin_award_id %>
-    </div>
-
-    <div class="p-2 bd-highlight">
-      <strong>Hours attend:</strong>
-      <%= @poin_event.hours_attend %>
-    </div>
-
     <div>
-      <%= link_to 'Edit', edit_poin_event_path(@poin_event), class:"btn btn-secondary text-light" %>
+      <% if current_user.admin? %>
+        <%= link_to 'Edit', edit_poin_event_path(@poin_event), class:"btn btn-secondary text-light" %>
+      <% end %>
       <%= link_to 'Back', poin_events_path, class:"btn btn-secondary text-light" %>
     </div>
   </div>
