@@ -16,25 +16,31 @@ class Users::SessionsController < Devise::SessionsController
       #end
     end
 
-    #def update
+    def update
 
-      #respond_to do |format|
-        #if current_user.update(user_params)
-          #format.html { redirect_to user_url(current_user), notice: 'User was successfully updated.' }
-          #format.json { render :show, status: :ok, location: current_user }
-        #else
-          ## format.html { render :edit, status: :unprocessable_entity }
-          ## format.json { render json: current_user.errors, status: :unprocessable_entity }
-          ## render 'edit'
-          ## puts("Dummy")
-        #end
-      #end
-    #end
+      if current_user.admin
+        path = admin_root_path
+      else
+        path = root_path
+      end
 
-    #private
+      respond_to do |format|
+        if current_user.update(user_params)
+          format.html { redirect_to path, notice: 'User was successfully updated.' }
+          format.json { render :show, status: :ok, location: current_user }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: current_user.errors, status: :unprocessable_entity }
+          render 'edit'
+          puts("Dummy")
+        end
+      end
+    end
+
+    private
     
-    #def user_params
-      #params.permit(:id, :major, :admin, :email, :first_name, :last_name, :bio, :birthdate, :ismember, :major)
-    #end
+    def user_params
+      params.permit(:id, :major, :bio, :birthdate)
+    end
     
 end

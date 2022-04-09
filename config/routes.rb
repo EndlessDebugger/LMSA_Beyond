@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: "users/sessions" }
     devise_scope :user do
       get 'users/edit', to: 'users/sessions#edit', as: :edit_user_session
-      post 'users/edit', to: 'users/sessions#update'
+      patch 'users/edit', to: 'users/sessions#update'
       get 'users/sign_in', to: 'users/sessions#new', as: :new_user_session
       get 'users/sign_out', to: 'users/sessions#destroy', as: :destroy_user_session
       get 'referrals/admin', :as => :admin_approve
