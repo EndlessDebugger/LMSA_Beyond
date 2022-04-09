@@ -8,7 +8,7 @@
   <br>
 
   <div class="p-5 mb-4 bg-light rounded-3">
-
+    <table>
       <% if current_user.admin? %>
         <div class="pb-5 text-center">
           <%= link_to 'Award Points', new_poin_event_path, {class: "btn btn-secondary text-light btn-lg", type: "button"} %>
@@ -18,10 +18,9 @@
       <table class="table">
       <thead>
         <tr>
-          <th scope="col">Points</th>
+          <th scope="col">Points given</th>
           <th scope="col">Date</th>
-          <th scope="col">Description</th>
-          <th scope="col">Admin award</th>
+          <th scope="col">Admin</th>
           <% if current_user.admin? %>
           <th scope="col">Options</th>
           <%end%>
@@ -34,13 +33,12 @@
           <tr>
             <td scope="row"><%= poin_event.balance %></td>
             <td scope="row"><%= poin_event.created_at.strftime("%m/%d/%Y") + " "+poin_event.created_at.strftime("%l:%M %p") %></td>
-            <td scope="row"><%= poin_event.description %></td>
             <td scope="row"><%= User.find_by("id=?",poin_event.admin_award_id).email %></td>
             <% if current_user.admin? %>
               <td scope="row"><%= link_to 'Show', poin_event %></td>
               <td scope="row"><%= link_to 'Edit', edit_poin_event_path(poin_event) %></td>
               <td scope="row"><%= link_to 'Destroy', poin_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            <% end %>
+              <% end %>
           </tr>
         <% end %>
       </tbody>

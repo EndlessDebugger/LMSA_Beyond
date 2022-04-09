@@ -10,12 +10,12 @@
   <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
 
     <div class="p-2 bd-highlight">
-      <strong>Admin award:</strong>
+      <strong>Admin:</strong>
       <%= User.find_by("id=?",@poin_event.admin_award_id).email %>
     </div>
 
     <div class="p-2 bd-highlight">
-      <strong>Balance:</strong>
+      <strong>Points given:</strong>
       <%= @poin_event.balance %>
     </div>
 
