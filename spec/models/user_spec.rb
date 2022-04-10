@@ -1,11 +1,15 @@
 require 'rails_helper'
 require 'faker'
 
-RSpec.describe User, type: :model do
-  #pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe(User, type: :model) do
+  # pending "add some examples to (or delete) #{__FILE__}"
+  subject do
+    described_class.new(valid_attributes)
+  end
+
   let(:valid_attributes) do
     {
-      #user_id: Faker::Number.number(digits: 6),
+      # user_id: Faker::Number.number(digits: 6),
       major: Faker::Educator.subject,
       admin: false,
       email: Faker::Internet.email(domain: 'gmail.com'),
@@ -14,12 +18,7 @@ RSpec.describe User, type: :model do
     }
   end
 
-  subject do
-    described_class.new(valid_attributes)
-  end
-
   it 'is valid with valid attributes' do
-    expect(subject).to be_valid
+    expect(subject).to(be_valid)
   end
-
 end

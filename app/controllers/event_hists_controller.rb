@@ -23,11 +23,11 @@ class EventHistsController < ApplicationController
 
     respond_to do |format|
       if @event_hist.save
-        format.html { redirect_to event_hist_url(@event_hist), notice: 'Event hist was successfully created.' }
-        format.json { render :show, status: :created, location: @event_hist }
+        format.html { redirect_to(event_hist_url(@event_hist), notice: 'Event hist was successfully created.') }
+        format.json { render(:show, status: :created, location: @event_hist) }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @event_hist.errors, status: :unprocessable_entity }
+        format.html { render(:new, status: :unprocessable_entity) }
+        format.json { render(json: @event_hist.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -36,11 +36,11 @@ class EventHistsController < ApplicationController
   def update
     respond_to do |format|
       if @event_hist.update(event_hist_params)
-        format.html { redirect_to event_hist_url(@event_hist), notice: 'Event hist was successfully updated.' }
-        format.json { render :show, status: :ok, location: @event_hist }
+        format.html { redirect_to(event_hist_url(@event_hist), notice: 'Event hist was successfully updated.') }
+        format.json { render(:show, status: :ok, location: @event_hist) }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @event_hist.errors, status: :unprocessable_entity }
+        format.html { render(:edit, status: :unprocessable_entity) }
+        format.json { render(json: @event_hist.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -50,8 +50,8 @@ class EventHistsController < ApplicationController
     @event_hist.destroy
 
     respond_to do |format|
-      format.html { redirect_to event_hists_url, notice: 'Event hist was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to(event_hists_url, notice: 'Event hist was successfully destroyed.') }
+      format.json { head(:no_content) }
     end
   end
 

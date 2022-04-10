@@ -1,1 +1,1 @@
-json.partial! "helps/help", help: @help
+json.partial!('helps/help', help: @help)

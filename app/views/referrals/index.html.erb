@@ -26,7 +26,7 @@
     </thead>
 
     <tbody>
-      <% Referral.where(old_member: current_user.id).find_each do |referral| %>
+      <% Referral.where(old_member: current_user.id).each do |referral| %>
         <tr>
           <td scope="row"><%= referral.guest_first_name %></td>
           <td scope="row"><%= referral.guest_last_name %></td>
@@ -36,7 +36,7 @@
           <td scope="row"><%= referral.approved %></td>
           <td scope="row"><%= link_to 'More Details', referral %></td>
 
-          <%if !referral.admin_approved?%>
+          <%if !referral.admin_approved%>
             <td><%= link_to 'Edit', edit_referral_path(referral) %></td>
           <%end%>
 

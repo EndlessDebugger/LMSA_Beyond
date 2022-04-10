@@ -1,9 +1,5 @@
 class HomeController < ApplicationController
-
-
   def index
-    if request.path == "/home/adminDash"
-      redirect_to root_path unless current_user.admin?
-    end
+    redirect_to(root_path) if request.path == '/home/adminDash' && !current_user.admin?
   end
 end

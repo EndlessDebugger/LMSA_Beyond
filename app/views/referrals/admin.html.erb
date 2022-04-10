@@ -15,7 +15,7 @@
     <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">Old member</th>
+        <th scope="col">Referring Member</th>
         <th scope="col">Guest first name</th>
         <th scope="col">Guest last name</th>
         <th scope="col">Medical prof</th>
@@ -27,15 +27,20 @@
     </thead>
 
     <tbody>
-        <% Referral.where(medical_prof: true).find_each do |referral|%>
+        <% Referral.where(medical_prof: true).each do |referral|%>
             <tr>
-              <td scope="row"><%= User.find_by(id: referral.old_member).email %></td>
+              <% that_user=User.find_by(id: referral.old_member)%>
+              <%if that_user.present?%>
+                <td scope="row"><%= link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), class:"nav-link"%></td>
+              <%else%>
+                <td scope="row"></td>
+              <%end%>
               <td scope="row"><%= referral.guest_first_name %></td>
               <td scope="row"><%= referral.guest_last_name %></td>
               <td scope="row"><%= referral.medical_prof %></td>
               <td scope="row"><%= referral.email %></td>
-              <td scope="row"><%= referral.date_referred %></td>
-              <td scope="row"><%= referral.admin_approved %></td>
+              <td scope="row"><%= referral.date_referred.strftime("%m/%d/%Y") %></td>
+              <td scope="row"><%= referral.approved %></td>
               <td scope="row"><%= link_to 'Show', referral %></td>
               <td scope="row"><%= link_to 'Edit', edit_referral_path(referral) %></td>
               <td scope="row"><%= link_to 'Destroy', referral, method: :delete, data: { confirm: 'Are you sure?' } %></td>

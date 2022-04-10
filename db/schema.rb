@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_04_035250) do
+ActiveRecord::Schema.define(version: 2022_04_10_055408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,9 +72,9 @@ ActiveRecord::Schema.define(version: 2022_04_04_035250) do
     t.boolean "medical_prof"
     t.string "email"
     t.datetime "date_referred"
-    t.string "admin_approved"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "admin_approved"
     t.index ["email"], name: "index_referrals_on_email", unique: true
   end
 
