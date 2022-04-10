@@ -16,8 +16,8 @@
   </head>
 
   <body>
-    <%= render "home/adminHeader" if user_signed_in? and current_user.admin==true and action_name!="edit" %>
-    <%= render "home/header" if user_signed_in? and current_user.admin==false and action_name!="edit"%>
+    <%= render "home/adminHeader" if user_signed_in? and current_user.admin==true and action_name!="edit" and :controller != 'users'%>
+    <%= render "home/header" if user_signed_in? and current_user.admin==false and action_name!="edit" and :controller != 'users'%>
     
     <% if flash.any? %>
       <% flash.each do |key, value| -%>

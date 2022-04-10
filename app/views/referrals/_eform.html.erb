@@ -24,7 +24,7 @@
 
   <div class="field">
     <%= form.label :medical_prof %>
-    <%= form.check_box :medical_prof %>
+    <%= form.select :medical_prof, [['No', false],['Yes', true]] %>
   </div>
 
   <div class="field">
@@ -32,19 +32,22 @@
     <%= form.text_field :email %>
   </div>
 
-  <div class="field">
-    <%= form.label :date_referred %>
-    <%= form.datetime_select :date_referred %>
-  </div>
 
+  <%= form.hidden_field :date_referred, value:  DateTime.now%>
   <%if current_user.admin?%>
     <div class="field">
       <%= form.label :admin_approved %>
-      <%= form.select :admin_approved, [[' ', nil], ['Yes', true], ['No', false]] %>
+      <%= form.select :admin_approved, [[' ', nil], ['No', false], ['Yes', true]] %>
     </div>
   <%end%>
 
+  <%if current_user.admin%>
+    <%= link_to 'Back', admin_approve_path,{class: "btn btn-outline-secondary text-dark", type: "button"} %>
+  <%else%>
+    <%= link_to 'Back', referrals_path,{class: "btn btn-outline-secondary text-dark", type: "button"} %>
+  <%end%>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Update referral", class: "btn btn-outline-secondary text-dark" %>
   </div>
 <% end %>

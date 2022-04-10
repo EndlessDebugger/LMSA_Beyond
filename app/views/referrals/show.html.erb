@@ -1,53 +1,55 @@
 <p id="notice"><%= notice %></p>
 
-<% @title = "Editing Referral" %>
+<% @title = "Showing Referral" %>
 <%= stylesheet_link_tag "home.css" %>
 
 <div class="container py-4">
-<h1 class="display-10 fw-bold text-light">Referrals</h1>
+<h1 class="display-10 fw-bold text-light">Showing Referral</h1>
 <br>
-  <div class="p-5 mb-4 bg-light rounded-3" style="text-align: center;">
+  <div class="p-5 mb-4 bg-light rounded-3">
     <div class="container-fluid py-5">
 
+    <div class="p-2 bd-highlight">
+      <strong>Referring member:</strong>
+      <% that_user=User.find_by(id: @referral.old_member)%>
+      <%= link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), class:"nav-link"%>
+    </div>
 
-    <p id="notice"><%= notice %></p>
-
-    <p>
-      <strong>Old member:</strong>
-      <%= @referral.old_member %>
-    </p>
-
-    <p>
+    <div class="p-2 bd-highlight">
       <strong>Guest first name:</strong>
       <%= @referral.guest_first_name %>
-    </p>
+    </div>
 
-    <p>
+    <div class="p-2 bd-highlight"> 
       <strong>Guest last name:</strong>
       <%= @referral.guest_last_name %>
-    </p>
+    </div>
 
-    <p>
+    <div class="p-2 bd-highlight">
       <strong>Medical prof:</strong>
       <%= @referral.medical_prof %>
-    </p>
+    </div>
 
-    <p>
+    <div class="p-2 bd-highlight">
       <strong>Email:</strong>
       <%= @referral.email %>
-    </p>
+    </div>
 
-    <p>
+    <div class="p-2 bd-highlight">
       <strong>Date referred:</strong>
-      <%= @referral.date_referred %>
-    </p>
+      <%= @referral.date_referred.strftime("%m/%d/%Y")  %>
+    </div>
 
-    <p>
+    <div class="p-2 bd-highlight">
       <strong>Admin approved:</strong>
-      <%= @referral.admin_approved %>
-    </p>
+      <%= @referral.approved %>
+    </div>
 
-    <%= link_to 'Back', referrals_path %>
+      <%if current_user.admin%>
+        <%= link_to 'Back', admin_approve_path,{class: "btn btn-outline-secondary text-dark", type: "button"} %>
+      <%else%>
+        <%= link_to 'Back', referrals_path,{class: "btn btn-outline-secondary text-dark", type: "button"} %>
+      <%end%>
     </div> 
   </div> 
 </div> 

@@ -1,1 +1,1 @@
-json.array! @helps, partial: "helps/help", as: :help
+json.array!(@helps, partial: 'helps/help', as: :help)

@@ -12,26 +12,29 @@
     <%= form.text_field :guest_last_name %>
   </div>
 
-
+  <div class="field">
+    <%= form.label :medical_prof %>
+    <%= form.select :medical_prof, [['No', false],['Yes', true]] %>
+  </div>
 
   <div class="field">
     <%= form.label :email %>
     <%= form.text_field :email %>
   </div>
 
-  <div class="field">
-    <%= form.label :medical_prof %>
-    <%= form.select :medical_prof, [['No', false],['Yes', true]] %>
-  </div>
-
   <%= form.hidden_field :date_referred, value:  DateTime.now%>
-  <div class="d-flex justify-content-start">
+
+  <div class="d-flex row">
   
-    <div class="col-4">
-      <%= link_to 'Back', referrals_path , {class: "btn btn-secondary text-light", type: "button"}%>
+    <div>
+      <%if current_user.admin%>
+        <%= link_to 'Back', admin_approve_path,{class: "btn btn-outline-secondary text-dark", type: "button"} %>
+      <%else%>
+        <%= link_to 'Back', referrals_path,{class: "btn btn-outline-secondary text-dark", type: "button"} %>
+      <%end%>
     </div>
-    <div class="actions col-4">
-      <%= form.submit "Submit", class: "btn btn-secondary text-light"%>
+    <div class="actions">
+      <%= form.submit "Submit", class: "btn btn-outline-secondary text-dark"%>
     </div>
   </div>
 

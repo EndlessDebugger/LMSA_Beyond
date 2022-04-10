@@ -13,8 +13,7 @@ require 'faker'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe '/events', type: :request do
-
+RSpec.describe('/events', type: :request) do
   before do
     lmsa_sign_in
     lmsa_make_admin
@@ -24,14 +23,14 @@ RSpec.describe '/events', type: :request do
   # Event. As you add validations to Event, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    #skip('Add a hash of attributes valid for your model')
+    # skip('Add a hash of attributes valid for your model')
     {
-      event_name: "Meeting",
-      e_type: "General Meeting",
+      event_name: 'Meeting',
+      e_type: 'General Meeting',
       event_date: Faker::Date.forward(days: 99),
       description: Faker::ChuckNorris.fact,
       event_creator: 1,
-      #event_creator: User.where(uid: 1)[:email],
+      # event_creator: User.where(uid: 1)[:email],
       virtual: false,
       password: Faker::Internet.password,
       meeting_link: Faker::Internet.url,
@@ -43,9 +42,9 @@ RSpec.describe '/events', type: :request do
   end
 
   let(:invalid_attributes) do
-    #skip('Add a hash of attributes invalid for your model')
+    # skip('Add a hash of attributes invalid for your model')
     {
-      #event_id: nil,
+      # event_id: nil,
       event_name: nil,
       e_type: nil,
       event_date: nil,
@@ -63,32 +62,32 @@ RSpec.describe '/events', type: :request do
 
   describe 'GET /index' do
     it 'renders a successful response' do
-      Event.create! valid_attributes
+      Event.create!(valid_attributes)
       get events_url
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      event = Event.create! valid_attributes
+      event = Event.create!(valid_attributes)
       get event_url(event)
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET /new' do
     it 'renders a successful response' do
       get new_event_url
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET /edit' do
     it 'renders a successful response' do
-      event = Event.create! valid_attributes
+      event = Event.create!(valid_attributes)
       get edit_event_url(event)
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
@@ -96,38 +95,37 @@ RSpec.describe '/events', type: :request do
     context 'with valid parameters' do
       it 'creates a new Event' do
         expect do
-          post events_url, params: { event: valid_attributes }
-          #raise response.body
-        end.to change(Event, :count).by(1)
+          post(events_url, params: { event: valid_attributes })
+          # raise response.body
+        end.to(change(Event, :count).by(1))
       end
 
       it 'redirects to the created event' do
         post events_url, params: { event: valid_attributes }
-        expect(response).to redirect_to(event_url(Event.last))
+        expect(response).to(redirect_to(event_url(Event.last)))
       end
     end
 
     context 'with invalid parameters' do
       it 'does not create a new Event' do
         expect do
-          post events_url, params: { event: invalid_attributes }
-        end.to change(Event, :count).by(0)
+          post(events_url, params: { event: invalid_attributes })
+        end.to(change(Event, :count).by(0))
       end
-
     end
   end
 
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        #skip('Add a hash of attributes valid for your model')
+        # skip('Add a hash of attributes valid for your model')
         {
-          event_name: "Meeting",
-          e_type: "General Meeting",
+          event_name: 'Meeting',
+          e_type: 'General Meeting',
           event_date: Faker::Date.forward(days: 99),
           description: Faker::ChuckNorris.fact,
           event_creator: 1,
-          #event_creator: User.where(uid: 1)[:email],
+          # event_creator: User.where(uid: 1)[:email],
           virtual: false,
           password: Faker::Internet.password,
           meeting_link: Faker::Internet.url,
@@ -139,39 +137,38 @@ RSpec.describe '/events', type: :request do
       end
 
       it 'updates the requested event' do
-        event = Event.create! valid_attributes
+        event = Event.create!(valid_attributes)
         patch event_url(event), params: { event: new_attributes }, as: :json
         event.reload
-        #skip('Add assertions for updated state')
-        #expect(response.body).to include(new_attributes[:event_id].to_s)
-        expect(response.body).to include(new_attributes[:event_name].to_s)
-        expect(response.body).to include(new_attributes[:meeting_link].to_s)
-        expect(response.body).to include(new_attributes[:point_val].to_s)
+        # skip('Add assertions for updated state')
+        # expect(response.body).to include(new_attributes[:event_id].to_s)
+        expect(response.body).to(include(new_attributes[:event_name].to_s))
+        expect(response.body).to(include(new_attributes[:meeting_link].to_s))
+        expect(response.body).to(include(new_attributes[:point_val].to_s))
       end
-
     end
 
     context 'with invalid parameters' do
-      it "does not update requested event" do
-        event = Event.create! valid_attributes
+      it 'does not update requested event' do
+        event = Event.create!(valid_attributes)
         patch event_url(event), params: { event: invalid_attributes }, as: :json
-        expect(response).not_to be_successful
+        expect(response).not_to(be_successful)
       end
     end
   end
 
   describe 'DELETE /destroy' do
     it 'destroys the requested event' do
-      event = Event.create! valid_attributes
+      event = Event.create!(valid_attributes)
       expect do
-        delete event_url(event)
-      end.to change(Event, :count).by(-1)
+        delete(event_url(event))
+      end.to(change(Event, :count).by(-1))
     end
 
     it 'redirects to the events list' do
-      event = Event.create! valid_attributes
+      event = Event.create!(valid_attributes)
       delete event_url(event)
-      expect(response).to redirect_to(events_url)
+      expect(response).to(redirect_to(events_url))
     end
   end
 end

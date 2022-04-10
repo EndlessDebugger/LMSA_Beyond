@@ -5,19 +5,18 @@ class Referral < ApplicationRecord
   validates :guest_last_name, presence: true
 
   def approved
-    if !medical_prof?
-      "N/A"
-    elsif !admin_approved.present?
-      "Pending"
-    elsif admin_approved?
-      "Approved"
+    if !medical_prof
+      'N/A'
+    elsif admin_approved.nil?
+      'Pending'
+    elsif !admin_approved
+      'Rejected'
     else
-      "Rejected"
+      'Approved'
     end
   end
 
   def friendReferralPoints
     1
   end
-
 end

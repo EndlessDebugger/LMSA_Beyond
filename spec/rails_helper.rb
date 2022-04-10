@@ -27,8 +27,8 @@ require 'rspec/rails'
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
-  puts e.to_s.strip
-  exit 1
+  puts(e.to_s.strip)
+  exit(1)
 end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -64,14 +64,16 @@ RSpec.configure do |config|
 end
 
 def lmsa_sign_in
-    Rails.application.env_config["devise.mapping"] = Devise.mappings[:user] # If using Devise
-    Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
-    get user_google_oauth2_omniauth_authorize_path
-    get user_google_oauth2_omniauth_callback_url
+  Rails.application.env_config['devise.mapping'] = Devise.mappings[:user] # If using Devise
+  Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
+  get(user_google_oauth2_omniauth_authorize_path)
+  get(user_google_oauth2_omniauth_callback_url)
 end
+
 def lmsa_make_admin
-    User.where(uid: 1).update(admin: true)
+  User.where(uid: 1).update(admin: true)
 end
+
 def lmsa_make_non_admin
   User.where(uid: 1).update(admin: true)
 end

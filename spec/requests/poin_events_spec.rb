@@ -13,7 +13,7 @@ require 'faker'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe '/poin_events', type: :request do
+RSpec.describe('/poin_events', type: :request) do
   before do
     lmsa_sign_in
     lmsa_make_admin
@@ -21,20 +21,21 @@ RSpec.describe '/poin_events', type: :request do
   # This should return the minimal set of attributes required to create a valid
   # PoinEvent. As you add validations to PoinEvent, be sure to
   # adjust the attributes here as well.
+
   let(:valid_attributes) do
-    #skip('Add a hash of attributes valid for your model')
+    # skip('Add a hash of attributes valid for your model')
     {
       user_id: Faker::Number.number(digits: 6),
       balance: Faker::Number.number(digits: 3),
-      date: Faker::Date.backward(days:7),
+      date: Faker::Date.backward(days: 7),
       description: Faker::ChuckNorris.fact,
       admin_award_id: Faker::Number.number(digits: 6),
-      hours_attend: Faker::Number.decimal(l_digits:1)
+      hours_attend: Faker::Number.decimal(l_digits: 1)
     }
   end
 
   let(:invalid_attributes) do
-    #skip('Add a hash of attributes invalid for your model')
+    # skip('Add a hash of attributes invalid for your model')
     {
       user_id: nil,
       balance: nil,
@@ -47,32 +48,32 @@ RSpec.describe '/poin_events', type: :request do
 
   describe 'GET /index' do
     it 'renders a successful response' do
-      PoinEvent.create! valid_attributes
+      PoinEvent.create!(valid_attributes)
       get poin_events_url
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      poin_event = PoinEvent.create! valid_attributes
+      poin_event = PoinEvent.create!(valid_attributes)
       get poin_event_url(poin_event)
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET /new' do
     it 'renders a successful response' do
       get new_poin_event_url
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET /edit' do
     it 'renders a successful response' do
-      poin_event = PoinEvent.create! valid_attributes
+      poin_event = PoinEvent.create!(valid_attributes)
       get edit_poin_event_url(poin_event)
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
@@ -80,75 +81,73 @@ RSpec.describe '/poin_events', type: :request do
     context 'with valid parameters' do
       it 'creates a new PoinEvent' do
         expect do
-          post poin_events_url, params: { poin_event: valid_attributes }
-        end.to change(PoinEvent, :count).by(1)
+          post(poin_events_url, params: { poin_event: valid_attributes })
+        end.to(change(PoinEvent, :count).by(1))
       end
 
       it 'redirects to the created poin_event' do
         post poin_events_url, params: { poin_event: valid_attributes }
-        expect(response).to redirect_to(poin_event_url(PoinEvent.last))
+        expect(response).to(redirect_to(poin_event_url(PoinEvent.last)))
       end
     end
 
     context 'with invalid parameters' do
       it 'does not create a new PoinEvent' do
         expect do
-          post poin_events_url, params: { poin_event: invalid_attributes }
-        end.to change(PoinEvent, :count).by(0)
+          post(poin_events_url, params: { poin_event: invalid_attributes })
+        end.to(change(PoinEvent, :count).by(0))
       end
-
     end
   end
 
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        #skip('Add a hash of attributes valid for your model')
+        # skip('Add a hash of attributes valid for your model')
         {
           user_id: Faker::Number.number(digits: 6),
           balance: Faker::Number.number(digits: 3),
-          date: Faker::Date.backward(days:7),
+          date: Faker::Date.backward(days: 7),
           description: Faker::ChuckNorris.fact,
           admin_award_id: Faker::Number.number(digits: 6),
-          hours_attend: Faker::Number.decimal(l_digits:1)
+          hours_attend: Faker::Number.decimal(l_digits: 1)
         }
       end
 
       it 'updates the requested poin_event' do
-        poin_event = PoinEvent.create! valid_attributes
+        poin_event = PoinEvent.create!(valid_attributes)
         patch poin_event_url(poin_event), params: { poin_event: new_attributes }, as: :json
         poin_event.reload
-        #skip('Add assertions for updated state')
-        expect(response.body).to include(new_attributes[:user_id].to_s)
-        expect(response.body).to include(new_attributes[:balance].to_s)
-        expect(response.body).to include(new_attributes[:description].to_s)
-        expect(response.body).to include(new_attributes[:admin_award_id].to_s)
-        expect(response.body).to include(new_attributes[:hours_attend].to_s)
+        # skip('Add assertions for updated state')
+        expect(response.body).to(include(new_attributes[:user_id].to_s))
+        expect(response.body).to(include(new_attributes[:balance].to_s))
+        expect(response.body).to(include(new_attributes[:description].to_s))
+        expect(response.body).to(include(new_attributes[:admin_award_id].to_s))
+        expect(response.body).to(include(new_attributes[:hours_attend].to_s))
       end
-
     end
 
     context 'with invalid parameters' do
-      it "does not create a new event" do
-        poin_event = PoinEvent.create! valid_attributes
+      it 'does not create a new event' do
+        poin_event = PoinEvent.create!(valid_attributes)
         patch poin_event_url(poin_event), params: { poin_event: invalid_attributes }, as: :json
-        expect(response).not_to be_successful
+        expect(response).not_to(be_successful)
       end
     end
   end
 
   describe 'DELETE /destroy' do
     it 'destroys the requested poin_event' do
-      poin_event = PoinEvent.create! valid_attributes
+      poin_event = PoinEvent.create!(valid_attributes)
       expect do
-        delete poin_event_url(poin_event)
-      end.to change(PoinEvent, :count).by(-1)
+        delete(poin_event_url(poin_event))
+      end.to(change(PoinEvent, :count).by(-1))
     end
 
     it 'redirects to the poin_events list' do
-      poin_event = PoinEvent.create! valid_attributes
+      poin_event = PoinEvent.create!(valid_attributes)
       delete poin_event_url(poin_event)
-      expect(response).to redirect_to(poin_events_url)
+      expect(response).to(redirect_to(poin_events_url))
     end
   end
 end

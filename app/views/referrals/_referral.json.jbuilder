@@ -1,3 +1,4 @@
-json.extract! referral, :id, :old_member, :guest_first_name, :guest_last_name, :medical_prof, :email,
+json.extract!(referral, :id, :old_member, :guest_first_name, :guest_last_name, :medical_prof, :email,
               :date_referred, :admin_approved, :created_at, :updated_at
-json.url referral_url(referral, format: :json)
+)
+json.url(referral_url(referral, format: :json))
