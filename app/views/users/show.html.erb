@@ -55,10 +55,15 @@
     </div>
   </div>
 
+    <div class="flex-row ">
+    <%if current_user.admin%>
+      <%= link_to 'Home', admin_root_path, class:"btn btn-secondary text-light p-2 col" %>
+    <%else%>
+      <%= link_to 'Home', root_path, class:"btn btn-secondary text-light p-2 col" %>
+    <%end%>
 
-    
-    <%= link_to 'Back', myhistory_points_leaderboard_path, class:"btn btn-secondary text-light" %>
-
+      <%= link_to 'Leaderboard', myhistory_points_leaderboard_path, class:"btn btn-secondary text-light p-2 col" %>
+    </div>
   </div>
 
 </div>

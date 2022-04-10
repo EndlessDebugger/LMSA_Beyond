@@ -16,6 +16,7 @@
       <p>Welcome to the Leaderboard, here you can compare your point earnings to everyone else.</p>
       <p> My Points: <%= current_user.sum_points %> </p>
       <p> My rank: <%= current_user.get_rank %> </p>
+      <a href="#you" class= "btn btn-outline-secondary text-dark" type = "button">See your current spot</a>
 
       <table class="table table-striped">
           <thead>
@@ -31,9 +32,14 @@
               <% temp.each do |that_user| %>
                 <tr>
                   <td><%= @count += 1 %></td>
-                  <td><p><%= link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), {class:"nav-link"}%> </p></td>
-                  <td><%= that_user.sum_points %></td>
 
+                  <%if that_user.id ==current_user.id%>
+                    <td><p id="you"><%= link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), {class:"nav-link"}%> </p></td>
+                  <%else%>
+                    <td><p><%= link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), {class:"nav-link"}%> </p></td>
+                  <%end%>
+                  
+                  <td><%= that_user.sum_points %></td>
                 </tr>
               <% end %>
             </tbody>
