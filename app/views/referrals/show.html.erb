@@ -12,7 +12,9 @@
     <div class="p-2 bd-highlight">
       <strong>Referring member:</strong>
       <% that_user=User.find_by(id: @referral.old_member)%>
-      <%= link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), class:"nav-link"%>
+      <%=if that_user.present?
+          link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), class:"nav-link"
+         end%>
     </div>
 
     <div class="p-2 bd-highlight">

@@ -105,12 +105,8 @@ RSpec.describe('/poin_events', type: :request) do
       let(:new_attributes) do
         # skip('Add a hash of attributes valid for your model')
         {
-          user_id: Faker::Number.number(digits: 6),
           balance: Faker::Number.number(digits: 3),
-          date: Faker::Date.backward(days: 7),
           description: Faker::ChuckNorris.fact,
-          admin_award_id: Faker::Number.number(digits: 6),
-          hours_attend: Faker::Number.decimal(l_digits: 1)
         }
       end
 

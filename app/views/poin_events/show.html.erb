@@ -11,7 +11,11 @@
 
     <div class="p-2 bd-highlight">
       <strong>Admin:</strong>
-      <%= User.find_by("id=?",@poin_event.admin_award_id).email %>
+      <%=award_admin = User.find_by("id=?",@poin_event.admin_award_id)
+         if award_admin.present?
+          award_admin.email
+         end%>
+      <%#<%= User.find_by("id=?",@poin_event.admin_award_id).email %>%>
     </div>
 
     <div class="p-2 bd-highlight">

@@ -27,7 +27,23 @@ RSpec.describe('updating user information', type: :feature) do
     fill_in 'Birthdate', with: new_values[:birthdate]
     fill_in 'Major', with: new_values[:major]
     fill_in 'Bio', with: new_values[:bio]
-    click_on 'Sign Up'
+    click_on 'commit'
+    expect(page).to(have_http_status(:ok))
+    expect(page).to(have_text('Welcome back'))
+    expect(page).to(have_text(new_values[:bio]))
+  end
+  it 'updated values admin' do
+    visit user_google_oauth2_omniauth_authorize_path
+    lmsa_make_admin
+    visit '/'
+    expect(page).to(have_text('Welcome back'))
+    expect(page).to(have_text('No Birthdate Given'))
+    expect(page).to(have_text('No Bio Given'))
+    visit edit_user_session_path
+    fill_in 'Birthdate', with: new_values[:birthdate]
+    fill_in 'Major', with: new_values[:major]
+    fill_in 'Bio', with: new_values[:bio]
+    click_on 'commit'
     expect(page).to(have_http_status(:ok))
     expect(page).to(have_text('Welcome back'))
     expect(page).to(have_text(new_values[:bio]))
@@ -189,7 +205,7 @@ RSpec.describe('creating new referral', type: :feature) do
     expect(page).to(have_text(prof_ref_vals[:email]))
     visit edit_referral_path(Referral.where(guest_first_name: prof_ref_vals[:first]).ids)
     select('Yes', from: 'referral_admin_approved')
-    click_on 'Update Referral'
+    click_on 'commit'
     expect(page).to(have_text('successfully updated'))
     visit referrals_path
     expect(page).to(have_text('approved'))
@@ -211,10 +227,10 @@ RSpec.describe('creating new referral', type: :feature) do
     expect(page).to(have_text(prof_ref_vals[:email]))
     visit edit_referral_path(Referral.where(guest_first_name: prof_ref_vals[:first]).ids)
     select('No', from: 'referral_admin_approved')
-    click_on 'Update Referral'
+    click_on 'commit'
     expect(page).to(have_text('successfully updated'))
     visit referrals_path
-    expect(page).to(have_text('rejected'))
+    expect(page).to(have_text('Rejected'))
   end
 end
 
