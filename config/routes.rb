@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get 'myhistory/index'
   get 'myhistory/points_leaderboard'
   get 'home/info'
+  get 'home/adminhelp'
+  get 'home/userhelp'
   resources :helps
   resources :announcements
   root to: 'home#index'
