@@ -33,21 +33,22 @@ gem 'devise'
 gem 'omniauth', '~>1.9.1'
 gem 'omniauth-google-oauth2'
 gem 'rexml'
-gem 'bootstrap', '~> 5.1.3'
-gem 'jquery-rails', '~> 4.4.0'
+# gem 'bootstrap', '~> 5.1.3'
+# gem 'jquery-rails', '~> 4.4.0'
 # gem 'fullcalendar-rails'
 # gem 'momentjs-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'brakeman'
+  gem 'bootstrap', '~> 5.1.3', require: false
+  gem 'brakeman', require: false
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'rspec-rails'
-  gem 'rubocop'
-  gem 'rubocop-performance'
-  gem 'rubocop-rails'
-  gem 'rubocop-rspec' 
-
+  gem 'jquery-rails', '~> 4.4.0', require: false
+  gem 'rspec-rails', require: false
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :development do
@@ -63,8 +64,8 @@ end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'faker'
   gem 'capybara', '>= 3.26'
+  gem 'faker'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'simplecov', require: false

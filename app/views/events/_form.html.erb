@@ -1,4 +1,7 @@
-<div class="container">
+<% @title = "LMSA Events" %>
+<%= stylesheet_link_tag "home.css" %>
+
+<div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
 <%= form_with(model: event) do |form| %>
   <% if event.errors.any? %>
     <div id="error_explanation">
@@ -11,13 +14,6 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="mb-3">
-
-    <%= form.label :event_id, class: "form-label" %>
-    <%= form.text_field :event_id, {class: "form-control", placeholder: "Event ID"} %>
-
-  </div>
   
   <div class="mb-3">
 
@@ -28,15 +24,15 @@
 
   <div class="mb-3">
 
-    <%= form.label :event_type, class: "form-label" %>
-    <%= form.text_field :event_type, {class: "form-control", placeholder: "Event Type"} %>
+    <%= form.label :e_type, 'Type', class: "form-label" %>
+    <%= form.select :e_type, Event.e_types.values, {class: "form-control", placeholder: "Event Type"} %>
     
   </div>
 
   <div class="mb-3">
 
     <%= form.label :event_date, class: "form-label" %>
-    <%= form.datetime_select :event_date, {class: "form-control", placeholder: "Event Date"} %>
+    <%= form.datetime_select :event_date, {class: "form-control"} %>
 
   </div>
 
@@ -47,13 +43,6 @@
 
   </div>
 
-  <div class="mb-3 form-check">
-
-    <%= form.label :virtual, class: "form-check-label" %>
-    <%= form.check_box :virtual, class: "form-check-input" %>
-
-  </div>
-
   <div class="mb-3">
 
     <%= form.label :password, class: "form-label" %>
@@ -61,7 +50,14 @@
 
   </div>
 
-  <div class="mb-3">
+   <div class="mb-3 form-check">
+
+    <%= form.label :virtual, class: "form-check-label" %>
+    <%= form.check_box :virtual, {class: "form-check-input", id: "virtual"} %>
+
+  </div>
+
+  <div class="mb-3" id="link">
 
     <%= form.label :meeting_link, class: "form-label" %>
     <%= form.text_field :meeting_link, {class: "form-control", placeholder: "Meeting Link"} %>
@@ -71,14 +67,14 @@
   <div class="mb-3">
 
     <%= form.label :signin_time, class: "form-label" %>
-    <%= form.datetime_select :signin_time, {class: "form-control", placeholder: "Sign In Time"} %>
+    <%= form.datetime_select :signin_time, {class: "form-control"} %>
 
   </div>
 
   <div class="mb-3">
 
-    <%= form.label :point_val, class: "form-label" %>
-    <%= form.number_field :point_val, {class: "form-control", placeholder: "Value"} %>
+    <%= form.label "Points value", class: "form-label" %>
+    <%= form.number_field :point_val,{class: "form-control", placeholder: "Value"} %>
 
   </div>
 
@@ -91,11 +87,21 @@
 
   <div class="mb-3">
 
-    <%= form.label :total_event_hr, class: "form-label" %>
+    <%= form.label "Total event hours", class: "form-label" %>
     <%= form.text_field :total_event_hr, {class: "form-control", placeholder: "Hours"} %>
 
   </div>
 
+  <div class="mb-3">
+
+    <%= form.label "Active Members Only", class: "form-check-label" %>
+    <%= form.check_box :active_mem, {class: "form-check-input", id: "active"} %>
+
+  </div>
+
+  <%= form.hidden_field :event_creator, value: (current_user.first_name + " " + current_user.last_name)%>
+
+  <%= link_to 'Back', events_path ,class:"btn btn-secondary text-light"%>
   <%= form.submit "Submit", class:"btn btn-secondary" %>
   
 <% end %>

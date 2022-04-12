@@ -1,5 +1,15 @@
-<h1>New Referral</h1>
+<p id="notice"><%= notice %></p>
 
-<%= render 'form', referral: @referral %>
+<% @title = "New Referral" %>
+<%= stylesheet_link_tag "home.css" %>
 
-<%= link_to 'Back', referrals_path %>
+<div class="container py-4">
+<h1 class="display-10 fw-bold text-light">New Referral</h1>
+  <br>
+    <div class="p-5 mb-4 bg-light rounded-3" style="text-align: left;">
+
+     <%= render 'form', referral: @referral %>
+
+    </div> 
+  </div> 
+</div> 

@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+<% @title = "LMSA Announce" %>
+<%= stylesheet_link_tag "home.css" %>
+
+<div class="container py-4">
+
+  <h1 class="display-10 fw-bold text-light"><%= @announcement.name %></h1>
+  <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
+
+    <div class="p-2 bd-highlight">
+      <strong>Announcement:</strong>
+      <%= @announcement.name %>
+    </div>
+
+    <div class="p-2 bd-highlight">
+      <strong>Description:</strong>
+      <%= @announcement.desc %>
+    </div>
+
+    <div>
+      <%= link_to 'Edit', edit_announcement_path(@announcement), class:"btn btn-secondary text-light" %>
+      <%= link_to 'Back', announcements_path, class:"btn btn-secondary text-light" %>
+    </div>
+
+  </div>
+</div>

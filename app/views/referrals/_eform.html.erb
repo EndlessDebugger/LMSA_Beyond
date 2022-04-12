@@ -1,0 +1,53 @@
+<%= form_with(model: referral) do |form| %>
+  <% if referral.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(referral.errors.count, "error") %> prohibited this referral from being saved:</h2>
+
+      <ul>
+        <% referral.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= form.label :guest_first_name %>
+    <%= form.text_field :guest_first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :guest_last_name %>
+    <%= form.text_field :guest_last_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :medical_prof %>
+    <%= form.select :medical_prof, [['No', false],['Yes', true]] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+
+  <%= form.hidden_field :date_referred, value:  DateTime.now%>
+  <%if current_user.admin?%>
+    <div class="field">
+      <%= form.label :admin_approved %>
+      <%= form.select :admin_approved, [[' ', nil], ['No', false], ['Yes', true]] %>
+    </div>
+  <%end%>
+
+  <%if current_user.admin%>
+    <%= link_to 'Back', admin_approve_path,{class: "btn btn-outline-secondary text-dark", type: "button"} %>
+  <%else%>
+    <%= link_to 'Back', referrals_path,{class: "btn btn-outline-secondary text-dark", type: "button"} %>
+  <%end%>
+
+  <div class="actions">
+    <%= form.submit "Update referral", class: "btn btn-outline-secondary text-dark" %>
+  </div>
+<% end %>

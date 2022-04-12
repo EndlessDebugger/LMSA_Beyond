@@ -1,5 +1,8 @@
-<div class="container">
-    <h1>Editing Event</h1>
-</div>
+<% @title = "LMSA Events" %>
+<%= stylesheet_link_tag "home.css" %>
 
-<%= render 'form', event: @event %>
+<div class="container py-4">
+    <h1 class="display-10 fw-bold text-light">Editing Event</h1>
+    
+    <%= render 'form', event: @event %>
+</div>

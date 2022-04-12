@@ -1,29 +1,34 @@
 <p id="notice"><%= notice %></div>
+<% @title = "LMSA Events" %>
+<%= stylesheet_link_tag "home.css" %>
 
-<div class="container">
+<div class="container py-4">
 
-  <h1><%= @event.event_name %></h1>
+  <h1 class="display-10 fw-bold text-light"><%= @event.event_name %></h1>
 
-  <div class="d-flex flex-column bd-highlight mb-3">
+  <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
 
-    <div class="p-2 bd-highlight">
-      <strong>Event ID: </strong> 
-      <%= @event.event_id %>
-    </div>
+    <% if current_user.admin? %>
 
-    <div class="p-2 bd-highlight">
-      <strong>Event name:</strong>
-      <%= @event.event_name %>
-    </div>
+      <div class="p-2 bd-highlight">
+        <strong>Event ID: </strong> 
+        <%= @event.id %>
+      </div>
+
+    <% end %>
 
     <div class="p-2 bd-highlight">
       <strong>Event type:</strong>
-      <%= @event.event_type %>
+      <%= @event.e_type_before_type_cast %>
     </div>
 
     <div class="p-2 bd-highlight">
       <strong>Event date:</strong>
-      <%= @event.event_date %>
+      <% if @event.event_date.present?%>
+        <%=  @event.event_date.strftime("%Y-%m-%d %H:%M")%>
+      <%else%>
+          <p>Nothing</p>
+      <%end%>
     </div>
 
     <div class="p-2 bd-highlight">
@@ -31,29 +36,20 @@
       <%= @event.description %>
     </div>
 
-    <div class="p-2 bd-highlight">
-      <strong>Event creator:</strong>
-      <%= @event.event_creator %>
-    </div>
-
-    <div class="p-2 bd-highlight">
-      <strong>Virtual:</strong>
-      <%= @event.virtual %>
-    </div>
-
-    <div class="p-2 bd-highlight">
-      <strong>Password:</strong>
-      <%= @event.password %>
-    </div>
-
-    <div class="p-2 bd-highlight">
-      <strong>Meeting link:</strong>
-      <%= @event.meeting_link %>
-    </div>
+    <% if @event.virtual? %>
+      <div class="p-2 bd-highlight">
+        <strong>Meeting link:</strong>
+        <%= @event.meeting_link %>
+      </div>
+    <% end %>
 
     <div class="p-2 bd-highlight">
       <strong>Signin time:</strong>
-      <%= @event.signin_time %>
+      <% if @event.signin_time.present?%>
+          <%=  @event.signin_time.strftime("%Y-%m-%d %H:%M")%>
+      <%else%>
+            <p>Nothing</p>
+      <%end%>
     </div>
 
     <div class="p-2 bd-highlight">
@@ -70,38 +66,85 @@
       <strong>Total event hr:</strong>
       <%= @event.total_event_hr %>
     </div>
+
+    <% if current_user.admin? %>
+
+      <div class="p-2 bd-highlight">
+        <strong>Event creator:</strong>
+        <%= @event.event_creator %>
+      </div>
+
+      <div class="p-2 bd-highlight">
+        <strong>Password:</strong>
+        <%= @event.password %>
+      </div>
+
+      <% if @event.active_mem == true %>
+        <div class="p-2 bd-highlight">
+          <strong>Active Memebers Only</strong>
+        </div>
+      <% end %>
+
+      <% if @event.enable_sign_in == false %>
+        <%= form_with(model: @event) do |form| %>
+          <%= form.hidden_field :enable_sign_in, value: true %>
+          <%= form.submit "Enable Sign In", class: "btn btn-secondary" %>
+        <% end %>
+      <% else %>
+        <%= form_with(model: @event) do |form| %>
+          <%= form.hidden_field :enable_sign_in, value: false %>
+          <%= form.submit "Disable Sign In", class: "btn btn-secondary" %>
+        <% end %>
+      <% end %>
+
+    <% end %>
     
-  </div>
 
-
-  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button>
-
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Sign In to <%= @event.event_name %></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <label for="password" class="col-form-label">Password:</label>
-            <input type="text" class="form-control" id="password">
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sing In</button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Sign In to <%= @event.event_name %></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <%= form_with url: "/sign_in_event" do |form| %>
+            <div class="modal-body">
+              <% form.label :password, class: "form-label" %>
+              <%= form.text_field :password, {class: "form-control", placeholder: "Password"} %>
+              <%= form.hidden_field :user_id, value: current_user.id%>
+              <%= form.hidden_field :event_id, value: @event.id%>
+              <%= form.hidden_field :sign_in, value: true%>
+              <%= form.hidden_field :point_recv, value: @event.point_val%>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <%= form.submit "Sign In", {class:"btn btn-secondary", "data-bs-dismiss":"modal"} %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
+
+    <div class="pt-2">
+
+      <%if current_user.admin%>
+        <%= link_to 'Edit', edit_event_path(@event), class:"btn btn-secondary text-light" %>
+        <%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-secondary text-light" %>
+      <%end%>
+
+      <% if @event.signin_time.present?
+           time_difference = (Time.current.to_time.min - @event.signin_time.to_time.min)
+           else
+             time_difference = -1
+         end %>
+      <% if current_user.admin == false && ((time_difference <= 5 && time_difference >= 0) || @event.enable_sign_in == true) %>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Sign In
+        </button>
+      <% end %>
+
+      <%= link_to 'Back', events_path, class:"btn btn-secondary text-light" %>
+
+    </div>
   </div>
-
-<%= link_to 'Edit', edit_event_path(@event), class:"btn btn-secondary text-light" %>
-<%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-secondary text-light" %>
-<%= link_to 'Sign In',  event_hists_path(:event_hist => {:event_id => @event.event_id, :user_id => current_user.id, :sign_in => true, :point_recv => @event.point_val}), method: :post, class:"btn btn-secondary text-light" %>
-<%= link_to 'Back', events_path, class:"btn btn-secondary text-light" %>
-
 </div>

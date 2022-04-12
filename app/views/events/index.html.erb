@@ -1,14 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<div class="container">
+<% @title = "LMSA Events" %>
+<%= stylesheet_link_tag "home.css" %>
 
-  <% if current_user.admin==true %>
-    <%= link_to "New Event", new_event_path, {class: "btn btn-secondary text-light", type: "button"} %>
-  <% end %>
+<div class="container py-4">
 
-  <br>
-  <br>
-  
-  <div id="calendar"></div>
+  <ul class="nav nav-tabs display-10 fw-bold text-light">
+    <li class="nav-item">
+      <h1 class="nav-link active display-10 fw-bold text-secondary">Events</h1>
+    </li>
 
+    <%if !current_user.admin%>
+      <li class="nav-item">
+        <h1><%= link_to "Event History", event_hists_path, {class: "nav-link display-10 fw-bold text-light"} %></h1>
+      </li>
+    <%end%>
+  </ul>
+
+  <!--<h1 class="display-10 fw-bold text-light">Events</h1>
+  <br>-->
+  <div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+      <% if current_user.admin? %>
+        <%= link_to "New Event", new_event_path, {class: "btn btn-secondary text-light", type: "button"} %>
+      <% end %>
+
+      <br>
+      <br>
+      <div hidden id="active_mem"><%= current_user.active_mem %></div>
+
+      <div id="calendar"></div>
+    </div> 
+  </div> 
 </div> 
