@@ -1,0 +1,28 @@
+<%= stylesheet_link_tag "header.css" %>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light"style="font-size:28px;">
+  
+  <div class="navbar-nav ms-start">
+    <%= link_to image_tag("logo.png", :size => "80x80" ), root_path, class:"nav-link"%>
+  </div>
+
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ms-auto">
+        <%= link_to "Home", admin_root_path, class:"nav-link" %>
+        <%= link_to "Approval List", admin_approve_path, class:"nav-link" %>
+        <%= link_to "Events", events_path, class:"nav-link" %>
+        <%= link_to "Points", poin_events_path, class:"nav-link" %>
+        <%= link_to "Announcements", announcements_path, class:"nav-link" %>
+        <%= link_to "Help", helps_path, class:"nav-link" %>
+        <%= link_to 'Leaderboard', myhistory_points_leaderboard_path, class:"nav-link"%>
+        <%= link_to "Info", home_info_path, class:"nav-link" %>
+        <%= link_to image_tag(current_user.avatar_url, :size => "80x80"), user_url(current_user) %>
+        <%= link_to "Sign Out", destroy_user_session_path, class:"nav-link" %>
+      </div>
+    </div>
+  </div>
+</nav>

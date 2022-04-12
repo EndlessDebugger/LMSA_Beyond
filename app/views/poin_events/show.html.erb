@@ -1,34 +1,43 @@
+<% @title = "LMSA Points" %>
+<%= stylesheet_link_tag "home.css" %>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @poin_event.user_id %>
-</p>
+<div class="container py-4">
 
-<p>
-  <strong>Balance:</strong>
-  <%= @poin_event.balance %>
-</p>
+  <h1 class="display-10 fw-bold text-light">Awarded Points Info</h1>
 
-<p>
-  <strong>Date:</strong>
-  <%= @poin_event.date %>
-</p>
+  <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
 
-<p>
-  <strong>Description:</strong>
-  <%= @poin_event.description %>
-</p>
+    <div class="p-2 bd-highlight">
+      <strong>Admin:</strong>
+      <%=award_admin = User.find_by("id=?",@poin_event.admin_award_id)
+         if award_admin.present?
+          award_admin.email
+         end%>
+      <%#<%= User.find_by("id=?",@poin_event.admin_award_id).email %>%>
+    </div>
 
-<p>
-  <strong>Admin award:</strong>
-  <%= @poin_event.admin_award_id %>
-</p>
+    <div class="p-2 bd-highlight">
+      <strong>Points given:</strong>
+      <%= @poin_event.balance %>
+    </div>
 
-<p>
-  <strong>Hours attend:</strong>
-  <%= @poin_event.hours_attend %>
-</p>
+    <div class="p-2 bd-highlight">
+      <strong>Date:</strong>
+      <%= @poin_event.created_at %>
+    </div>
 
-<%= link_to 'Edit', edit_poin_event_path(@poin_event) %> |
-<%= link_to 'Back', poin_events_path %>
+    <div class="p-2 bd-highlight">
+      <strong>Description:</strong>
+      <%= @poin_event.description %>
+    </div>
+
+    <div>
+      <% if current_user.admin? %>
+        <%= link_to 'Edit', edit_poin_event_path(@poin_event), class:"btn btn-secondary text-light" %>
+      <% end %>
+      <%= link_to 'Back', poin_events_path, class:"btn btn-secondary text-light" %>
+    </div>
+  </div>
+</div>

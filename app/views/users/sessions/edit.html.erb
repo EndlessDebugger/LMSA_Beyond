@@ -1,0 +1,25 @@
+<%= stylesheet_link_tag "signup.css" %>
+<% @title = "LMSA UserInfo" %>
+
+<div class="d-flex flex-row  justify-content-center">
+  <%=image_tag("logo.png", :height => "40%", :width => "40%")%>
+
+  <div class="container align-items-center">
+
+    <div class="body align-items-center my-auto">
+    <br>
+      <h1 class="text-dark text-align-center"> Please fill out before continuing</h1>
+
+      <div class=" box-2 flex-column align-items-center">
+        <div class="col-md-7 align-items-center mx-auto">
+          <%= render 'form', user: @user %>
+        </div>
+      </div> 
+
+    </div>
+
+  </div>
+
+</div>
+
+

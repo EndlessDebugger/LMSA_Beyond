@@ -1,34 +1,69 @@
 <p id="notice"><%= notice %></p>
+<% @title = "LMSA Leaderboard" %>
+<%= stylesheet_link_tag "home.css" %>
 
-<p>
-  <strong>User:</strong>
-  <%= @user.user_id %>
-</p>
 
-<p>
-  <strong>Major:</strong>
-  <%= @user.major %>
-</p>
 
-<p>
-  <strong>Admin:</strong>
-  <%= @user.admin %>
-</p>
+<div class="container py-4">
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+  <h1 class="display-5 fw-bold text-light"><%= @user.first_name %>'s Page</h1>
 
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
+  <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
 
-<p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
-</p>
+  <div class="container">
+    <div class="d-flex flex-row">
+        <div class="p-2">
+            <%= image_tag(current_user.avatar_url, :size => "200x200" ) %>
+        </div>
+        <div class="p-2">
+            <p>
+              <strong>First name:</strong>
+              <%= @user.first_name %>
+            </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+            <p>
+              <strong>Last Name:</strong>
+              <%= @user.last_name %>
+            </p>
+
+            <p>
+              <strong>Points:</strong>
+              <%= @user.sum_points %>
+            </p>
+
+            <p>
+              <strong>Email:</strong>
+              <%= @user.email %>
+            </p>
+
+            <p>
+              <strong>Bio:</strong>
+              <%= @user.bioConfirmation %>
+            </p>
+
+            <p>
+              <strong>Birthdate:</strong>
+              <%= @user.bod %>
+            </p>
+
+            <p>
+              <strong>Major:</strong>
+              <%= @user.majorConfirmation %>
+            </p>
+
+        </div>
+    </div>
+  </div>
+
+    <div class="flex-row ">
+    <%if current_user.admin%>
+      <%= link_to 'Home', admin_root_path, class:"btn btn-secondary text-light p-2 col" %>
+    <%else%>
+      <%= link_to 'Home', root_path, class:"btn btn-secondary text-light p-2 col" %>
+    <%end%>
+
+      <%= link_to 'Leaderboard', myhistory_points_leaderboard_path, class:"btn btn-secondary text-light p-2 col" %>
+    </div>
+  </div>
+
+</div>

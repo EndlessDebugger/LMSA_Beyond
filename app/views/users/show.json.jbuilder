@@ -1,1 +1,1 @@
-json.partial! "users/user", user: @user
+json.partial!('user/user', referral: @user)

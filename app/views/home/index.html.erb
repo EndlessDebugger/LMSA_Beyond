@@ -1,9 +1,86 @@
-<h1>Navigation</h1>
-<br>
-This is the Navigation page. Use it to go between other pages
-<br>
-<%= link_to 'Event History', event_hists_path %> |
-<%= link_to 'Events', events_path %> |
-<%= link_to 'Point Events', poin_events_path %> |
-<%= link_to 'Referrals', referrals_path %> |
-<%= link_to 'Users', users_path %> |
+<% @title = "LMSA Home" %>
+<%= stylesheet_link_tag "home.css" %>
+
+
+<div class="container py-4">
+  <h1 class="display-10 fw-bold text-light">Home</h1>
+  <br>
+    <div class="p-5 mb-4 bg-light rounded-3" style="text-align: center;">
+      <div class="container-fluid py-5">
+        <h1 class="display-10 fw-bold">Welcome back <%= current_user.first_name %>!</h1>
+        <p> <strong>Points: </strong> <%= current_user.sum_points %> </p>
+
+        <p>
+            <strong>User Name: </strong>
+            <%= current_user.first_name %>
+            <%= current_user.last_name %>
+        </p>
+
+        <p>
+            <strong>User ID: </strong>
+            <%= current_user.id %>
+        </p>
+
+        <p>
+            <strong>User Email: </strong>
+            <%= current_user.email %>
+        </p>
+
+        <p>
+            <strong>User Birthdate: </strong>
+            <%= current_user.bod %>
+        </p>
+
+        <p>
+            <strong>User Bio: </strong>
+            <%= current_user.bioConfirmation %>
+        </p>
+
+        <% if current_user.major.present? %>
+            <p>
+                <strong>User Major: </strong>
+                <%= current_user.major %>
+            </p>
+        <% end %>
+
+        <%= link_to "Update my Info",  edit_user_session_path, {class: "btn btn-outline-secondary text-dark", type: "button"} %>
+        <br>
+        <%if current_user.allowed%>
+          <%=button_to "Make me an admin",{controller: "users", action: "dev",id: current_user.id }, {class: "btn btn-outline-secondary text-dark", type: "button"} %>
+        <%end%>
+      </div>
+</div>
+
+<div class="p-5 mb-4 bg-light rounded-3 lead">
+  <h1 class="display-20 fw-bold">Active Member Status</h1>
+  <%if current_user.active_mem%>
+        <p>Congrats on making to be an active member!</p>
+        <div class="progress" style="height: 50px">
+          <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+        </div>
+  <%else%>
+
+    <%if current_user.activeMem_Check == 0%>
+      <p>Start attending some events to work towards to being an active member!</p>
+      <div class="progress" style="height: 50px">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow=<%current_user.activeMem_Check%> aria-valuemin="0" aria-valuemax="100" style="width: <%=current_user.activeMem_Check%>%"></div>
+      </div>
+    <%else%>
+      <p>You're getting closer to being an active member!</p>
+      <div class="progress" style="height: 50px">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow=<%current_user.activeMem_Check%> aria-valuemin="0" aria-valuemax="100" style="width: <%=current_user.activeMem_Check%>%"><%=current_user.activeMem_Check%>%</div>
+      </div>
+    <%end%>
+
+    <br>
+    <p> To reach active member status you still need to go: </p>
+    <ul>
+      <li><%= (4-current_user.get_gen)%> General Meetings</li>
+      <li><%= (3-current_user.get_fun)%> Fundraising Meetings</li>
+      <li><%= (3-current_user.get_vol)%> Volunteering Meetings</li>
+    </ul> 
+
+
+
+  <%end%>
+</div>

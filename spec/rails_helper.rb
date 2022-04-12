@@ -3,7 +3,7 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -27,8 +27,8 @@ require 'rspec/rails'
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
-  puts e.to_s.strip
-  exit 1
+  puts(e.to_s.strip)
+  exit(1)
 end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -61,4 +61,19 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+end
+
+def lmsa_sign_in
+  Rails.application.env_config['devise.mapping'] = Devise.mappings[:user] # If using Devise
+  Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
+  get(user_google_oauth2_omniauth_authorize_path)
+  get(user_google_oauth2_omniauth_callback_url)
+end
+
+def lmsa_make_admin
+  User.where(uid: 1).update(admin: true)
+end
+
+def lmsa_make_non_admin
+  User.where(uid: 1).update(admin: true)
 end

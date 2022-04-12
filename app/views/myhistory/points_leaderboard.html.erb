@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<% @title = "LMSA Leaderboard" %>
+<%= stylesheet_link_tag "home.css" %>
+
+<div class="container py-4">
+<h1 class="display-10 fw-bold text-light">Points Leaderboard</h1>
+<br>
+  <div class="p-5 mb-4 bg-light rounded-3" style="text-align: center;">
+    <div class="container-fluid py-5">
+
+      <!--Temp is important as it calls the user model function leaderboard, the reason why it's here and not done directly in line 30
+          is to make sure the function runs before line 18, that way get_rank gets populated and all ends well -Daniel-->
+      <%temp = current_user.leaderboard%>
+
+      <p>Welcome to the Leaderboard, here you can compare your point earnings to everyone else.</p>
+      <p> My Points: <%= current_user.sum_points %> </p>
+      <p> My rank: <%= current_user.get_rank %> </p>
+      <a href="#you" class= "btn btn-outline-secondary text-dark" type = "button">See your current spot</a>
+
+      <table class="table table-striped">
+          <thead>
+              <tr>
+                <th>Rank of <%=current_user.counter%> </th>
+                <th>User</th>          
+                <th>Points</th>
+              </tr>
+            </thead>
+          <br>
+            <tbody>
+              <% @count = 0 %>
+              <% temp.each do |that_user| %>
+                <tr>
+                  <td><%= @count += 1 %></td>
+
+                  <%if that_user.id ==current_user.id%>
+                    <td><p id="you"><%= link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), {class:"nav-link"}%> </p></td>
+                  <%else%>
+                    <td><p><%= link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), {class:"nav-link"}%> </p></td>
+                  <%end%>
+                  
+                  <td><%= that_user.sum_points %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          <br>
+      </table>
+
+    </div> 
+  </div> 
+</div> 

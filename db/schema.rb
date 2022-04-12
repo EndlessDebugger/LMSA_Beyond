@@ -10,27 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_11_195428) do
+ActiveRecord::Schema.define(version: 2022_04_10_055408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "announcements", force: :cascade do |t|
+    t.string "name"
+    t.integer "creator_id"
+    t.bigint "event_id_id"
+    t.string "desc"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id_id"], name: "index_announcements_on_event_id_id"
+  end
+
   create_table "event_hists", force: :cascade do |t|
-    t.integer "event_id"
     t.integer "user_id"
     t.boolean "sign_in"
     t.integer "point_recv"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "event_id"
+    t.index ["event_id"], name: "index_event_hists_on_event_id"
   end
 
-  create_table "events", force: :cascade do |t|
-    t.integer "event_id"
+  create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "event_name"
-    t.string "event_type"
     t.datetime "event_date"
     t.string "description"
-    t.integer "event_creator"
+    t.string "event_creator"
     t.boolean "virtual"
     t.string "password"
     t.string "meeting_link"
@@ -38,8 +47,11 @@ ActiveRecord::Schema.define(version: 2022_02_11_195428) do
     t.integer "point_val"
     t.string "graphics"
     t.float "total_event_hr"
+    t.boolean "enable_sign_in", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "e_type", null: false
+    t.boolean "active_mem", default: false
   end
 
   create_table "poin_events", force: :cascade do |t|
@@ -55,26 +67,34 @@ ActiveRecord::Schema.define(version: 2022_02_11_195428) do
 
   create_table "referrals", force: :cascade do |t|
     t.integer "old_member"
-    t.integer "new_member"
     t.string "guest_first_name"
     t.string "guest_last_name"
     t.boolean "medical_prof"
     t.string "email"
     t.datetime "date_referred"
-    t.string "admin_approved"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "admin_approved"
+    t.index ["email"], name: "index_referrals_on_email", unique: true
   end
 
   create_table "users", force: :cascade do |t|
     t.integer "user_id"
     t.string "major"
-    t.boolean "admin"
+    t.boolean "admin", default: false
     t.string "email"
     t.string "first_name"
     t.string "last_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "uid"
+    t.string "avatar_url"
+    t.datetime "birthdate"
+    t.text "bio"
+    t.integer "signInCount", default: 0
+    t.boolean "active_mem", default: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "event_hists", "events"
 end
