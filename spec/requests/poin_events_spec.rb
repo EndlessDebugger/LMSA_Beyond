@@ -106,7 +106,7 @@ RSpec.describe('/poin_events', type: :request) do
         # skip('Add a hash of attributes valid for your model')
         {
           balance: Faker::Number.number(digits: 3),
-          description: Faker::ChuckNorris.fact,
+          description: Faker::ChuckNorris.fact
         }
       end
 

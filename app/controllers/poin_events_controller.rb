@@ -22,11 +22,9 @@ class PoinEventsController < ApplicationController
 
   # POST /poin_events or /poin_events.json
   def create
-    user = User.where("email = ?",params[:email]).first
-    userID=0
-    if user.present?
-      userID = user.id
-    end
+    user = User.where('email = ?', params[:email]).first
+    userID = 0
+    userID = user.id if user.present?
     # redirect_to poin_events_path, notice: String(poin_event_params[:balance])
     # puts(userID, params[:balance], params[:description], params[:admin_award_id])
     # @poin_event = PoinEvent.new(poin_event_params)
@@ -88,5 +86,4 @@ class PoinEventsController < ApplicationController
   def poin_event_params
     params.require(:poin_event).permit(:email, :user_id, :balance, :date, :description, :admin_award_id, :hours_attend)
   end
-
 end
