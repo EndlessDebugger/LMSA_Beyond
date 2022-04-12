@@ -5,6 +5,16 @@
 ###########################################################
 
 # You can find all configuration options for rubocop-rails here: https://docs.rubocop.org/rubocop-rails/cops_rails.html
+#
+#
+
+
+Rails/SkipsModelValidations:
+  Enabled: false
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+Rails/FilePath:
+  Enabled: false
 
 Rails/ActiveRecordCallbacksOrder:
   Enabled: true

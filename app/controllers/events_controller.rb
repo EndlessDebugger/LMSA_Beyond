@@ -48,7 +48,7 @@ class EventsController < ApplicationController
 
   # DELETE /events/1 or /events/1.json
   def destroy
-    @event.destroy
+    @event.destroy!
 
     respond_to do |format|
       format.html { redirect_to(events_url, notice: 'Event was successfully destroyed.') }
@@ -72,7 +72,7 @@ class EventsController < ApplicationController
                  )
     elsif event.password == password
       new_event_hist = EventHist.new(new_event_hist_params)
-      new_event_hist.save
+      new_event_hist.save!
 
       User.find_by(id: user_id).update_attribute(:active_mem, true) if !current_user.active_mem && (current_user.activeMem_Check >= 100)
 

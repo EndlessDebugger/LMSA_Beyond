@@ -22,7 +22,7 @@ class PoinEventsController < ApplicationController
 
   # POST /poin_events or /poin_events.json
   def create
-    user = User.where('email = ?', params[:email]).first
+    user = User.where(email: params[:email]).first
     userID = 0
     userID = user.id if user.present?
     # redirect_to poin_events_path, notice: String(poin_event_params[:balance])
@@ -64,7 +64,7 @@ class PoinEventsController < ApplicationController
   # DELETE /poin_events/1 or /poin_events/1.json
   def destroy
     if current_user.admin?
-      @poin_event.destroy
+      @poin_event.destroy!
 
       respond_to do |format|
         format.html { redirect_to(poin_events_url, notice: 'Poin event was successfully destroyed.') }

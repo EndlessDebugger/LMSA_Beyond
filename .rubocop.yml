@@ -42,14 +42,36 @@ AllCops:
         - "**/spec_helper.rb"
         - "node_modules/**/*"
         - "bin/*"
-        - "spec/*"
+        - "**/spec/**/*"
 
 ###########################################################
 ###################### RuboCop ############################
 ###########################################################
 
 # You can find all configuration options for rubocop here: https://docs.rubocop.org/rubocop/cops_bundler.html
+#
+#
 
+Naming/VariableName:
+  Enabled: false
+Naming/MethodName:
+  Enabled: false
+Lint/UselessAssignment:
+  Enabled: false
+Layout/LineLength:
+  Enabled: false
+Naming/AccessorMethodName:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Style/InlineComment:
+  Enabled: false
+Metrics/ParameterLists:
+  Enabled: false
+Lint/UnusedMethodArgument:
+  Enabled: false
 ###########################################################
 ####################### Gemspec ###########################
 ###########################################################
@@ -104,11 +126,6 @@ Layout/FirstHashElementLineBreak:
 
 Layout/LineEndStringConcatenationIndentation: # (new in 1.18)
     Enabled: true
-
-Layout/LineLength:
-    Max: 150
-    Exclude:
-        - "**/spec/**/*"
 
 Layout/MultilineArrayBraceLayout:
     EnforcedStyle: new_line
@@ -244,9 +261,6 @@ Lint/UnmodifiedReduceAccumulator: # (new in 1.1)
 Lint/UnusedBlockArgument:
     IgnoreEmptyBlocks: false
 
-Lint/UnusedMethodArgument:
-    IgnoreEmptyMethods: false
-
 Lint/UselessMethodDefinition:
     Enabled: true
 
@@ -270,8 +284,6 @@ Metrics/ClassLength:
     CountAsOne: ["array", "hash"]
     Max: 150
 
-Metrics/CyclomaticComplexity:
-    Max: 10
 
 Metrics/MethodLength:
     CountAsOne: ["array", "hash"]
@@ -282,13 +294,6 @@ Metrics/ModuleLength:
     Max: 250
     Exclude:
         - "**/spec/**/*"
-
-Metrics/ParameterLists:
-    Exclude:
-        - "**/spec/feature/*"
-
-Metrics/PerceivedComplexity:
-    Max: 10
 
 ###########################################################
 ######################## Naming ###########################
@@ -386,9 +391,6 @@ Style/IfWithBooleanLiteralBranches: # (new in 1.9)
     Enabled: true
 
 Style/ImplicitRuntimeError:
-    Enabled: true
-
-Style/InlineComment:
     Enabled: true
 
 Style/InPatternThen: # (new in 1.16)

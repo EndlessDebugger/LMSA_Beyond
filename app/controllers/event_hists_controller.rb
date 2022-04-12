@@ -47,7 +47,7 @@ class EventHistsController < ApplicationController
 
   # DELETE /event_hists/1 or /event_hists/1.json
   def destroy
-    @event_hist.destroy
+    @event_hist.destroy!
 
     respond_to do |format|
       format.html { redirect_to(event_hists_url, notice: 'Event hist was successfully destroyed.') }
