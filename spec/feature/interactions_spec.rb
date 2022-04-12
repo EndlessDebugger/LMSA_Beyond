@@ -32,6 +32,7 @@ RSpec.describe('updating user information', type: :feature) do
     expect(page).to(have_text('Welcome back'))
     expect(page).to(have_text(new_values[:bio]))
   end
+
   it 'updated values admin' do
     visit user_google_oauth2_omniauth_authorize_path
     lmsa_make_admin

@@ -31,7 +31,7 @@ class Users::SessionsController < Devise::SessionsController
         format.html { render(:edit, status: :unprocessable_entity) }
         format.json { render(json: current_user.errors, status: :unprocessable_entity) }
         render('edit')
-        puts('Dummy')
+        Rails.logger.debug('Dummy')
       end
     end
   end

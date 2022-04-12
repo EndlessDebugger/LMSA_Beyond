@@ -22,7 +22,9 @@ class PoinEventsController < ApplicationController
 
   # POST /poin_events or /poin_events.json
   def create
-    userID = User.find_by(params[:email]).id
+    user = User.where(email: params[:email]).first
+    userID = 0
+    userID = user.id if user.present?
     # redirect_to poin_events_path, notice: String(poin_event_params[:balance])
     # puts(userID, params[:balance], params[:description], params[:admin_award_id])
     # @poin_event = PoinEvent.new(poin_event_params)
@@ -62,7 +64,7 @@ class PoinEventsController < ApplicationController
   # DELETE /poin_events/1 or /poin_events/1.json
   def destroy
     if current_user.admin?
-      @poin_event.destroy
+      @poin_event.destroy!
 
       respond_to do |format|
         format.html { redirect_to(poin_events_url, notice: 'Poin event was successfully destroyed.') }
@@ -83,14 +85,5 @@ class PoinEventsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def poin_event_params
     params.require(:poin_event).permit(:email, :user_id, :balance, :date, :description, :admin_award_id, :hours_attend)
-  end
-
-  def set_event_hist
-    @event_hist = EventHist.find(params[:id])
-  end
-
-  # Only allow a list of trusted parameters through.
-  def event_hist_params
-    params.require(:event_hist).permit(:event_id, :user_id, :sign_in, :point_recv)
   end
 end

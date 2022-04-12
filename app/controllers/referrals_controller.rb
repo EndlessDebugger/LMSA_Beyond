@@ -53,7 +53,7 @@ class ReferralsController < ApplicationController
 
   # DELETE /referrals/1 or /referrals/1.json
   def destroy
-    @referral.destroy
+    @referral.destroy!
 
     respond_to do |format|
       format.html { redirect_to(referrals_url, notice: 'Referral was successfully destroyed.') }
@@ -77,6 +77,6 @@ class ReferralsController < ApplicationController
 
   def referralMax(id)
     # This doesn't account for if the referral was in a previous semester, as the client wants the system to reset every semester
-    (Referral.where('old_member = ?', id).count > 2)
+    (Referral.where(old_member: id).count > 2)
   end
 end
