@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     get 'myhistory/points_leaderboard'
     post 'users/dev/:id' => 'users#dev', :as => 'dev'
     post 'users/nodev/:id' => 'users#nodev', :as => 'nodev'
+    post '/create_new_admin', to: 'users#create_new_admin'
   end
 
   resources :home
