@@ -20,7 +20,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def after_sign_in_path_for(resource_or_scope)
     # this really serves no purpose after the first login, unless they want a special pop up for loggin for the x-th time? -daniel
-    current_user.update(signInCount: (current_user.signInCount + 1))
+    current_user.update!(signInCount: (current_user.signInCount + 1))
 
     if current_user.signInCount == 1
 
@@ -30,12 +30,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       reffed = Referral.find_by(email: current_user.email)
       unless reffed.nil?
         if reffed.admin_approved && reffed.medical_prof
-          PoinEvent.create(user_id: reffed.old_member, balance: 3, date: DateTime.now,
-                           description: 'You referred x y using email: z'.gsub(/[xyz]/, 'x' => reffed.guest_first_name, 'y' => reffed.guest_last_name, 'z' => reffed.email)
+          PoinEvent.create!(user_id: reffed.old_member, balance: 3, date: DateTime.now,
+                            description: 'You referred x y using email: z'.gsub(/[xyz]/, 'x' => reffed.guest_first_name, 'y' => reffed.guest_last_name, 'z' => reffed.email)
           )
         elsif reffed.admin_approved.nil? && !reffed.admin_approved
-          PoinEvent.create(user_id: reffed.old_member, balance: 1, date: DateTime.now,
-                           description: 'You referred x y using email: z'.gsub(/[xyz]/, 'x' => reffed.guest_first_name, 'y' => reffed.guest_last_name, 'z' => reffed.email)
+          PoinEvent.create!(user_id: reffed.old_member, balance: 1, date: DateTime.now,
+                            description: 'You referred x y using email: z'.gsub(/[xyz]/, 'x' => reffed.guest_first_name, 'y' => reffed.guest_last_name, 'z' => reffed.email)
           )
         end
       end
