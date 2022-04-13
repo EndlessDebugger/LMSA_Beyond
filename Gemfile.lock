@@ -335,7 +335,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  activerecord
   bootsnap (>= 1.4.4)
   bootstrap (~> 5.1.3)
   brakeman
