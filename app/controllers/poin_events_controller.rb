@@ -22,29 +22,28 @@ class PoinEventsController < ApplicationController
 
   # POST /poin_events or /poin_events.json
   def create
-    user = User.where(email: params[:email]).first
-    userID = 0
-    userID = user.id if user.present?
-    # redirect_to poin_events_path, notice: String(poin_event_params[:balance])
-    # puts(userID, params[:balance], params[:description], params[:admin_award_id])
-    # @poin_event = PoinEvent.new(poin_event_params)
-    # @poin_event = PoinEvent.new(user_id: userID, balance: params[:balance],created_at: params[:created_at],description: params[:description],admin_award_id: params[:admin_award_id])
-    new_poin_event_params = {
-      user_id: userID,
-      balance: poin_event_params[:balance],
-      description: poin_event_params[:description],
-      admin_award_id: poin_event_params[:admin_award_id]
-    }
-    @poin_event = PoinEvent.new(new_poin_event_params)
-    respond_to do |format|
-      if @poin_event.save
-        format.html { redirect_to(poin_event_url(@poin_event), notice: 'Poin event was successfully created.') }
-        format.json { render(:show, status: :created, location: @poin_event) }
-      else
-        format.html { render(:new, status: :unprocessable_entity) }
-        format.json { render(json: @poin_event.errors, status: :unprocessable_entity) }
+    user = User.find_by(email: poin_event_params[:email])
+    if user.present?
+      new_poin_event_params = {
+        user_id: user[:id],
+        balance: poin_event_params[:balance],
+        description: poin_event_params[:description],
+        admin_award_id: poin_event_params[:admin_award_id]
+      }
+      @poin_event = PoinEvent.new(new_poin_event_params)
+      respond_to do |format|
+        if @poin_event.save
+          format.html { redirect_to(poin_event_url(@poin_event), notice: 'Poin event was successfully created.') }
+          format.json { render(:show, status: :created, location: @poin_event) }
+        else
+          format.html { render(:new, status: :unprocessable_entity) }
+          format.json { render(json: @poin_event.errors, status: :unprocessable_entity) }
+        end
       end
+    else 
+      redirect_to(poin_events_path, notice: 'The email does not exist!')
     end
+
   end
 
   # PATCH/PUT /poin_events/1 or /poin_events/1.json
