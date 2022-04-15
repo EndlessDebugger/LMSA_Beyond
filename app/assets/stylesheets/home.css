@@ -132,4 +132,8 @@ body{
     background-color: #6a2d35;
     color: #fff;
     vertical-align: middle;
+    border-top-left-radius: 6px !important;
+	border-top-right-radius: 6px !important;
+    border-bottom-left-radius: 6px !important;
+	border-bottom-right-radius: 6px !important;
   }
