@@ -50,9 +50,6 @@
           <%=button_to "Member View",{controller: "users", action: "nodev",id: current_user.id }, {class: "btn btn-outline-secondary text-dark", type: "button"} %>
         <%end%>
 
-        <button type="button" class="btn btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Make a new Officer
-        </button>
         
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -79,5 +76,20 @@
 
       </div>
     </div>
+
+    <div class="p-5 mb-4 bg-light rounded-3 lead">
+      <h1 class="display-20 fw-bold">Officer Options</h1>
+      <br>
+      <div class ="grid">
+        <%=link_to "Update Points Policy", points_path, {class: "btn btn-lg btn-outline-secondary text-dark", type: "button"}%>
+        <%=link_to "Member Managment", points_path, {class: "btn btn-lg btn-outline-secondary text-dark", type: "button"}%>
+        <a type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Make A New Officer
+        </a>
+        <%=link_to "Semester Point Reset", points_path, {class: "btn btn-lg btn-outline-secondary text-dark", type: "button"}%>
+      </div>
+      
+    </div>
   </div>
+
 <% end %>
