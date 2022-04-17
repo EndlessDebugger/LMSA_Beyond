@@ -49,14 +49,25 @@ class PoinEventsController < ApplicationController
   # PATCH/PUT /poin_events/1 or /poin_events/1.json
   def update
     redirect_to(poin_events_path) unless current_user.admin?
-    respond_to do |format|
-      if @poin_event.update(poin_event_params)
-        format.html { redirect_to(poin_event_url(@poin_event), notice: 'Poin event was successfully updated.') }
-        format.json { render(:show, status: :ok, location: @poin_event) }
-      else
-        format.html { render(:edit, status: :unprocessable_entity) }
-        format.json { render(json: @poin_event.errors, status: :unprocessable_entity) }
+    user = User.find_by(email: poin_event_params[:email])
+    if user.present?
+      new_poin_event_params = {
+        user_id: user[:id],
+        balance: poin_event_params[:balance],
+        description: poin_event_params[:description],
+        admin_award_id: poin_event_params[:admin_award_id]
+      }
+      respond_to do |format|
+        if @poin_event.update(new_poin_event_params)
+          format.html { redirect_to(poin_event_url(@poin_event), notice: 'Poin event was successfully updated.') }
+          format.json { render(:show, status: :ok, location: @poin_event) }
+        else
+          format.html { render(:edit, status: :unprocessable_entity) }
+          format.json { render(json: @poin_event.errors, status: :unprocessable_entity) }
+        end
       end
+    else
+      redirect_to(poin_events_path, notice: 'The email does not exist!')
     end
   end
 
