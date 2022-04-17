@@ -17,6 +17,13 @@
       <%= @announcement.desc %>
     </div>
 
+    <%if @announcement.link.present?%>
+      <div>
+        <strong>Link: </strong>
+        <a href="<%= @announcement.link %>" class="nav-link"><%= @announcement.link %></a>
+      </div>
+    <%end%>
+
     <div>
       <%= link_to 'Edit', edit_announcement_path(@announcement), class:"btn btn-secondary text-light" %>
       <%= link_to 'Back', announcements_path, class:"btn btn-secondary text-light" %>
