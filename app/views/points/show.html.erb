@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Referrals:</strong>
+  <%= @point.referrals %>
+</p>
+
+<p>
+  <strong>Prof referrals:</strong>
+  <%= @point.prof_referrals %>
+</p>
+
+<p>
+  <strong>Gen event:</strong>
+  <%= @point.gen_event %>
+</p>
+
+<p>
+  <strong>Fund event:</strong>
+  <%= @point.fund_event %>
+</p>
+
+<p>
+  <strong>Vol event:</strong>
+  <%= @point.vol_event %>
+</p>
+
+<%= link_to 'Edit', edit_point_path(@point) %> |
+<%= link_to 'Back', points_path %>

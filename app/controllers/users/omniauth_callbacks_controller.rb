@@ -61,11 +61,16 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       first_name: auth.info.first_name,
       last_name: auth.info.last_name,
       full_name: auth.info.full_name,
-      avatar_url: auth.info.image
+      avatar_url: formatUserImg(auth.info.image)
     }
   end
 
   def auth
     @auth ||= request.env['omniauth.auth']
   end
+
+  def formatUserImg(input)
+    input.sub! '=s96-c' , '=s200-c'
+  end
+  
 end
