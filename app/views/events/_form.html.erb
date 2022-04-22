@@ -2,7 +2,7 @@
 <%= stylesheet_link_tag "home.css" %>
 
 <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
-<%= form_with(model: event) do |form| %>
+<%= form_with(model: event, local:false) do |form| %>
   <% if event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -32,7 +32,7 @@
   <div class="mb-3">
 
     <%= form.label :event_date, class: "form-label" %>
-    <%= form.datetime_select :event_date, {class: "form-control"} %>
+    <%= form.datetime_select :event_date, {class: "form-control",  ampm: true, order: [:day, :month, :year], start_year:Date.today.year} %>
 
   </div>
 
@@ -67,13 +67,13 @@
   <div class="mb-3">
 
     <%= form.label :signin_time, class: "form-label" %>
-    <%= form.datetime_select :signin_time, {class: "form-control"} %>
+    <%= form.datetime_select :signin_time, {class: "form-control",  ampm: true, order: [:day, :month, :year], start_year:Date.today.year} %>
 
   </div>
 
   <div class="mb-3">
 
-    <%= form.label "Points value", class: "form-label" %>
+    <%= form.label "Other Event Points value", class: "form-label" %>
     <%= form.number_field :point_val,{class: "form-control", placeholder: "Value"} %>
 
   </div>
@@ -81,7 +81,7 @@
   <div class="mb-3">
 
     <%= form.label :graphics, class: "form-label" %>
-    <%= form.text_field :graphics, {class: "form-control", placeholder: "Graphics"} %>
+    <%= form.text_field :graphics, {class: "form-control", placeholder: "Graphics Drive URL"} %>
 
   </div>
 
@@ -106,3 +106,5 @@
   
 <% end %>
 </div>
+
+

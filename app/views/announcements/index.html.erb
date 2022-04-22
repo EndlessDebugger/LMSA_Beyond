@@ -29,12 +29,20 @@
               <div class="accordion-body">
                 <div>
                   <strong>Date: </strong>
-                  <%= announcement.created_at.strftime("%Y-%m-%d") %>
+                  <%= announcement.created_at.strftime("%m/%d/%Y %l:%M %p") %>
                 </div>
                 <div>
                   <strong>Description: </strong>
                   <%= announcement.desc %>
                 </div>
+
+                <%if announcement.link.present?%>
+                  <div>
+                    <strong>Link: </strong>
+                    <a href="<%= announcement.link %>" class="nav-link"><%= announcement.link %></a>
+                  </div>
+                <%end%>
+
               </div>
               <div class="p-2">
                   <% if current_user.admin? %>

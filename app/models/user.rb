@@ -19,7 +19,7 @@ class User < ApplicationRecord
   end
 
   def sum_points
-    poin_events.where('user_id = ?', id).sum(:balance) + event_hists.where('user_id = ?', id).sum(:point_recv)
+    poin_events.where(user_id: id).sum(:balance) + event_hists.where(user_id: id).sum(:point_recv)
   end
 
   def bod
@@ -39,7 +39,7 @@ class User < ApplicationRecord
   end
 
   def userReferrals
-    referrals.where('oldmember = ?', id)
+    referrals.where(oldmember: id)
   end
 
   def counter
@@ -65,9 +65,9 @@ class User < ApplicationRecord
     @fun  = Event.where(e_type: Event.e_types[:fund]).joins(:event_hists).where(event_hists: { user_id: id }).count
     @vol  = Event.where(e_type: Event.e_types[:volunteer]).joins(:event_hists).where(event_hists: { user_id: id }).count
 
-    puts('Gen: ' + @gen.to_s + ' fun:' + @fun.to_s + ' vol:' + @vol.to_s)
+    Rails.logger.debug { "Gen: #{@gen} fun:#{@fun} vol:#{@vol}" }
 
-    (((@gen + @fun + @vol).to_f / 10).to_f * 100)
+    (Float((Float((@gen + @fun + @vol)) / 10)) * 100)
   end
 
   def get_gen

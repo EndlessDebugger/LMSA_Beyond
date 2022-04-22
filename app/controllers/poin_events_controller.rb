@@ -22,47 +22,59 @@ class PoinEventsController < ApplicationController
 
   # POST /poin_events or /poin_events.json
   def create
-    userID = User.find_by(params[:email]).id
-    # redirect_to poin_events_path, notice: String(poin_event_params[:balance])
-    # puts(userID, params[:balance], params[:description], params[:admin_award_id])
-    # @poin_event = PoinEvent.new(poin_event_params)
-    # @poin_event = PoinEvent.new(user_id: userID, balance: params[:balance],created_at: params[:created_at],description: params[:description],admin_award_id: params[:admin_award_id])
-    new_poin_event_params = {
-      user_id: userID,
-      balance: poin_event_params[:balance],
-      description: poin_event_params[:description],
-      admin_award_id: poin_event_params[:admin_award_id]
-    }
-    @poin_event = PoinEvent.new(new_poin_event_params)
-    respond_to do |format|
-      if @poin_event.save
-        format.html { redirect_to(poin_event_url(@poin_event), notice: 'Poin event was successfully created.') }
-        format.json { render(:show, status: :created, location: @poin_event) }
-      else
-        format.html { render(:new, status: :unprocessable_entity) }
-        format.json { render(json: @poin_event.errors, status: :unprocessable_entity) }
+    user = User.find_by(email: poin_event_params[:email])
+    if user.present?
+      new_poin_event_params = {
+        user_id: user[:id],
+        balance: poin_event_params[:balance],
+        description: poin_event_params[:description],
+        admin_award_id: poin_event_params[:admin_award_id]
+      }
+      @poin_event = PoinEvent.new(new_poin_event_params)
+      respond_to do |format|
+        if @poin_event.save
+          format.html { redirect_to(poin_event_url(@poin_event), notice: 'Poin event was successfully created.') }
+          format.json { render(:show, status: :created, location: @poin_event) }
+        else
+          format.html { render(:new, status: :unprocessable_entity) }
+          format.json { render(json: @poin_event.errors, status: :unprocessable_entity) }
+        end
       end
+    else 
+      redirect_to(poin_events_path, notice: 'The email does not exist!')
     end
+
   end
 
   # PATCH/PUT /poin_events/1 or /poin_events/1.json
   def update
     redirect_to(poin_events_path) unless current_user.admin?
-    respond_to do |format|
-      if @poin_event.update(poin_event_params)
-        format.html { redirect_to(poin_event_url(@poin_event), notice: 'Poin event was successfully updated.') }
-        format.json { render(:show, status: :ok, location: @poin_event) }
-      else
-        format.html { render(:edit, status: :unprocessable_entity) }
-        format.json { render(json: @poin_event.errors, status: :unprocessable_entity) }
+    user = User.find_by(email: poin_event_params[:email])
+    if user.present?
+      new_poin_event_params = {
+        user_id: user[:id],
+        balance: poin_event_params[:balance],
+        description: poin_event_params[:description],
+        admin_award_id: poin_event_params[:admin_award_id]
+      }
+      respond_to do |format|
+        if @poin_event.update(new_poin_event_params)
+          format.html { redirect_to(poin_event_url(@poin_event), notice: 'Point awardal was successfully updated.') }
+          format.json { render(:show, status: :ok, location: @poin_event) }
+        else
+          format.html { render(:edit, status: :unprocessable_entity) }
+          format.json { render(json: @poin_event.errors, status: :unprocessable_entity) }
+        end
       end
+    else
+      redirect_to(poin_events_path, notice: 'The email does not exist!')
     end
   end
 
   # DELETE /poin_events/1 or /poin_events/1.json
   def destroy
     if current_user.admin?
-      @poin_event.destroy
+      @poin_event.destroy!
 
       respond_to do |format|
         format.html { redirect_to(poin_events_url, notice: 'Poin event was successfully destroyed.') }
@@ -71,6 +83,59 @@ class PoinEventsController < ApplicationController
     else
       redirect_to(poin_events_url)
     end
+  end
+
+
+  def policyUpdate
+    puts(policy_params)
+
+    if current_user.admin
+
+      if(policy_params[:general_event].present? && policy_params[:general_event] != Rails.configuration.points.general_event)
+        Rails.configuration.points.general_event=policy_params[:general_event]
+      end
+
+      if(policy_params[:med_prof_ref].present? && policy_params[:med_prof_ref] != Rails.configuration.points.med_prof_ref)
+        Rails.configuration.points.med_prof_ref=policy_params[:med_prof_ref]
+      end
+
+      if(policy_params[:merch].present? && policy_params[:merch] != Rails.configuration.points.merch)
+        Rails.configuration.points.merch=policy_params[:merch]
+      end
+
+      if(policy_params[:social].present? && policy_params[:social] != Rails.configuration.points.social)
+        Rails.configuration.points.social=policy_params[:social]
+      end
+
+      if(policy_params[:fundraiser].present? && policy_params[:fundraiser] != Rails.configuration.points.fundraiser)
+        Rails.configuration.points.fundraiser=policy_params[:fundraiser]
+      end
+      
+      if(policy_params[:volunteer].present? && policy_params[:volunteer] != Rails.configuration.points.volunteer)
+        Rails.configuration.points.volunteer=policy_params[:volunteer]
+      end
+      
+      if(policy_params[:referral].present? && policy_params[:referral] != Rails.configuration.points.referral)
+        Rails.configuration.points.referral=policy_params[:referral]
+      end
+      
+      if(policy_params[:opp].present? && policy_params[:opp] != Rails.configuration.points.opp)
+        Rails.configuration.points.opp=policy_params[:opp]
+      end
+
+      if(policy_params[:smedia].present? && policy_params[:smedia] != Rails.configuration.points.smedia)
+        Rails.configuration.points.smedia=policy_params[:smedia]
+      end
+
+      respond_to do |format|
+        format.html { redirect_to(admin_root_path, notice: "Policy update successful") }
+        format.json { head(:no_content) }
+      end
+    else
+      redirect_to(root_path, alert: "You're not allowed to do this!") 
+    end
+
+
   end
 
   private
@@ -85,12 +150,7 @@ class PoinEventsController < ApplicationController
     params.require(:poin_event).permit(:email, :user_id, :balance, :date, :description, :admin_award_id, :hours_attend)
   end
 
-  def set_event_hist
-    @event_hist = EventHist.find(params[:id])
-  end
-
-  # Only allow a list of trusted parameters through.
-  def event_hist_params
-    params.require(:event_hist).permit(:event_id, :user_id, :sign_in, :point_recv)
+  def policy_params
+    params.permit( :general_event, :med_prof_ref, :merch, :social, :fundraiser, :volunteer, :referral, :opp)
   end
 end

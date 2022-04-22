@@ -20,6 +20,7 @@ class EventsController < ApplicationController
 
   # POST /events or /events.json
   def create
+    # pointsUpdate
     @event = Event.new(event_params)
 
     respond_to do |format|
@@ -35,6 +36,7 @@ class EventsController < ApplicationController
 
   # PATCH/PUT /events/1 or /events/1.json
   def update
+    # pointsUpdate
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to(event_url(@event), notice: 'Event was successfully updated.') }
@@ -48,7 +50,7 @@ class EventsController < ApplicationController
 
   # DELETE /events/1 or /events/1.json
   def destroy
-    @event.destroy
+    @event.destroy!
 
     respond_to do |format|
       format.html { redirect_to(events_url, notice: 'Event was successfully destroyed.') }
@@ -72,7 +74,7 @@ class EventsController < ApplicationController
                  )
     elsif event.password == password
       new_event_hist = EventHist.new(new_event_hist_params)
-      new_event_hist.save
+      new_event_hist.save!
 
       User.find_by(id: user_id).update_attribute(:active_mem, true) if !current_user.active_mem && (current_user.activeMem_Check >= 100)
 
@@ -92,7 +94,21 @@ class EventsController < ApplicationController
   def set_event
     @event = Event.find(params[:id])
   end
+  
 
+  def pointsUpdate
+    attributes = event_params.clone
+    if(attributes[:e_type]=="General Meeting")
+      attributes[:point_recv]=Rails.configuration.points.general_event
+    elsif(attributes[:e_type]=="Study Social" ||attributes[:e_type]=="Familia Social")
+      attributes[:point_recv]=Rails.configuration.points.social
+    elsif(params[:e_type]=="Fundraising")
+      attributes[:point_recv]=Rails.configuration.points.fundraiser  
+    elsif(attributes[:e_type]=="Volunteering")
+      attributes[:point_recv]=Rails.configuration.points.volunteer
+    end
+    @event.update_attributes(attributes)
+  end
   # Only allow a list of trusted parameters through.
   def event_params
     params.require(:event).permit(:event_name, :e_type, :event_date, :description, :event_creator, :signin_time,

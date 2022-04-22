@@ -1,14 +1,111 @@
 <p id="notice"><%= notice %></p>
 
-<% @title = "Help for Admins" %>
+<% @title = "LMSA Help for Officers" %>
 <%= stylesheet_link_tag "home.css" %>
 
 <div class="container py-4">
 <br>
-    <h1  class="display-10 fw-bold text-light">Help for Admins</h1>
+    <h1  class="display-10 fw-bold text-light">Help for Officers</h1>
     <div class="p-5 mb-4 bg-light rounded-3" style="text-align: center;">
       <div class="container-fluid py-5">
 
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+              <button class="accordion-button fw-bold fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                Home
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+              <div class="accordion-body">
+                On the home page, you can find your total points, name, user id, email, birthdate, and bio. You can update this information by clicking the update my info button
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+              <button class="accordion-button collapsed fw-bold fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                Approval List
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+              <div class="accordion-body">
+                Members of the club may earn points by referring people to the club. They get extra points if they refer a medical professional, which requires approval by an Admin. To approve or reject a referral, navigate to the Approval List tab and click “edit” on the appropriate referral and select “yes” or “no” beside “Admin Approved”
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+              <button class="accordion-button collapsed fw-bold fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                Events
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+              <div class="accordion-body">
+                This page allows you to create a new event, setting a password, and enable/disable sign in.
+                To create a new event, click on “new event” and fill in the form it shows you. To enable/disable sign in on the event, click on the event from the calendar in the main events page and click on the button “Enable Sign in” or “Disable Sign in”. When sign in is enabled, any user that you have given the password to can sign in to the event. This enable/disable feature is intended to help you make it harder for people to sign in from home.              
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+              <button class="accordion-button collapsed fw-bold fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+                Points
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+              <div class="accordion-body">
+                To award points for users in special cases, you can go to the award points page. The information you need to enter is the user's email that you want to award points. The amount of points you want to award to the user. The date which the points were rewarded (this can be left as is, as it defaults to the current time), and a description/reason for why you are giving this user points. 
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+              <button class="accordion-button collapsed fw-bold fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
+                Announcements
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
+              <div class="accordion-body">
+                Here is where you can create a new announcement. Simply click on “new announcement” and fill in the form, and everyone will be able to see your announcement in their announcements tab. You will also be able to destroy an announcement by expanding it and clicking the destroy button.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingSix">
+              <button class="accordion-button collapsed fw-bold fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseSix">
+                Leaderboard
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSix">
+              <div class="accordion-body">
+                This page shows the point leaderboard for all users in the organization. You can click on any user to view their information.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingSeven">
+              <button class="accordion-button collapsed fw-bold fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false" aria-controls="panelsStayOpen-collapseSeven">
+                Info
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSeven">
+              <div class="accordion-body">
+                This page shows the current year's point system.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
     </div> 
   </div> 
 </div> 

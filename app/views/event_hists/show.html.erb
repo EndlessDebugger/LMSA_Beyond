@@ -10,13 +10,13 @@
         <p>
           <strong>Event:</strong>
           <% @eventer = Event.find_by(id: @event_hist.event_id) %>
-          <%= link_to @eventer.event_name, @eventer %>
+          <%= link_to @eventer.event_name, @eventer, class:"nav-link" %>
         </p>
 
         <p>
           <strong>Date:</strong>
           <% @eventer = Event.find_by(id: @event_hist.event_id) %>
-          <%= link_to @eventer.event_date, @eventer %>
+          <%= link_to @eventer.event_date.strftime("%m/%d/%Y %l:%M %p"), @eventer , class:"nav-link"%>
         </p>
 
 
@@ -25,6 +25,6 @@
           <%= @event_hist.point_recv %>
         </p>
 
-        <%= link_to 'Back', event_hists_path %>
+        <%= link_to 'Back', event_hists_path, class:"nav-link" %>
     </div>
 </div>

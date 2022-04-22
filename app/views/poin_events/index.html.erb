@@ -21,7 +21,7 @@
           <th scope="col">Points given</th>
           <th scope="col">Date</th>
           <th scope="col">Admin</th>
-          <% if current_user.admin? %>
+            <% if current_user.admin? %>
           <th scope="col">Options</th>
           <%end%>
           <th colspan="3"></th>
@@ -31,14 +31,12 @@
       <tbody>
         <% PoinEvent.where(user_id: current_user.id).find_each do |poin_event| %>
           <tr>
-            <td scope="row"><%= poin_event.balance %></td>
-            <td scope="row"><%= poin_event.created_at.strftime("%m/%d/%Y") + " "+poin_event.created_at.strftime("%l:%M %p") %></td>
-            <td scope="row"><%= User.find_by("id=?",poin_event.admin_award_id).email %></td>
+            <th scope="row"><%= poin_event.balance %></td>
+            <td><%= poin_event.created_at.strftime("%m/%d/%Y %l:%M %p") %></td>
+            <td><%= User.find_by("id=?",poin_event.admin_award_id).email %></td>
             <% if current_user.admin? %>
-              <td scope="row"><%= link_to 'Show', poin_event %></td>
-              <td scope="row"><%= link_to 'Edit', edit_poin_event_path(poin_event) %></td>
-              <td scope="row"><%= link_to 'Destroy', poin_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-              <% end %>
+              <td><%= link_to 'Show', poin_event %> <%= link_to 'Edit', edit_poin_event_path(poin_event) %> <%= link_to 'Destroy', poin_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>

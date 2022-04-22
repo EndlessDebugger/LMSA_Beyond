@@ -42,6 +42,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def create_new_admin
+    if current_user.admin == true
+      user = User.find_by(email: params[:email])
+      if user.present?
+        user.update_attribute(:admin, true)
+        redirect_to(:admin_root, notice: 'New Admin Created Successfully')
+      else
+        redirect_to(:admin_root, alert: 'The User Has to Sign In first, before assigning admin priviledges')
+      end
+    else
+      redirect_to(:root, alert: 'You are not authorized!')
+    end
+  end
+
   # POST /users or /users.json
   # def create
   # @user = User.new(user_params)
@@ -81,15 +95,13 @@ class UsersController < ApplicationController
     # end
   end
 
-  private
-
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
-  def user_params
-    params.permit(:id, :major, :admin, :email, :first_name, :last_name, :bio, :birthdate, :major)
-  end
+  ## Only allow a list of trusted parameters through.
+  # def user_params
+  #  params.permit(:id, :major, :admin, :email, :first_name, :last_name, :bio, :birthdate, :major)
+  # end
 end

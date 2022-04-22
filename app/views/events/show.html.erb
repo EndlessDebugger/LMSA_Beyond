@@ -8,7 +8,7 @@
 
   <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
 
-    <% if current_user.admin? %>
+    <% if current_user.admin %>
 
       <div class="p-2 bd-highlight">
         <strong>Event ID: </strong> 
@@ -25,9 +25,9 @@
     <div class="p-2 bd-highlight">
       <strong>Event date:</strong>
       <% if @event.event_date.present?%>
-        <%=  @event.event_date.strftime("%Y-%m-%d %H:%M")%>
+        <%=  @event.event_date.strftime("%l:%M %p, %m/%d/%Y")%>
       <%else%>
-          <p>Nothing</p>
+          <p>No date given</p>
       <%end%>
     </div>
 
@@ -46,7 +46,7 @@
     <div class="p-2 bd-highlight">
       <strong>Signin time:</strong>
       <% if @event.signin_time.present?%>
-          <%=  @event.signin_time.strftime("%Y-%m-%d %H:%M")%>
+          <%=  @event.signin_time.strftime("%l:%M %p, %m/%d/%Y")%>
       <%else%>
             <p>Nothing</p>
       <%end%>
@@ -58,8 +58,12 @@
     </div>
 
     <div class="p-2 bd-highlight">
-      <strong>Graphics:</strong>
-      <%= @event.graphics %>
+      <% if @event.graphics.present?%>
+        <iframe src="<%= @event.graphics %>" class="imgbox">
+            <p>Graphics failed to render</p>
+        </iframe>
+      <%end%>
+
     </div>
 
     <div class="p-2 bd-highlight">

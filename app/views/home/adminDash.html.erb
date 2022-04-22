@@ -1,5 +1,8 @@
-<% @title = "LMSA Admin" %>
+<% @title = "LMSA Officers" %>
 <%= stylesheet_link_tag "home.css" %>
+
+<%= render :partial =>"points_modal" %>
+<%= render :partial =>"newadminmodal" %>
 
 <% if !current_user.admin? %>
   <meta http-equiv="refresh" content="0; URL=<%= root_path %>" />
@@ -9,7 +12,7 @@
 
     <div class="p-5 mb-4 bg-light rounded-3" style="text-align: center;">
       <div class="container-fluid py-5">
-        <h1 class="display-10 fw-bold">Welcome back Admin <%= current_user.first_name %>!</h1>
+        <h1 class="display-10 fw-bold">Welcome back Officer <%= current_user.first_name %>!</h1>
         <p> <strong>Points: </strong> <%= current_user.sum_points %> </p>
         <p>
             <strong>User Name: </strong>
@@ -47,12 +50,33 @@
         <%= link_to "Update my Info",  edit_user_session_path, {class: "btn btn-outline-secondary text-dark", type: "button"} %>
         <br>
         <%if current_user.allowed%>
-          <%=button_to "Make me a normal user",{controller: "users", action: "nodev",id: current_user.id }, {class: "btn btn-outline-secondary text-dark", type: "button"} %>
+          <%=button_to "Member View",{controller: "users", action: "nodev", id: current_user.id }, {class: "btn btn-outline-secondary text-dark", type: "button"} %>
         <%end%>
-  
-
 
       </div>
     </div>
+
+    <div class="p-5 mb-4 bg-light rounded-3 lead">
+      <h1 class="display-20 fw-bold">Officer Options</h1>
+      <br>
+
+      <div class ="grid">
+
+        <a type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#pointsmodal">
+         Update Points Policy
+        </a>
+
+        <%=link_to "Member Managment", points_path, {class: "btn btn-lg btn-outline-secondary text-dark", type: "button"}%>
+
+        <a type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Make A New Officer
+        </a>
+
+        <%=link_to "Semester Point Reset", points_path, {class: "btn btn-lg btn-outline-secondary text-dark", type: "button"}%>
+
+      </div>
+      
+    </div>
   </div>
+
 <% end %>

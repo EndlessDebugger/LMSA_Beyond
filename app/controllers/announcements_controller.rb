@@ -47,7 +47,7 @@ class AnnouncementsController < ApplicationController
 
   # DELETE /announcements/1 or /announcements/1.json
   def destroy
-    @announcement.destroy
+    @announcement.destroy!
 
     respond_to do |format|
       format.html { redirect_to(announcements_url, notice: 'Announcement was successfully destroyed.') }
@@ -64,6 +64,6 @@ class AnnouncementsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def announcement_params
-    params.require(:announcement).permit(:name, :desc)
+    params.require(:announcement).permit(:name, :desc, :link)
   end
 end

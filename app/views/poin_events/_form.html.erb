@@ -16,18 +16,20 @@
     <% end %>
 
     <div class="mb-3">
+    
+      <%@prefilled=""%>
+      <%curr = PoinEvent.find_by(id: @poin_event.id)%>
+      <% if curr.present? &&(dave=User.find_by(id: curr.user_id)).present?%>
+        <% @prefilled=dave.email%>
+      <%end%>
+
       <%= form.label :email, class: "form-label" %>
-      <%= form.text_field :email, {class: "form-control", placeholder: "email"} %>
+      <%= form.text_field :email,{:value => @prefilled, class: "form-control", placeholder: "email"} %>
     </div>
 
     <div class="mb-3">
       <%= form.label :balance, class: "form-label" %>
       <%= form.number_field :balance, {class: "form-control", placeholder: "Balance"} %>
-    </div>
-
-    <div class="mb-3">
-      <%= form.label :created_at, class: "form-label" %>
-      <%= form.datetime_select :created_at, {class: "form-control"} %>
     </div>
 
     <div class="mb-3">
