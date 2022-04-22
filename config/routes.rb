@@ -20,12 +20,17 @@ Rails.application.routes.draw do
     post 'users/nodev/:id' => 'users#nodev', :as => 'nodev'
     post '/create_new_admin', to: 'users#create_new_admin'
     post '/sign_in_event', to: 'events#sign_in_event'
+    # 
 
     get 'leaderboard'=>'myhistory#points_leaderboard', :as =>:myhistory_points_leaderboard
 
     # get 'point_history' => 'poin_events#index', :as => :poin_events
     # post 'point_history' => 'poin_events#index', :as => :poin_events
     resources :poin_events, :path=> :point_history
+    # resources :points_helper, :path=> :points_policy, only: [:policyUpdate] do
+    post '/points_policy', to: 'poin_events#policyUpdate'
+    # end
+    
   end
 
   resources :home

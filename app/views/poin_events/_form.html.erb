@@ -19,7 +19,7 @@
     
       <%@prefilled=""%>
       <%curr = PoinEvent.find_by(id: @poin_event.id)%>
-      <% if (dave=User.find_by(id: curr.user_id)).present?%>
+      <% if curr.present? &&(dave=User.find_by(id: curr.user_id)).present?%>
         <% @prefilled=dave.email%>
       <%end%>
 
