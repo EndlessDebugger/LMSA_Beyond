@@ -25,7 +25,7 @@
     <div class="p-2 bd-highlight">
       <strong>Event date:</strong>
       <% if @event.event_date.present?%>
-        <%=  @event.event_date.strftime("%Y-%m-%d %H:%M")%>
+        <%=  @event.event_date.strftime("%l:%M %p, %m/%d/%Y")%>
       <%else%>
           <p>No date given</p>
       <%end%>
@@ -46,7 +46,7 @@
     <div class="p-2 bd-highlight">
       <strong>Signin time:</strong>
       <% if @event.signin_time.present?%>
-          <%=  @event.signin_time.strftime("%Y-%m-%d %H:%M")%>
+          <%=  @event.signin_time.strftime("%l:%M %p, %m/%d/%Y")%>
       <%else%>
             <p>Nothing</p>
       <%end%>
