@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 body{
-    background-color: maroon;
+    background-color: rgb(106,45,53);
 }
 
 * {
@@ -12,14 +12,18 @@ body{
 }
 
 .container {
-    margin: 50px auto
+    margin: 50px auto;
 }
 
 .body {
     position: relative;
-    width: 720px;
-    height: 440px;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr;
+    justify-content: center;
+    align-items: center;
     margin: 20px auto;
+    padding: 2%;
     border: 1px solid #dddd;
     border-radius: 30px;
     overflow: hidden;
@@ -52,10 +56,6 @@ body{
 }
 
 .container .box {
-    width: 100px;
-    height: 100px;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     border: 2px solid transparent;
@@ -90,23 +90,6 @@ body{
 
 .footer.text-muted {
     font-size: 10px
-}
-
-.fas.fa-times {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    height: 20px;
-    width: 20px;
-    background-color: #f3cff379;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center
-}
-
-.fas.fa-times:hover {
-    color: #ff0000
 }
 
 @media (max-width:767px) {
