@@ -30,6 +30,7 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     if current_user.allowed
       user.update_attribute(:admin, true)
+      user.update_attribute(:active_mem, true)
       redirect_to(:admin_root)
     end
   end
@@ -47,6 +48,7 @@ class UsersController < ApplicationController
       user = User.find_by(email: params[:email])
       if user.present?
         user.update_attribute(:admin, true)
+        user.update_attribute(:active_mem, true)
         redirect_to(:admin_root, notice: 'New Admin Created Successfully')
       else
         redirect_to(:admin_root, alert: 'The User Has to Sign In first, before assigning admin priviledges')
