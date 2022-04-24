@@ -7,65 +7,74 @@
 <div class="container py-4">
 
   <div class="container">
-    <h1 class="display-5 fw-bold text-light"><%= @user.first_name %>'s Page</h1>
+    <div class="row">
+      <div class="col">
+        <h1 class="display-5 fw-bold text-light"><%= @user.first_name %>'s Page</h1>
+        <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
+          <div class="row">
+            <div class="p-2 col">
+                <%= image_tag(@user.avatar_url, :size => "200x200" ) %>
+            </div>
+            <div class="p-2 col">
+              <p>
+                <strong>First name:</strong>
+                <%= @user.first_name %>
+              </p>
 
-    <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
-      <div class="row">
-        <div class="p-2 col">
-            <%= image_tag(@user.avatar_url, :size => "200x200" ) %>
-        </div>
-        <div class="p-2 col">
-          <p>
-            <strong>First name:</strong>
-            <%= @user.first_name %>
-          </p>
+              <p>
+                <strong>Last Name:</strong>
+                <%= @user.last_name %>
+              </p>
 
-          <p>
-            <strong>Last Name:</strong>
-            <%= @user.last_name %>
-          </p>
+              <p>
+                <strong>Points:</strong>
+                <%= @user.sum_points %>
+              </p>
 
-          <p>
-            <strong>Points:</strong>
-            <%= @user.sum_points %>
-          </p>
+              <p>
+                <strong>Email:</strong>
+                <%= @user.email %>
+              </p>
 
-          <p>
-            <strong>Email:</strong>
-            <%= @user.email %>
-          </p>
+              <p>
+                <strong>Bio:</strong>
+                <%= @user.bioConfirmation %>
+              </p>
 
-          <p>
-            <strong>Bio:</strong>
-            <%= @user.bioConfirmation %>
-          </p>
+              <p>
+                <strong>Major:</strong>
+                <%= @user.majorConfirmation %>
+              </p>
+            </div>
+          </div>
 
-          <p>
-            <strong>Major:</strong>
-            <%= @user.majorConfirmation %>
-          </p>
+          <div class="flex-row">
+            <%if current_user.admin%>
+              <%= link_to 'Home', admin_root_path, class:"btn btn-secondary text-light p-2 col" %>
+            <%else%>
+              <%= link_to 'Home', root_path, class:"btn btn-secondary text-light p-2 col" %>
+            <%end%>
+
+            <%= link_to 'Leaderboard', myhistory_points_leaderboard_path, class:"btn btn-secondary text-light p-2 col" %>
+          </div>
+
         </div>
       </div>
 
-      <div class="flex-row ">
-        <%if current_user.admin%>
-          <%= link_to 'Home', admin_root_path, class:"btn btn-secondary text-light p-2 col" %>
-        <%else%>
-          <%= link_to 'Home', root_path, class:"btn btn-secondary text-light p-2 col" %>
-        <%end%>
-
-        <%= link_to 'Leaderboard', myhistory_points_leaderboard_path, class:"btn btn-secondary text-light p-2 col" %>
+      <div class="col">
+        <h1 class="display-5 fw-bold text-light">Something needs to be here!!!</h1>
       </div>
-
     </div>
   </div>
+
 
   <% if current_user.admin%>
     <div class="container">
       <h1 class="display-5 fw-bold text-light"><%= @user.first_name %>'s Event Attendance</h1>
       <div class="p-5 mb-4 bg-light rounded-3">
+
         <div class="container-fluid py-5" style="text-align: center;">
-          <table  class="table table-striped">
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th scope="col">Event</th>
@@ -86,6 +95,7 @@
             </tbody>
           </table >
         </div>
+
         <h2> Points For Attendance: <%= attendance_points %> </h2>
       </div> 
     </div>
@@ -95,39 +105,83 @@
       <h1 class="display-5 fw-bold text-light"><%= @user.first_name %>'s Admin Awards</h1>
       <div class="p-5 mb-4 bg-light rounded-3">
 
-      <div class="container-fluid py-5" style="text-align: center;">
-        <table>
+        <div class="container-fluid py-5" style="text-align: center;">
           <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Points given</th>
-              <th scope="col">Date</th>
-              <th scope="col">Admin</th>
-                <% if current_user.admin? %>
-                  <th scope="col">Options</th>
-                <%end%>
-              <th colspan="3"></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% admin_points = 0 %>
-            <% PoinEvent.where(user_id: current_user.id).find_each do |poin_event| %>
+            <thead>
               <tr>
-                <th scope="row"><%= poin_event.balance %></td>
-                <% admin_points += poin_event.balance %>
-                <td scope="row"><%= poin_event.created_at.strftime("%m/%d/%Y %l:%M %p") %></td>
-                <td scope="row"><%= User.find_by("id=?",poin_event.admin_award_id).email %></td>
-                <% if current_user.admin? %>
-                  <td><%= link_to 'Show', poin_event %> <%= link_to 'Edit', edit_poin_event_path(poin_event) %> <%= link_to 'Destroy', poin_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                <% end %>
+                <th scope="col">Points given</th>
+                <th scope="col">Date</th>
+                <th scope="col">Admin</th>
+                  <% if current_user.admin? %>
+                    <th scope="col">Options</th>
+                  <%end%>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+            </thead>
+
+            <tbody>
+              <% admin_points = 0 %>
+              <% PoinEvent.where(user_id: current_user.id).find_each do |poin_event| %>
+                <tr>
+                  <th scope="row"><%= poin_event.balance %></td>
+                  <% admin_points += poin_event.balance %>
+                  <td scope="row"><%= poin_event.created_at.strftime("%m/%d/%Y %l:%M %p") %></td>
+                  <td scope="row"><%= User.find_by("id=?",poin_event.admin_award_id).email %></td>
+                  <% if current_user.admin? %>
+                    <td><%= link_to 'Show', poin_event %> <%= link_to 'Edit', edit_poin_event_path(poin_event) %> <%= link_to 'Destroy', poin_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
       <h2> Points For Admin Awards: <%= admin_points %> </h2>
+      </div>
     </div>
+
+    <div class="container">
+
+      <h1 class="display-5 fw-bold text-light"><%= @user.first_name %>'s Referral Points</h1>
+      <div class="p-5 mb-4 bg-light rounded-3">
+
+        <div class="container-fluid py-5" style="text-align: center;">
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Medical</th>
+                <th scope="col">Email</th>
+                <th scope="col">Date</th>
+                <th scope="col">Admin</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% referral_points = 0 %>
+              <% Referral.where(old_member: current_user.id).each do |referral| %>
+                <tr>
+                  <td scope="row"><%= referral.medical_prof %></td>
+                  <td scope="row"><%= referral.email %></td>
+                  <td scope="row"><%= referral.date_referred.strftime("%m/%d/%Y") %></td>
+                  <td scope="row"><%= referral.approved %></td>
+                  <% if referral.medical_prof == true %>
+                    <% if referral.admin_approved == true %>
+                      <% referral_points += 3 %>
+                    <% end %>
+                  <% else %>
+                    <% referral_points += 1 %>
+                  <% end %>
+                  <td scope="row"><%= link_to 'More Details', referral %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div> 
+
+        <h2> Points For Referrals: <%= referral_points %> </h2>
+      </div> 
+    </div>
+
   <%end%>
 
 </div>
