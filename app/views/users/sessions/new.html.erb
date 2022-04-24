@@ -1,26 +1,21 @@
 <%= stylesheet_link_tag "login.css" %>
 <% @title = "TAMU LMSA PLUS" %>
-<h1 style="color:white;">Welcome to LMSA PLUS Tracker</h1>
 
-<div class="container align-items-center">
-    <div class="body align-items-center justify-content-center">
-        <div class="box-1 align-items-center"><%= image_tag "logo.png" %> </div>
-        <div class=" box-2 align-items-center">
-            <div >
-                <div class="align-items-center">
-                  <div>
-                    <div style="width: 100%;">
-                      <a class="btn btn-outline-dark" href="<%=user_google_oauth2_omniauth_authorize_path%>" role="button" style="text-transform:none">
-                        <img width="25px"  alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
-                          <h3>Sign in with Google</h3>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div >
-                <p class="footer text-muted">By register you agree with our <span class="p-color me-1">terms and conditions</span>and <span class="p-color ms-1">privacy policy</span> </p>
-            </div>
-        </div> 
-    </div>
+<div>
+  <h1 style="color:white;">Welcome to LMSA PLUS Tracker</h1>
+  <div class="body">
+      <div><%= image_tag "logo.png", {class: "myimg"} %> </div>
+
+      <div class="box-2 align-items-center">
+        <a class="btn btn-outline-dark" href="<%=user_google_oauth2_omniauth_authorize_path%>" role="button" style="text-transform:none">
+          <img width="25px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+            <h3>Sign in with Google</h3>
+        </a>
+
+      <div>
+        <p class="footer text-muted">By register you agree with our <span class="p-color me-1">terms and conditions</span>and <span class="p-color ms-1">privacy policy</span> </p>
+      </div>
+
+    </div> 
+  </div>
 </div>

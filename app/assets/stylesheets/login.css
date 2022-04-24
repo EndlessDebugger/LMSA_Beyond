@@ -2,28 +2,19 @@
 
 body{
     background-color: rgb(106,45,53);
-}
-
-* {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif
 }
 
-.container {
-    margin: 50px auto;
-}
+
 
 .body {
-    position: relative;
     height: 100%;
     display: grid;
-    grid-template-rows: 1fr;
-    justify-content: center;
+    grid-template-columns: 1fr;
+    justify-items: center;
     align-items: center;
-    margin: 20px auto;
-    padding: 2%;
+    /* margin: 20px auto; */
     border: 1px solid #dddd;
     border-radius: 30px;
     overflow: hidden;
@@ -31,20 +22,25 @@ body{
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 20px
 }
 
-.box-1 img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover
+.myimg {
+    width: 70%;
+    height: 70%;
+    object-fit: cover;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    justify-items: center;
+    align-items: center;
+    margin-top: 6%;
 }
 
 .box-2 {
-    padding: 10px
+    margin-top:7%;
+    margin-left: 28%;
+    margin-right: auto;
 }
 
-.box-1,
-.box-2 {
-    width: 50%
-}
+
 
 .h-1 {
     font-size: 24px;
