@@ -23,6 +23,11 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 
+
+import "trix"
+import "@rails/actiontext"
+
+
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
@@ -71,3 +76,5 @@ document.addEventListener('turbolinks:load', function() {
     calendar.render();
 
 });
+require("trix")
+require("@rails/actiontext")
