@@ -26,10 +26,6 @@ import "trix";
 import "@rails/actiontext";
 
 
-import "trix"
-import "@rails/actiontext"
-
-
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
@@ -80,3 +76,7 @@ document.addEventListener('turbolinks:load', function() {
 });
 require("trix")
 require("@rails/actiontext")
+
+window.addEventListener("trix-file-accept", function(event) {
+  event.preventDefault()
+})
