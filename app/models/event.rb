@@ -13,4 +13,14 @@ class Event < ApplicationRecord
     general: 'General Meeting',
     fund: 'Fundraising'
   }, _prefix: true, _default: :other
+
+
+  def driveImage
+    if graphics.present? && graphics.include?("drive.google")
+      "https://drive.google.com/uc?export=view&id="+graphics[32..-18]
+    else
+      graphics
+    end
+  end
+
 end
