@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></div>
-<% @title = "LMSA Events" %>
+<% @title = "TAMU LMSA Events" %>
 <%= stylesheet_link_tag "home.css" %>
 
 <div class="container row">
@@ -19,9 +19,10 @@
 
       <% end %>
 
+    <% if @event.virtual? && @event.meeting_link.present? %>
       <div class="p-2 bd-highlight">
-        <strong>Event type:</strong>
-        <%= @event.e_type_before_type_cast %>
+        <strong>Meeting link:</strong>
+        <a herf="<%= @event.meeting_link %>"><%= @event.meeting_link %></a>
       </div>
 
       <div class="p-2 bd-highlight">
@@ -33,10 +34,14 @@
         <%end%>
       </div>
 
-      <div class="p-2 bd-highlight">
-        <strong>Description:</strong>
-        <%= @event.description %>
-      </div>
+    <div class="p-2 bd-highlight">
+    <%alas= @event%>
+      <% if alas.graphics.present?%>
+        <iframe src="<%= alas.driveImage %>" class="imgbox">
+            <p>Graphics failed to render</p>
+        </iframe>
+        <%puts(alas.driveImage)%>
+      <%end%>
 
       <% if @event.virtual? %>
         <div class="p-2 bd-highlight">
@@ -76,6 +81,7 @@
       <% if current_user.admin? %>
 
         <div class="p-2 bd-highlight">
+
           <strong>Event creator:</strong>
           <%= @event.event_creator %>
         </div>

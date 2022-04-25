@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<% @title = "LMSA Announce" %>
+<% @title = "LMSA Announcements" %>
 <%= stylesheet_link_tag "home.css" %>
 
 
@@ -31,10 +31,17 @@
                   <strong>Date: </strong>
                   <%= announcement.created_at.strftime("%m/%d/%Y %l:%M %p") %>
                 </div>
+
+                <br>
+
                 <div>
                   <strong>Description: </strong>
-                  <%= announcement.desc %>
+                  <div class="trix-content">
+                    <%= announcement.Rich_Description %>
+                  </div>
                 </div>
+
+                <br>
 
                 <%if announcement.link.present?%>
                   <div>
@@ -47,7 +54,7 @@
               <div class="p-2">
                   <% if current_user.admin? %>
                     <%= link_to "Edit", edit_announcement_path(announcement), class:"btn btn-secondary text-light" %>
-                    <%= link_to 'Destroy', announcement, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-secondary text-light" %>
+                    <%= link_to 'Delete', announcement, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-secondary text-light" %>
                   <% end %>
                 </div>
             </div>

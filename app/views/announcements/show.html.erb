@@ -14,7 +14,9 @@
 
     <div class="p-2 bd-highlight">
       <strong>Description:</strong>
-      <%= @announcement.desc %>
+      <div class="trix-content">
+        <%= @announcement.Rich_Description %>
+      </div>
     </div>
 
     <%if @announcement.link.present?%>
