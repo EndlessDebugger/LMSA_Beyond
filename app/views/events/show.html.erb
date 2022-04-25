@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></div>
-<% @title = "LMSA Events" %>
+<% @title = "TAMU LMSA Events" %>
 <%= stylesheet_link_tag "home.css" %>
 
 <div class="container py-4">
@@ -36,10 +36,10 @@
       <%= @event.description %>
     </div>
 
-    <% if @event.virtual? %>
+    <% if @event.virtual? && @event.meeting_link.present? %>
       <div class="p-2 bd-highlight">
         <strong>Meeting link:</strong>
-        <%= @event.meeting_link %>
+        <a herf="<%= @event.meeting_link %>"><%= @event.meeting_link %></a>
       </div>
     <% end %>
 
@@ -58,10 +58,12 @@
     </div>
 
     <div class="p-2 bd-highlight">
-      <% if @event.graphics.present?%>
-        <iframe src="<%= @event.graphics %>" class="imgbox">
+    <%alas= @event%>
+      <% if alas.graphics.present?%>
+        <iframe src="<%= alas.driveImage %>" class="imgbox">
             <p>Graphics failed to render</p>
         </iframe>
+        <%puts(alas.driveImage)%>
       <%end%>
 
     </div>
@@ -85,7 +87,7 @@
 
       <% if @event.active_mem == true %>
         <div class="p-2 bd-highlight">
-          <strong>Active Memebers Only</strong>
+          <h2>Active Memebers Only</h2>
         </div>
       <% end %>
 
