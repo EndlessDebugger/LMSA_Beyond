@@ -27,7 +27,7 @@
     </thead>
 
     <tbody>
-        <% Referral.where(medical_prof: true).each do |referral|%>
+        <% Referral.all.each do |referral|%>
             <tr>
               <% that_user=User.find_by(id: referral.old_member)%>
               <%if that_user.present?%>
