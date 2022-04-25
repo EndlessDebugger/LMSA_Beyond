@@ -11,6 +11,7 @@
     
     <!-- need to add check within new of the referal controller to make sure the user only makes up to 3 friend referals-->
     <%= link_to 'New Referral', new_referral_path,{class: "btn btn-outline-secondary text-dark", type: "button"} %>
+    <%= render :partial =>"explainmodal" %>
 
       <table class="table table-striped">
         <thead>
@@ -30,13 +31,13 @@
             <tr>
               <td scope="row"><%= referral.guest_first_name %></td>
               <td scope="row"><%= referral.guest_last_name %></td>
-              <td scope="row"><%= referral.medical_prof %></td>
+              <td scope="row"><%= referral.prof %></td>
               <td scope="row"><%= referral.email %></td>
               <td scope="row"><%= referral.date_referred.strftime("%m/%d/%Y") %></td>
               <td scope="row"><%= referral.approved %></td>
               <td scope="row"><%= link_to 'More Details', referral %></td>
 
-              <%if !referral.admin_approved%>
+              <%if !referral.admin_approved && referral.medical_prof%>
                 <td><%= link_to 'Edit', edit_referral_path(referral) %></td>
               <%end%>
 

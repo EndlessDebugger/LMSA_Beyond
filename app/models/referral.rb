@@ -16,7 +16,12 @@ class Referral < ApplicationRecord
     end
   end
 
-  def friendReferralPoints
-    1
+  def prof
+    if medical_prof
+      "Yes"
+    else
+      "No"
+    end
   end
+
 end

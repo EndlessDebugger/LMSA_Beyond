@@ -149,7 +149,7 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th scope="col">Medical</th>
+                <th scope="col">Medical Professional</th>
                 <th scope="col">Email</th>
                 <th scope="col">Date</th>
                 <th scope="col">Admin</th>
@@ -160,16 +160,16 @@
               <% referral_points = 0 %>
               <% Referral.where(old_member: current_user.id).each do |referral| %>
                 <tr>
-                  <td scope="row"><%= referral.medical_prof %></td>
+                  <td scope="row"><%= referral.prof %></td>
                   <td scope="row"><%= referral.email %></td>
                   <td scope="row"><%= referral.date_referred.strftime("%m/%d/%Y") %></td>
                   <td scope="row"><%= referral.approved %></td>
                   <% if referral.medical_prof == true %>
                     <% if referral.admin_approved == true %>
-                      <% referral_points += 3 %>
+                      <% referral_points += Rails.configuration.points.med_prof_ref %>
                     <% end %>
                   <% else %>
-                    <% referral_points += 1 %>
+                    <% referral_points += Rails.configuration.points.referral %>
                   <% end %>
                   <td scope="row"><%= link_to 'More Details', referral %></td>
                 </tr>
