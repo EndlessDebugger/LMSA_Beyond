@@ -24,6 +24,7 @@
         <strong>Meeting link:</strong>
         <a herf="<%= @event.meeting_link %>"><%= @event.meeting_link %></a>
       </div>
+    <%end%>
 
       <div class="p-2 bd-highlight">
         <strong>Event date:</strong>
@@ -35,13 +36,14 @@
       </div>
 
     <div class="p-2 bd-highlight">
-    <%alas= @event%>
+      <%alas= @event%>
       <% if alas.graphics.present?%>
         <iframe src="<%= alas.driveImage %>" class="imgbox">
             <p>Graphics failed to render</p>
         </iframe>
         <%puts(alas.driveImage)%>
       <%end%>
+    </div>
 
       <% if @event.virtual? %>
         <div class="p-2 bd-highlight">
@@ -62,15 +64,6 @@
       <div class="p-2 bd-highlight">
         <strong>Point val:</strong>
         <%= @event.point_val %>
-      </div>
-
-      <div class="p-2 bd-highlight">
-        <% if @event.graphics.present?%>
-          <iframe src="<%= @event.graphics %>" class="imgbox">
-              <p>Graphics failed to render</p>
-          </iframe>
-        <%end%>
-
       </div>
 
       <div class="p-2 bd-highlight">
@@ -97,17 +90,17 @@
           </div>
         <% end %>
 
-        <% if @event.enable_sign_in == false %>
-          <%= form_with(model: @event) do |form| %>
-            <%= form.hidden_field :enable_sign_in, value: true %>
-            <%= form.submit "Enable Sign In", class: "btn btn-secondary" %>
+          <% if @event.enable_sign_in == false %>
+            <%= form_with(model: @event) do |form| %>
+              <%= form.hidden_field :enable_sign_in, value: true %>
+              <%= form.submit "Enable Sign In", class: "btn btn-secondary" %>
+            <% end %>
+          <% else %>
+            <%= form_with(model: @event) do |form| %>
+              <%= form.hidden_field :enable_sign_in, value: false %>
+              <%= form.submit "Disable Sign In", class: "btn btn-secondary" %>
+            <% end %>
           <% end %>
-        <% else %>
-          <%= form_with(model: @event) do |form| %>
-            <%= form.hidden_field :enable_sign_in, value: false %>
-            <%= form.submit "Disable Sign In", class: "btn btn-secondary" %>
-          <% end %>
-        <% end %>
 
       <% end %>
       
