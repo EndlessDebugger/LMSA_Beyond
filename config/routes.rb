@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     # 
 
     get 'leaderboard'=>'myhistory#points_leaderboard', :as =>:myhistory_points_leaderboard
+    get 'leaderboard'=>'myhistory#points_leaderboard2', :as =>:myhistory_points_leaderboard2
 
     # get 'point_history' => 'poin_events#index', :as => :poin_events
     # post 'point_history' => 'poin_events#index', :as => :poin_events

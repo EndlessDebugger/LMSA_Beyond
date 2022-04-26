@@ -30,20 +30,22 @@
             <tbody>
               <% @count = 0 %>
               <% temp.each do |that_user| %>
-                <%if that_user.id ==current_user.id%>
-                  <tr class="curr">
-                    <td><%= @count += 1 %></td>
+                <% if that_user.activeMem_Check == true%> <%# if this doesn't work, fix the conditional here !!!!!!! %> 
+                  <%if that_user.id ==current_user.id%>
+                    <tr class="curr">
+                      <td><%= @count += 1 %></td>
 
-                    <td><p id="you"><%= link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), {class:"link"}%> </p></td>
-                    
-                    <td><%= that_user.sum_points %></td>
-                  </tr>
-                <%else%>
-                  <tr>
-                    <td><%= @count += 1 %></td>
-                    <td><p><%= link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), {class:"link"}%> </p></td>
-                    <td><%= that_user.sum_points %></td>
-                  </tr>
+                      <td><p id="you"><%= link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), {class:"link"}%> </p></td>
+                      
+                      <td><%= that_user.sum_points %></td>
+                    </tr>
+                  <%else%>
+                    <tr>
+                      <td><%= @count += 1 %></td>
+                      <td><p><%= link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), {class:"link"}%> </p></td>
+                      <td><%= that_user.sum_points %></td>
+                    </tr>
+                  <% end %>
                 <% end %>
               <% end %>
             </tbody>
@@ -53,6 +55,3 @@
     </div> 
   </div> 
 </div> 
-
-
-                
