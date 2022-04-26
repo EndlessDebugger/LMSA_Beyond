@@ -10,58 +10,14 @@
 
         <%= form_with url: "/reset_semester" do |form| %>
 
-            <div class="modal-body policyGrid">
 
-                <div class="mb-3">
-                    <%= form.label "General Events", class: "form-label" %>
-                    <%= form.number_field :general_event, { :value=> Rails.configuration.points.general_event, class: "form-control w-75 ", placeholder: "General event points"} %>
-                </div> 
+            <div class="mb-3">
+                <p>Are you Sure? This will clear every member's point history, referral history, and event attendance</p>
+            </div> 
 
-                <div class="mb-3">
-                    <%= form.label "Volunteering Events", class: "form-label" %>
-                    <%= form.number_field :volunteer, { :value=> Rails.configuration.points.volunteer, class: "form-control w-75", placeholder: "Volunteering event points"} %>
-                </div>
 
-                <div class="mb-3">
-                    <%= form.label "Fundraiser Events", class: "form-label" %>
-                    <%= form.number_field :fundraiser, { :value=> Rails.configuration.points.fundraiser, class: "form-control w-75", placeholder: "Fundraiser event points"} %>
-                </div>
-
-                <div class="mb-3">
-                    <%= form.label "Social Events", class: "form-label" %>
-                    <%= form.number_field :social, { :value=> Rails.configuration.points.social, class: "form-control w-75", placeholder: "Social event points"} %>
-                </div>
-
-                <div class="mb-3">
-                    <%= form.label "Industry Referrals", class: "form-label" %>
-                    <%= form.number_field :med_prof_ref, { :value=> Rails.configuration.points.med_prof_ref, class: "form-control w-75", placeholder: "Professional referral points"} %>
-                </div>
-
-                <div class="mb-3">
-                    <%= form.label "Friend Referrals", class: "form-label" %>
-                    <%= form.number_field :referral, { :value=> Rails.configuration.points.referral, class: "form-control w-75", placeholder: "Friend referral points"} %>
-                </div>
-
-                <div class="mb-3">
-                    <%= form.label "Opporunity Share", class: "form-label" %>
-                    <%= form.number_field :opp, { :value=> Rails.configuration.points.opp, class: "form-control w-75", placeholder: "Opporunity Share points"} %>
-                </div>
-
-                <div class="mb-3">
-                    <%= form.label "Social Media Share", class: "form-label" %>
-                    <%= form.number_field :smedia, { :value=> Rails.configuration.points.smedia, class: "form-control w-75", placeholder: "Social Media points"} %>
-                </div>
-
-                <div class="mb-3">
-                    <%= form.label "Merchandise Purchase", class: "form-label" %>
-                    <%= form.number_field :merch, { :value=> Rails.configuration.points.merch, class: "form-control w-75", placeholder: "Merch points"} %>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <%= form.submit "Submit Change", {class:"btn btn-secondary", "data-bs-dismiss":"modal"} %>
-            </div>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <%= form.submit "RESET", {class:"btn btn-secondary", "data-bs-dismiss":"modal"} %>
 
         <% end %>
 
