@@ -139,10 +139,7 @@ class PoinEventsController < ApplicationController
 
   def reset
     if current_user.admin
-      if(rest_params[:new_date]!=Rails.configuration.points.reset_date)
-        Rails.configuration.points.reset_date=rest_params[:new_date]
-      end
-
+      # Poinevent.connection.truncate("poin_events")  
       respond_to do |format|
         format.html { redirect_to(admin_root_path, notice: "Semester Reset Successful") }
         format.json { head(:no_content) }
