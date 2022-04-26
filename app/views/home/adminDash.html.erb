@@ -1,8 +1,9 @@
 <% @title = "LMSA Officers" %>
 <%= stylesheet_link_tag "home.css" %>
 
-<%= render :partial =>"newadminmodal" %>
-<%= render :partial =>"reset_modal" %>
+<%= render "newadminmodal" %>
+<%= render "resultmodal" %>
+<%= render "removeModal" %>
 
 <% if !current_user.admin? %>
   <meta http-equiv="refresh" content="0; URL=<%= root_path %>" />
@@ -62,13 +63,17 @@
 
       <div class ="grid">
 
-        <%=link_to "Member Managment", points_path, {class: "btn btn-lg btn-outline-secondary text-dark", type: "button"}%>
+        <a type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#removeModal">
+          Remove Member
+        </a>
 
         <a type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Make A New Officer
         </a>
 
-        <%=link_to "Semester Point Reset", points_path, {class: "btn btn-lg btn-outline-secondary text-dark", type: "button"}%>
+        <a type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#resultmodal">
+          Semester Point Reset
+        </a>
 
       </div>
       

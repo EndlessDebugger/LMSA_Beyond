@@ -121,7 +121,7 @@
 
             <tbody>
               <% admin_points = 0 %>
-              <% PoinEvent.where(user_id: @user.id).find_each do |poin_event| %>
+              <% PoinEvent.where(user_id: @user.id).each do |poin_event| %>
                 <tr>
                   <th scope="row"><%= poin_event.balance %></td>
                   <% admin_points += poin_event.balance %>
@@ -179,6 +179,13 @@
 
         <h2> Points For Referrals: <%= referral_points %> </h2>
       </div> 
+    </div>
+
+    <div class="container">
+      <%= form_with url: "/remove_member" do |form| %>
+        <%= form.hidden_field :email, value: @user.email %>
+        <%= form.submit "Remove Member", {class:"btn btn-secondary btn-lg", type:"button"} %>
+      <% end %>
     </div>
 
   <%end%>

@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     resources :poin_events, :path=> :point_history
     # post '/points_policy', to: 'points#create'
     post '/reset_semester', to: 'poin_events#reset'
+    post '/remove_member', to: 'users#remove_member'
     # end
     
   end
