@@ -70,7 +70,7 @@
   </div>
 
 
-  <% if current_user.admin%>
+  <% if current_user.admin %>
     <div class="container">
       <h1 class="display-5 fw-bold text-light"><%= @user.first_name %>'s Event Attendance</h1>
       <div class="p-5 mb-4 bg-light rounded-3">
@@ -86,7 +86,7 @@
             </thead>
             <tbody>
               <% attendance_points = 0 %>
-              <% Event.joins(:event_hists).where(event_hists: {user_id: current_user.id}).order("event_date DESC").each do |hist| %>
+              <% Event.joins(:event_hists).where(event_hists: {user_id: @user.id}).order("event_date DESC").each do |hist| %>
                 <tr>
                   <td scope="row"><%= link_to hist.event_name, EventHist.find_by(id: hist.event_hists), class:"nav-link"  %></td>
                   <td scope="row"><%= hist.point_val %></td>
@@ -122,7 +122,7 @@
 
             <tbody>
               <% admin_points = 0 %>
-              <% PoinEvent.where(user_id: current_user.id).find_each do |poin_event| %>
+              <% PoinEvent.where(user_id: @user.id).find_each do |poin_event| %>
                 <tr>
                   <th scope="row"><%= poin_event.balance %></td>
                   <% admin_points += poin_event.balance %>
@@ -160,7 +160,7 @@
 
             <tbody>
               <% referral_points = 0 %>
-              <% Referral.where(old_member: current_user.id).each do |referral| %>
+              <% Referral.where(old_member: @user.id).each do |referral| %>
                 <tr>
                   <td scope="row"><%= referral.prof %></td>
                   <td scope="row"><%= referral.email %></td>
