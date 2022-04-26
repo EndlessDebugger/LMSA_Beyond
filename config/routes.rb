@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :points
   root to: 'home#index'
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }
@@ -27,8 +26,8 @@ Rails.application.routes.draw do
     # get 'point_history' => 'poin_events#index', :as => :poin_events
     # post 'point_history' => 'poin_events#index', :as => :poin_events
     resources :poin_events, :path=> :point_history
-    # resources :points_helper, :path=> :points_policy, only: [:policyUpdate] do
-    post '/points_policy', to: 'poin_events#policyUpdate'
+    # post '/points_policy', to: 'points#create'
+    post '/reset_semester', to: 'poin_events#reset'
     # end
     
   end
@@ -38,6 +37,7 @@ Rails.application.routes.draw do
   resources :referrals
   resources :events
   resources :categories
+  resources :points
   resources :event_hists
   resources :users
   resources :sessions

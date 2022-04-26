@@ -38,7 +38,7 @@
     <div class="p-2 bd-highlight">
       <%alas= @event%>
       <% if alas.graphics.present?%>
-        <iframe src="<%= alas.driveImage %>" class="imgbox">
+        <iframe class="responsive-iframe" src="<%= alas.driveImage %>" class="imgbox">
             <p>Graphics failed to render</p>
         </iframe>
         <%puts(alas.driveImage)%>

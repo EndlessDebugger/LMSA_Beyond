@@ -8,6 +8,7 @@ default: &default
   referral: 1
   opp: 1
   smedia: 1
+  reset_date: 2022-04-15 18:54:30.042912
 
 development:
   <<: *default

@@ -1,22 +1,14 @@
-<div class="modal fade" id="pointsmodal" tabindex="-1" aria-labelledby="points_modal_label" aria-hidden="true">
+<div class="modal fade" id="resetmodal" tabindex="-1" aria-labelledby="reset_modal_label" aria-hidden="true">
 
     <div class="modal-dialog modal-lg">
 
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="pointsModalLabel">Updating Global Points Policy</h5>
+                <h5 class="modal-title" id="resetModalLabel">Reseting TAMU LMSA Points</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-        <%= form_with url: "/points_policy" do |form| %>
-
-        <!-- *load in the current config vars
-             *take in user input
-             *update post request
-             *to where?
-
-            config vars: Rails.configuration.points
-        -->
+        <%= form_with url: "/reset_semester" do |form| %>
 
             <div class="modal-body policyGrid">
 
