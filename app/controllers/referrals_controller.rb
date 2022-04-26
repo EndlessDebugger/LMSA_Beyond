@@ -1,5 +1,10 @@
 class ReferralsController < ApplicationController
   before_action :set_referral, only: %i[show edit update destroy]
+  rescue_from ActiveRecord::RecordNotUnique, :with => :error_render_method
+
+  def error_render_method
+      redirect_to(referrals_path, { alert: 'Duplicate referrals are not allowed' })
+  end
 
   # GET /referrals or /referrals.json
   def index
@@ -28,11 +33,12 @@ class ReferralsController < ApplicationController
     else
       respond_to do |format|
         if @referral.save
+          format.js{render :js=>"console.log(\"\nFUCK\");$(\"#explainmodal\").modal('show');"}
           format.html { redirect_to(referrals_path) }
           # format.json { render :show, status: :created, location: @referral }
         else
-          format.html { render(:new, status: :unprocessable_entity) }
-          format.json { render(json: @referral.errors, status: :unprocessable_entity) }
+          redirect_to(referrals_path, { alert: 'Duplicate referrals are not allowed' })
+
         end
       end
     end
@@ -77,6 +83,6 @@ class ReferralsController < ApplicationController
 
   def referralMax(id)
     # This doesn't account for if the referral was in a previous semester, as the client wants the system to reset every semester
-    (Referral.where(old_member: id).count > 2)
+    (Referral.where(old_member: id).where(medical_prof: false).count > 2)
   end
 end

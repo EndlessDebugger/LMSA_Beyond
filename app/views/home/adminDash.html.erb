@@ -1,5 +1,8 @@
-<% @title = "LMSA Admin" %>
+<% @title = "LMSA Officers" %>
 <%= stylesheet_link_tag "home.css" %>
+
+<%= render :partial =>"newadminmodal" %>
+<%= render :partial =>"reset_modal" %>
 
 <% if !current_user.admin? %>
   <meta http-equiv="refresh" content="0; URL=<%= root_path %>" />
@@ -47,32 +50,8 @@
         <%= link_to "Update my Info",  edit_user_session_path, {class: "btn btn-outline-secondary text-dark", type: "button"} %>
         <br>
         <%if current_user.allowed%>
-          <%=button_to "Member View",{controller: "users", action: "nodev",id: current_user.id }, {class: "btn btn-outline-secondary text-dark", type: "button"} %>
+          <%=button_to "Member View",{controller: "users", action: "nodev", id: current_user.id }, {class: "btn btn-outline-secondary text-dark", type: "button"} %>
         <%end%>
-
-        
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Making a new Officer</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <%= form_with url: "/create_new_admin" do |form| %>
-                <div class="modal-body">
-                  <% form.label :email, class: "form-label" %>
-                  <%= form.text_field :email, {class: "form-control", placeholder: "Email"} %>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <%= form.submit "Add Officer", {class:"btn btn-secondary", "data-bs-dismiss":"modal"} %>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-  
-
 
       </div>
     </div>
@@ -80,13 +59,21 @@
     <div class="p-5 mb-4 bg-light rounded-3 lead">
       <h1 class="display-20 fw-bold">Officer Options</h1>
       <br>
+
       <div class ="grid">
-        <%=link_to "Update Points Policy", points_path, {class: "btn btn-lg btn-outline-secondary text-dark", type: "button"}%>
+
+        <a type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#pointsmodal">
+         Update Points Policy
+        </a>
+
         <%=link_to "Member Managment", points_path, {class: "btn btn-lg btn-outline-secondary text-dark", type: "button"}%>
+
         <a type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Make A New Officer
         </a>
+
         <%=link_to "Semester Point Reset", points_path, {class: "btn btn-lg btn-outline-secondary text-dark", type: "button"}%>
+
       </div>
       
     </div>

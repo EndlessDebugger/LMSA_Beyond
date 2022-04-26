@@ -1,0 +1,34 @@
+<div class="p-2">
+  <p> Total Points: <%= current_user.sum_points %> </p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Balance</th>
+          <th scope="col">Date</th>
+          <th scope="col">Description</th>
+          <th scope="col">Admin award</th>
+          <% if current_user.admin? %>
+          <th scope="col">Options</th>
+          <%end%>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% PoinEvent.where(user_id: current_user.id).find_each do |poin_event| %>
+          <tr>
+            <td scope="row"><%= poin_event.balance %></td>
+            <td scope="row"><%= poin_event.created_at.strftime("%m/%d/%Y") %></td>
+            <td scope="row"><%= poin_event.description %></td>
+            <td><%= User.find_by("id=?",poin_event.admin_award_id).email %></td>
+            <% if current_user.admin? %>
+            <td scope="row">
+              <div>
+                <%= link_to 'Show', poin_event, class:"link" %>
+              </div>
+            </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+</div>

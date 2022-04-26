@@ -1,154 +1,201 @@
 <p id="notice"><%= notice %></div>
-<% @title = "LMSA Events" %>
+<% @title = "TAMU LMSA Events" %>
 <%= stylesheet_link_tag "home.css" %>
 
-<div class="container py-4">
+<div class="container row">
 
-  <h1 class="display-10 fw-bold text-light"><%= @event.event_name %></h1>
+  <div class="container col">
 
-  <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
+    <h1 class="display-10 fw-bold text-light"><%= @event.event_name %></h1>
 
-    <% if current_user.admin %>
+    <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
 
-      <div class="p-2 bd-highlight">
-        <strong>Event ID: </strong> 
-        <%= @event.id %>
-      </div>
+      <% if current_user.admin %>
 
-    <% end %>
+        <div class="p-2 bd-highlight">
+          <strong>Event ID: </strong> 
+          <%= @event.id %>
+        </div>
 
-    <div class="p-2 bd-highlight">
-      <strong>Event type:</strong>
-      <%= @event.e_type_before_type_cast %>
-    </div>
+      <% end %>
 
-    <div class="p-2 bd-highlight">
-      <strong>Event date:</strong>
-      <% if @event.event_date.present?%>
-        <%=  @event.event_date.strftime("%Y-%m-%d %H:%M")%>
-      <%else%>
-          <p>No date given</p>
-      <%end%>
-    </div>
-
-    <div class="p-2 bd-highlight">
-      <strong>Description:</strong>
-      <%= @event.description %>
-    </div>
-
-    <% if @event.virtual? %>
+    <% if @event.virtual? && @event.meeting_link.present? %>
       <div class="p-2 bd-highlight">
         <strong>Meeting link:</strong>
-        <%= @event.meeting_link %>
+        <a herf="<%= @event.meeting_link %>"><%= @event.meeting_link %></a>
       </div>
-    <% end %>
+    <%end%>
+
+      <div class="p-2 bd-highlight">
+        <strong>Event date:</strong>
+        <% if @event.event_date.present?%>
+          <%=  @event.event_date.strftime("%l:%M %p, %m/%d/%Y")%>
+        <%else%>
+            <p>No date given</p>
+        <%end%>
+      </div>
 
     <div class="p-2 bd-highlight">
-      <strong>Signin time:</strong>
-      <% if @event.signin_time.present?%>
-          <%=  @event.signin_time.strftime("%Y-%m-%d %H:%M")%>
-      <%else%>
-            <p>Nothing</p>
-      <%end%>
-    </div>
-
-    <div class="p-2 bd-highlight">
-      <strong>Point val:</strong>
-      <%= @event.point_val %>
-    </div>
-
-    <div class="p-2 bd-highlight">
-      <% if @event.graphics.present?%>
-        <iframe src="<%= @event.graphics %>" class="imgbox">
+      <%alas= @event%>
+      <% if alas.graphics.present?%>
+        <iframe class="responsive-iframe" src="<%= alas.driveImage %>" class="imgbox">
             <p>Graphics failed to render</p>
         </iframe>
+        <%puts(alas.driveImage)%>
       <%end%>
-
     </div>
 
-    <div class="p-2 bd-highlight">
-      <strong>Total event hr:</strong>
-      <%= @event.total_event_hr %>
-    </div>
-
-    <% if current_user.admin? %>
-
-      <div class="p-2 bd-highlight">
-        <strong>Event creator:</strong>
-        <%= @event.event_creator %>
-      </div>
-
-      <div class="p-2 bd-highlight">
-        <strong>Password:</strong>
-        <%= @event.password %>
-      </div>
-
-      <% if @event.active_mem == true %>
+      <% if @event.virtual? %>
         <div class="p-2 bd-highlight">
-          <strong>Active Memebers Only</strong>
+          <strong>Meeting link:</strong>
+          <%= @event.meeting_link %>
         </div>
       <% end %>
 
-      <% if @event.enable_sign_in == false %>
-        <%= form_with(model: @event) do |form| %>
-          <%= form.hidden_field :enable_sign_in, value: true %>
-          <%= form.submit "Enable Sign In", class: "btn btn-secondary" %>
-        <% end %>
-      <% else %>
-        <%= form_with(model: @event) do |form| %>
-          <%= form.hidden_field :enable_sign_in, value: false %>
-          <%= form.submit "Disable Sign In", class: "btn btn-secondary" %>
-        <% end %>
-      <% end %>
+      <div class="p-2 bd-highlight">
+        <strong>Signin time:</strong>
+        <% if @event.signin_time.present?%>
+            <%=  @event.signin_time.strftime("%l:%M %p, %m/%d/%Y")%>
+        <%else%>
+              <p>Nothing</p>
+        <%end%>
+      </div>
 
-    <% end %>
-    
+      <div class="p-2 bd-highlight">
+        <strong>Point val:</strong>
+        <%= @event.point_val %>
+      </div>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Sign In to <%= @event.event_name %></h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="p-2 bd-highlight">
+        <strong>Total event hr:</strong>
+        <%= @event.total_event_hr %>
+      </div>
+
+      <% if current_user.admin? %>
+
+        <div class="p-2 bd-highlight">
+
+          <strong>Event creator:</strong>
+          <%= @event.event_creator %>
+        </div>
+
+        <div class="p-2 bd-highlight">
+          <strong>Password:</strong>
+          <%= @event.password %>
+        </div>
+
+        <% if @event.active_mem == true %>
+          <div class="p-2 bd-highlight">
+            <strong>Active Memebers Only</strong>
           </div>
-          <%= form_with url: "/sign_in_event" do |form| %>
-            <div class="modal-body">
-              <% form.label :password, class: "form-label" %>
-              <%= form.text_field :password, {class: "form-control", placeholder: "Password"} %>
+        <% end %>
+
+          <% if @event.enable_sign_in == false %>
+            <%= form_with(model: @event) do |form| %>
+              <%= form.hidden_field :enable_sign_in, value: true %>
+              <%= form.submit "Enable Sign In", class: "btn btn-secondary" %>
+            <% end %>
+          <% else %>
+            <%= form_with(model: @event) do |form| %>
+              <%= form.hidden_field :enable_sign_in, value: false %>
+              <%= form.submit "Disable Sign In", class: "btn btn-secondary" %>
+            <% end %>
+          <% end %>
+
+      <% end %>
+      
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Sign In to <%= @event.event_name %></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <%= form_with url: "/sign_in_event" do |form| %>
+              <div class="modal-body">
+                <% form.label :password, class: "form-label" %>
+                <%= form.text_field :password, {class: "form-control", placeholder: "Password"} %>
+                <%= form.hidden_field :user_id, value: current_user.id%>
+                <%= form.hidden_field :event_id, value: @event.id%>
+                <%= form.hidden_field :sign_in, value: true%>
+                <%= form.hidden_field :point_recv, value: @event.point_val%>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <%= form.submit "Sign In", {class:"btn btn-secondary", "data-bs-dismiss":"modal"} %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-2">
+
+        <%if current_user.admin%>
+          <%= link_to 'Edit', edit_event_path(@event), class:"btn btn-secondary text-light" %>
+          <%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-secondary text-light" %>
+        <%end%>
+
+        <% if @event.signin_time.present?
+            time_difference = (Time.current.to_time.min - @event.signin_time.to_time.min)
+            else
+              time_difference = -1
+          end %>
+
+        <% if current_user.admin == false && ((time_difference <= 5 && time_difference >= 0) || @event.enable_sign_in == true) %>
+          
+          <% if @event.password == "" %>
+            <%= form_with url: "/sign_in_event" do |form| %>
+              <%= form.hidden_field :password, value: @event.password%>
               <%= form.hidden_field :user_id, value: current_user.id%>
               <%= form.hidden_field :event_id, value: @event.id%>
               <%= form.hidden_field :sign_in, value: true%>
               <%= form.hidden_field :point_recv, value: @event.point_val%>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <%= form.submit "Sign In", {class:"btn btn-secondary", "data-bs-dismiss":"modal"} %>
-            </div>
+              <%= form.submit "Sign In", {class:"btn btn-secondary"} %>
+              <%= link_to 'Back', events_path, class:"btn btn-secondary text-light" %>
+            <% end %>
+          <% else %>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Sign In
+            </button>
+            <%= link_to 'Back', events_path, class:"btn btn-secondary text-light" %>
           <% end %>
-        </div>
+
+        <% end %>
+
       </div>
     </div>
-
-    <div class="pt-2">
-
-      <%if current_user.admin%>
-        <%= link_to 'Edit', edit_event_path(@event), class:"btn btn-secondary text-light" %>
-        <%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-secondary text-light" %>
-      <%end%>
-
-      <% if @event.signin_time.present?
-           time_difference = (Time.current.to_time.min - @event.signin_time.to_time.min)
-           else
-             time_difference = -1
-         end %>
-      <% if current_user.admin == false && ((time_difference <= 5 && time_difference >= 0) || @event.enable_sign_in == true) %>
-        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Sign In
-        </button>
-      <% end %>
-
-      <%= link_to 'Back', events_path, class:"btn btn-secondary text-light" %>
-
-    </div>
   </div>
+
+  <% if current_user.admin? %>
+    <div class="container col">
+
+      <h1 class="display-10 fw-bold text-light">Attendance</h1>
+      
+      <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5" style="text-align: center;">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">User</th>
+                <th scope="col">Time Signed In</th>
+              </tr>
+            </thead>
+          
+            <tbody>
+              <% EventHist.where(event_id: @event.id).each do |event_hist| %>
+                <tr>
+                  <% user = User.find(event_hist.user_id) %>
+                  <td><%=user.first_name %> <%= user.last_name %></td>
+                  <td><%=user.created_at.strftime("%l:%M %p, %m/%d/%Y") %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  <% end %>
 </div>

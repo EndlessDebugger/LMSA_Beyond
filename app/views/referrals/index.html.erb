@@ -11,41 +11,42 @@
     
     <!-- need to add check within new of the referal controller to make sure the user only makes up to 3 friend referals-->
     <%= link_to 'New Referral', new_referral_path,{class: "btn btn-outline-secondary text-dark", type: "button"} %>
+    <%= render :partial =>"explainmodal" %>
 
-    <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Guest first name</th>
-        <th scope="col">Guest last name</th>
-        <th scope="col">Medical Professional</th>
-        <th scope="col">Email</th>
-        <th scope="col">Date referred</th>
-        <th scope="col">Admin approved</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Guest first name</th>
+            <th scope="col">Guest last name</th>
+            <th scope="col">Medical Professional</th>
+            <th scope="col">Email</th>
+            <th scope="col">Date referred</th>
+            <th scope="col">Admin approved</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-    <tbody>
-      <% Referral.where(old_member: current_user.id).each do |referral| %>
-        <tr>
-          <td scope="row"><%= referral.guest_first_name %></td>
-          <td scope="row"><%= referral.guest_last_name %></td>
-          <td scope="row"><%= referral.medical_prof %></td>
-          <td scope="row"><%= referral.email %></td>
-          <td scope="row"><%= referral.date_referred.strftime("%m/%d/%Y") %></td>
-          <td scope="row"><%= referral.approved %></td>
-          <td scope="row"><%= link_to 'More Details', referral %></td>
+        <tbody>
+          <% Referral.where(old_member: current_user.id).each do |referral| %>
+            <tr>
+              <td scope="row"><%= referral.guest_first_name %></td>
+              <td scope="row"><%= referral.guest_last_name %></td>
+              <td scope="row"><%= referral.prof %></td>
+              <td scope="row"><%= referral.email %></td>
+              <td scope="row"><%= referral.date_referred.strftime("%m/%d/%Y") %></td>
+              <td scope="row"><%= referral.approved %></td>
+              <td scope="row"><%= link_to 'More Details', referral %></td>
 
-          <%if !referral.admin_approved%>
-            <td><%= link_to 'Edit', edit_referral_path(referral) %></td>
-          <%end%>
+              <%if !referral.admin_approved && referral.medical_prof%>
+                <td><%= link_to 'Edit', edit_referral_path(referral) %></td>
+              <%end%>
 
-          <td scope="row"><%= link_to 'Delete', referral, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
+              <td scope="row"><%= link_to 'Delete', referral, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      
     </div> 
   </div> 
 </div> 
