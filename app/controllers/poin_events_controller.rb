@@ -87,7 +87,6 @@ class PoinEventsController < ApplicationController
 
 
   def policyUpdate
-    puts(policy_params)
 
     if current_user.admin
 
@@ -138,6 +137,21 @@ class PoinEventsController < ApplicationController
 
   end
 
+  def reset
+    if current_user.admin
+      if(rest_params[:new_date]!=Rails.configuration.points.reset_date)
+        Rails.configuration.points.reset_date=rest_params[:new_date]
+      end
+
+      respond_to do |format|
+        format.html { redirect_to(admin_root_path, notice: "Semester Reset Successful") }
+        format.json { head(:no_content) }
+      end
+    else
+      redirect_to(root_path, alert: "You're not allowed to do this!") 
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -152,5 +166,9 @@ class PoinEventsController < ApplicationController
 
   def policy_params
     params.permit( :general_event, :med_prof_ref, :merch, :social, :fundraiser, :volunteer, :referral, :opp)
+  end
+
+  def reset_params
+    params.permit(:new_date)
   end
 end
