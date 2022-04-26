@@ -12,11 +12,12 @@
         <h1 class="display-5 fw-bold text-light"><%= @user.first_name %>'s Page</h1>
         <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
           <div class="row">
-            <div class="p-2 col">
-              <% if current_user.avatar_url.present? %> 
+            <% if @user.avatar_url.present? %> 
+              <div class="p-2 col">
                 <%= image_tag(@user.avatar_url, :size => "200x200" ) %>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
+            
             <div class="p-2 col">
               <p>
                 <strong>First name:</strong>
@@ -114,9 +115,7 @@
                 <th scope="col">Points given</th>
                 <th scope="col">Date</th>
                 <th scope="col">Admin</th>
-                  <% if current_user.admin? %>
-                    <th scope="col">Options</th>
-                  <%end%>
+                <th scope="col">Options</th>
               </tr>
             </thead>
 
@@ -128,9 +127,7 @@
                   <% admin_points += poin_event.balance %>
                   <td scope="row"><%= poin_event.created_at.strftime("%m/%d/%Y %l:%M %p") %></td>
                   <td scope="row"><%= User.find_by("id=?",poin_event.admin_award_id).email %></td>
-                  <% if current_user.admin? %>
-                    <td><%= link_to 'Show', poin_event %> <%= link_to 'Edit', edit_poin_event_path(poin_event) %> <%= link_to 'Destroy', poin_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                  <% end %>
+                  <td><%= link_to 'Show', poin_event %> <%= link_to 'Edit', edit_poin_event_path(poin_event) %> <%= link_to 'Destroy', poin_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                 </tr>
               <% end %>
             </tbody>
