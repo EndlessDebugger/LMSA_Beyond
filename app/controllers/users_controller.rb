@@ -98,7 +98,7 @@ class UsersController < ApplicationController
   end
 
   def remove_member
-    if current_user.admin
+    if current_user.admin?
       other_user = User.find_by(email: params[:email])
       if current_user.id != other_user.id
         Referral.where(old_member: other_user.id).destroy_all

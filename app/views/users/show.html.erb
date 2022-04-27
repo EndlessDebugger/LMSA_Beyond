@@ -184,7 +184,7 @@
     <div class="container">
       <%= form_with url: "/remove_member" do |form| %>
         <%= form.hidden_field :email, value: @user.email %>
-        <%= form.submit "Remove Member", {class:"btn btn-secondary btn-lg", type:"button"} %>
+        <%= form.submit "Remove Member", {class:"btn btn-secondary btn-lg"} %>
       <% end %>
     </div>
 
