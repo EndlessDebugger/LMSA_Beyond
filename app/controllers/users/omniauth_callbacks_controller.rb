@@ -30,7 +30,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       reffed = Referral.find_by(email: current_user.email)
       unless reffed.nil?
         if reffed.admin_approved.nil? && !reffed.admin_approved
-          PoinEvent.create!(user_id: reffed.old_member, balance: oint.find_by(name:"Friend Referral").val || 1, date: DateTime.now,
+          PoinEvent.create!(user_id: reffed.old_member, balance: (Point.find_by(name:"Friend Referral").val || 1), date: DateTime.now,
                             description: 'You referred x y using email: z'.gsub(/[xyz]/, 'x' => reffed.guest_first_name, 'y' => reffed.guest_last_name, 'z' => reffed.email)
           )
         end
