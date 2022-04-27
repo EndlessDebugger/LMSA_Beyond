@@ -21,15 +21,18 @@
 
     <div class="mb-3">
       <%= form.label "Value", class: "form-label" %>
-      <%= form.number_field :val, {class: "form-control", placeholder: "Name"} %>
+      <%= form.number_field :val, {class: "form-control", placeholder: "Value"} %>
     </div>
 
     <div class="mb-3">
       <%= form.label "Description", class: "form-label" %>
-      <%= form.text_field :desc, {class: "form-control", placeholder: "Name"} %>
+      <%= form.text_field :desc, {class: "form-control", placeholder: "Description"} %>
     </div>
 
-    <%= form.submit "Submit", class:"btn btn-secondary" %>
+    <div class="d-flex">
+      <%= form.submit "Submit", class:"btn btn-secondary" %>
+      <%= link_to 'Back', points_path , class:"btn btn-secondary"%>
+    </div>
 
   <% end %>
 </div>
