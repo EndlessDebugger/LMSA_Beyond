@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
  <ul>
-<li><%=@point.name%>: <%=@point.val%> points: <%=@point.desc%> <%= link_to 'Edit', edit_point_path(@point) %> <%= link_to 'Destroy', @point, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+<li>For each <%=@point.name%> you get <%=@point.val%> points: <%=@point.desc%> <%= link_to 'Edit', edit_point_path(@point) %> <%= link_to 'Destroy', @point, method: :delete, data: { confirm: 'Are you sure?' } %></li>
   </ul>
 
 <%= link_to 'Edit', edit_point_path(@point) %> |
