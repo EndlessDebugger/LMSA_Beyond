@@ -46,10 +46,14 @@
                 <%temp = User.find_by("id=?", poin_event.user_id)%>
                 <td><% if temp.present? %>
                             <%=temp.email %>
-                           <% end %>
+                      <% end %>
                 </td>
                 <td><%= poin_event.created_at.strftime("%m/%d/%Y %l:%M %p") %></td>
-                <td><%= User.find_by("id=?",poin_event.admin_award_id).email %></td>
+                <%tempAdmin = User.find_by("id=?",poin_event.admin_award_id)%>
+                <td><% if tempAdmin.present? %>
+                            <%=tempAdmin.email %>
+                      <% end %>
+                </td>
                 <td><%= link_to 'Show', poin_event %> <%= link_to 'Edit', edit_poin_event_path(poin_event) %> <%= link_to 'Destroy', poin_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>
             <% end %>
