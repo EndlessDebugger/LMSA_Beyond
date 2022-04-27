@@ -1,9 +1,9 @@
 <% @title = "LMSA Officers" %>
 <%= stylesheet_link_tag "home.css" %>
 
-<%= render "newadminmodal" %>
-<%= render "resultmodal" %>
-<%= render "removeModal" %>
+<%= render :partial=>"newadminmodal" %>
+<%= render :partial=>"resultmodal" %>
+<%= render :partial=>"removeModal" %>
 
 <% if !current_user.admin? %>
   <meta http-equiv="refresh" content="0; URL=<%= root_path %>" />
