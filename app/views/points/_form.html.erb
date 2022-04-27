@@ -1,32 +1,35 @@
-<%= form_with(model: point) do |form| %>
-  <% if point.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(point.errors.count, "error") %> prohibited this point from being saved:</h2>
+<%= stylesheet_link_tag "home.css" %>
 
-      <ul>
-        <% point.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
+  <%= form_with(model: @point) do |form| %>
+    <% if point.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(point.errors.count, "error") %> prohibited this point from being saved:</h2>
+
+        <ul>
+          <% point.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= form.label "Name", class: "form-label" %>
+      <%= form.text_field :name, {class: "form-control", placeholder: "Name"} %>
     </div>
+
+    <div class="mb-3">
+      <%= form.label "Value", class: "form-label" %>
+      <%= form.number_field :val, {class: "form-control", placeholder: "Name"} %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label "Description", class: "form-label" %>
+      <%= form.text_field :desc, {class: "form-control", placeholder: "Name"} %>
+    </div>
+
+    <%= form.submit "Submit", class:"btn btn-secondary" %>
+
   <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.number_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label "Point Value" %>
-    <%= form.number_field :val %>
-  </div>
-
-  <div class="field">
-    <%= form.label :desc %>
-    <%= form.number_field :desc %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

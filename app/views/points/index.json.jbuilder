@@ -1,1 +1,1 @@
-json.array! @points, partial: "points/point", as: :point
+json.array!(@points, partial: "points/point", as: :point)
