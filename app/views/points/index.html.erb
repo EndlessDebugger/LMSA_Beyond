@@ -8,7 +8,7 @@
     <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
         <ul>
         <%Point.all.each do |po|%>
-            <li><%=po.name%>: <%=po.val%> points per <%=po.point_type%>: <%=po.desc%> <%= link_to 'Edit', edit_point_path(po) %> <%= link_to 'Destroy', po, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+            <li>For each <%=po.name%> you get <%=po.val%> points: <%=po.desc%> <%= link_to 'Edit', edit_point_path(po) %> <%= link_to 'Destroy', po, method: :delete, data: { confirm: 'Are you sure?' } %></li>
         <%end%>
         </ul>
         <a type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#pointsmodal">
