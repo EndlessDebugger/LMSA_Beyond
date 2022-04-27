@@ -40,7 +40,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-        
+        <div class="formData">
         <%= form_with(model: @point) do |form| %>
             <div class="mb-3">
                 <%= form.label :name, class: "form-label" %>
@@ -63,6 +63,7 @@
             </div>
 
         <% end %>
+        </div>
 
         </div>
 
