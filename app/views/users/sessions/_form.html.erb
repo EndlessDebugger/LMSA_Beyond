@@ -18,7 +18,7 @@
   <div class="d-flex flex-row bd-highlight mb-3 justify-content-sm-around">
 
     <div>
-      <%if current_user.admin?%>
+      <%if current_user.admin%>
         <%= link_to 'Skip', admin_root_path,{class: "btn btn-outline-secondary text-dark", type: "button"} %>
       <%else%>
         <%= link_to 'Skip', root_path,{class: "btn btn-outline-secondary text-dark", type: "button"} %>
