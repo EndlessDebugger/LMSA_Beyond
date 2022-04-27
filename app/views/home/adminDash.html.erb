@@ -4,6 +4,8 @@
 <%= render :partial=>"newadminmodal" %>
 <%= render :partial=>"resultmodal" %>
 <%= render :partial=>"removeModal" %>
+<%= render :partial=>"activemodal" %>
+
 
 <% if !current_user.admin? %>
   <meta http-equiv="refresh" content="0; URL=<%= root_path %>" />
@@ -73,6 +75,10 @@
 
         <a type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#resultmodal">
           Semester Point Reset
+        </a>
+
+        <a type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#activemodal">
+          View all Active Members
         </a>
 
       </div>

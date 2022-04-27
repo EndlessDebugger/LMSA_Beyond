@@ -35,15 +35,6 @@
         <%end%>
       </div>
 
-    <div class="p-2 bd-highlight">
-      <%alas= @event%>
-      <% if alas.graphics.present?%>
-        <iframe class="responsive-iframe" src="<%= alas.driveImage %>" class="imgbox">
-            <p>Graphics failed to render</p>
-        </iframe>
-        <%puts(alas.driveImage)%>
-      <%end%>
-    </div>
 
       <% if @event.virtual? %>
         <div class="p-2 bd-highlight">
@@ -168,8 +159,25 @@
     </div>
   </div>
 
+  <div class="container col">
+   <h1 class="display-10 fw-bold text-light">Graphics</h1>
+      
+      <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5 align-item-center justify-content-center">
+          <%alas= @event%>
+          <% if alas.graphics.present?%>
+            <iframe class="responsive-iframe" src="<%= alas.driveImage %>">
+                <p>Graphics failed to render</p>
+            </iframe>
+            <%puts(alas.driveImage)%>
+          <%end%>
+          </div>
+        </div>
+
+  </div>
+
   <% if current_user.admin? %>
-    <div class="container col">
+    <div class="container row">
 
       <h1 class="display-10 fw-bold text-light">Attendance</h1>
       
@@ -199,3 +207,4 @@
     </div>
   <% end %>
 </div>
+
