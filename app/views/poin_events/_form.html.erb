@@ -39,7 +39,9 @@
 
     <%= form.hidden_field :admin_award_id, value: current_user.id %>
 
-    <%= link_to 'Back', poin_events_path, class:"btn btn-secondary text-light" %>
-    <%= form.submit "Submit", class:"btn btn-secondary" %>
+    <div class="d-flex">
+      <%= link_to 'Back', poin_events_path, class:"btn btn-secondary text-light" %>
+      <%= form.submit "Submit", class:"btn btn-secondary" %>
+    </div>
   <% end %>
 </div>

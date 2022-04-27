@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <% @title = "TAMU LMSA Plus Point History" %>
 <%= stylesheet_link_tag "home.css" %>
@@ -22,7 +21,7 @@
               <th scope="col">Member</th>
             <% end %>
             <th scope="col">Date</th>
-            <th scope="col">Admin</th>
+            <th scope="col">Officer</th>
               <% if current_user.admin? %>
             <th scope="col">Options</th>
             <%end%>

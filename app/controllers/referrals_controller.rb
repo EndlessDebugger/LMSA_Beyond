@@ -33,11 +33,18 @@ class ReferralsController < ApplicationController
     else
       respond_to do |format|
         if @referral.save
-          format.js{render :js=>"console.log(\"\nFUCK\");$(\"#explainmodal\").modal('show');"}
-          format.html { redirect_to(referrals_path) }
-          # format.json { render :show, status: :created, location: @referral }
+
+          message = "Referral was successfully created. You will recieve the points once your friend signs into this website."
+          if referral_params[:medical_prof] == true
+            message = "Referral was successfully created. You will recieve the points once an admin approves it."
+          end
+
+          format.html { redirect_to(referrals_path, notice: "#{message}") }
+          format.json { render :show, status: :created, location: @referral }
+
         else
-          redirect_to(referrals_path, { alert: 'Duplicate referrals are not allowed' })
+          format.html { render(:new, status: :unprocessable_entity) }
+          format.json { render(json: @referral.errors, status: :unprocessable_entity) }
 
         end
       end
@@ -48,6 +55,14 @@ class ReferralsController < ApplicationController
   def update
     respond_to do |format|
       if @referral.update(referral_params)
+
+        if referral_params[:admin_approved] && referral_params[:medical_prof]
+          PoinEvent.create!(user_id: referral_params[:old_member], balance: Point.find_by(name:"Professional Referral").val || 3, date: DateTime.now,
+                            description: 'You referred professional: x y using email: z'.gsub(/[xyz]/, 'x' => referral_params[:guest_first_name], 'y' => referral_params[:guest_last_name], 'z' => referral_params[:email]),
+                            admin_award_id: current_user.id
+                          )
+        end
+
         format.html { redirect_to(referral_url(@referral), notice: 'Referral was successfully updated.') }
         format.json { render(:show, status: :ok, location: @referral) }
       else

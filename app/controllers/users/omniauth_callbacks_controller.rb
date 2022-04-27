@@ -29,12 +29,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       # maybe auto email for being referred could help, or a referral code? -Daniel
       reffed = Referral.find_by(email: current_user.email)
       unless reffed.nil?
-        if reffed.admin_approved && reffed.medical_prof
-          PoinEvent.create!(user_id: reffed.old_member, balance: Rails.configuration.points.med_prof_ref, date: DateTime.now,
-                            description: 'You referred x y using email: z'.gsub(/[xyz]/, 'x' => reffed.guest_first_name, 'y' => reffed.guest_last_name, 'z' => reffed.email)
-          )
-        elsif reffed.admin_approved.nil? && !reffed.admin_approved
-          PoinEvent.create!(user_id: reffed.old_member, balance: Rails.configuration.points.referral, date: DateTime.now,
+        if reffed.admin_approved.nil? && !reffed.admin_approved
+          PoinEvent.create!(user_id: reffed.old_member, balance: oint.find_by(name:"Friend Referral").val || 1, date: DateTime.now,
                             description: 'You referred x y using email: z'.gsub(/[xyz]/, 'x' => reffed.guest_first_name, 'y' => reffed.guest_last_name, 'z' => reffed.email)
           )
         end

@@ -33,7 +33,7 @@ class PoinEventsController < ApplicationController
       @poin_event = PoinEvent.new(new_poin_event_params)
       respond_to do |format|
         if @poin_event.save
-          format.html { redirect_to(poin_event_url(@poin_event), notice: 'Poin event was successfully created.') }
+          format.html { redirect_to(poin_event_url(@poin_event), notice: 'Point Award was successfully created.') }
           format.json { render(:show, status: :created, location: @poin_event) }
         else
           format.html { render(:new, status: :unprocessable_entity) }
@@ -41,7 +41,7 @@ class PoinEventsController < ApplicationController
         end
       end
     else 
-      redirect_to(poin_events_path, notice: 'The email does not exist!')
+      redirect_to(poin_events_path, alert: 'The email does not exist!')
     end
 
   end
