@@ -6,14 +6,25 @@
     <br>
     <h1  class="display-10 fw-bold text-light">Points System</h1>
     <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
-        <ul>
-        <%Point.all.each do |po|%>
-            <li><%=po.name%>: <%=po.val%> points per <%=po.point_type%>: <%=po.desc%> <%= link_to 'Edit', edit_point_path(po) %> <%= link_to 'Destroy', po, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-        <%end%>
-        </ul>
-        <a type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#pointsmodal">
-          Add a new point
-        </a>  
+        <table class="table table-striped">
+            <tbody>
+                <%Point.all.each do |po|%>
+                    <tr>
+                        <th scope="row"><%= po.name %></td>
+                        <td><%= po.val %></td>
+                        <td><%= po.desc %></td>
+                        <% if current_user.admin? %>
+                        <td><%= link_to 'Show', po %> <%= link_to 'Edit', edit_point_path(po) %> <%= link_to 'Destroy', po, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        <% end %>
+                    </tr>
+                <%end%>
+            </tbody>
+            <% if current_user.admin? %>
+            <a type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#pointsmodal">
+            Add a new point
+            </a>  
+            <% end %>
+        </table>
     </div>
 </div>
 
@@ -34,11 +45,6 @@
             <div class="mb-3">
                 <%= form.label :name, class: "form-label" %>
                 <%= form.text_field :name, {class: "form-control", placeholder: "Name"} %>
-            </div>
-               
-            <div class="mb-3">
-                <%= form.label :point_type, class: "form-label" %>
-                <%= form.text_field :point_type, {class: "form-control", placeholder: "Point Type"} %>
             </div>
 
             <div class="mb-3">

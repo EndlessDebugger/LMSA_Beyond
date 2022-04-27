@@ -38,11 +38,11 @@ class PointsController < ApplicationController
   def update
     respond_to do |format|
       if @point.update(point_params)
-        format.html { redirect_to point_url(@point), notice: "Point was successfully updated." }
-        format.json { render :show, status: :ok, location: @point }
+        format.html { redirect_to(point_url(@point), notice: "Point was successfully updated.") }
+        format.json { render(:show, status: :ok, location: @point) }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @point.errors, status: :unprocessable_entity }
+        format.html { render(:edit, status: :unprocessable_entity) }
+        format.json { render(json: @point.errors, status: :unprocessable_entity) }
       end
     end
   end
