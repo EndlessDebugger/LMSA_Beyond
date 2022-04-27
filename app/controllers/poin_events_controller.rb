@@ -140,6 +140,11 @@ class PoinEventsController < ApplicationController
   def reset
     if current_user.admin
       # Poinevent.connection.truncate("poin_events")  
+      Event.destroy_all
+      EventHist.destroy_all
+      PoinEvent.destroy_all
+      Announcement.destroy_all
+      Referral.destroy_all
       respond_to do |format|
         format.html { redirect_to(admin_root_path, notice: "Semester Reset Successful") }
         format.json { head(:no_content) }
