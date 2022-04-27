@@ -44,7 +44,7 @@
             <% @poin_events.each do |poin_event| %>
               <tr>
                 <th scope="row"><%= poin_event.balance %></td>
-                <td><%= if temp = User.find_by("id=?", poin_event.user_id).present? 
+                <td><%= if (temp = User.find_by("id=?", poin_event.user_id)).present? 
                             temp.email 
                             end %></td>
                 <td><%= poin_event.created_at.strftime("%m/%d/%Y %l:%M %p") %></td>
