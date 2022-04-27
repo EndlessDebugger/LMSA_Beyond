@@ -6,7 +6,6 @@
       <div id="error_explanation">
         <h2><%= pluralize(point.errors.count, "error") %> prohibited this point from being saved:</h2>
 
-<<<<<<< HEAD
         <ul>
           <% point.errors.each do |error| %>
             <li><%= error.full_message %></li>
@@ -31,22 +30,6 @@
     </div>
 
     <%= form.submit "Submit", class:"btn btn-secondary" %>
-=======
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.number_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label "Point Value" %>
-    <%= form.number_field :val %>
-  </div>
-
-  <div class="field">
-    <%= form.label :desc %>
-    <%= form.number_field :desc %>
-  </div>
->>>>>>> 82492f7c6e074ceae6eb01c28e79bb8802d15329
 
   <% end %>
 </div>
