@@ -19,12 +19,12 @@
 
       <% end %>
 
-    <% if @event.virtual? && @event.meeting_link.present? %>
-      <div class="p-2 bd-highlight">
-        <strong>Meeting link:</strong>
-        <a herf="<%= @event.meeting_link %>"><%= @event.meeting_link %></a>
-      </div>
-    <%end%>
+      <% if @event.meeting_link.present?%>
+        <div class="p-2 bd-highlight">
+          <strong>Meeting link:</strong>
+          <a href="<%= @event.meeting_link %>" target="_blank"><%= @event.meeting_link %></a>
+        </div>
+      <%end%>
 
       <div class="p-2 bd-highlight">
         <strong>Event date:</strong>
@@ -34,14 +34,6 @@
             <p>No date given</p>
         <%end%>
       </div>
-
-
-      <% if @event.virtual? %>
-        <div class="p-2 bd-highlight">
-          <strong>Meeting link:</strong>
-          <%= @event.meeting_link %>
-        </div>
-      <% end %>
 
       <div class="p-2 bd-highlight">
         <strong>Signin time:</strong>
@@ -62,6 +54,13 @@
         <%= @event.total_event_hr %>
       </div>
 
+      <% if @event.description.present? %>
+        <div class="p-2 bd-highlight">
+          <strong>Description:</strong>
+          <%= @event.description %>
+        </div>
+      <% end %>
+      
       <% if current_user.admin? %>
 
         <div class="p-2 bd-highlight">
@@ -162,17 +161,10 @@
   <div class="container col">
    <h1 class="display-10 fw-bold text-light">Graphics</h1>
       
-      <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
-        <div class="container-fluid py-5 align-item-center justify-content-center">
-          <%alas= @event%>
-          <% if alas.graphics.present?%>
-            <iframe class="responsive-iframe" src="<%= alas.driveImage %>">
-                <p>Graphics failed to render</p>
-            </iframe>
-            <%puts(alas.driveImage)%>
-          <%end%>
-          </div>
-        </div>
+    <%alas= @event%>
+    <% if alas.graphics.present?%>
+      <img class="rounded img-fluid img-thumbnail" src="<%= alas.driveImage %>">
+    <%end%>
 
   </div>
 
