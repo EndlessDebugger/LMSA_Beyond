@@ -22,13 +22,13 @@ Rails.application.routes.draw do
     # 
 
     get 'leaderboard'=>'myhistory#points_leaderboard', :as =>:myhistory_points_leaderboard
-    get 'leaderboard'=>'myhistory#points_leaderboard2', :as =>:myhistory_points_leaderboard2
 
     # get 'point_history' => 'poin_events#index', :as => :poin_events
     # post 'point_history' => 'poin_events#index', :as => :poin_events
     resources :poin_events, :path=> :point_history
     # post '/points_policy', to: 'points#create'
     post '/reset_semester', to: 'poin_events#reset'
+    post '/remove_member', to: 'users#remove_member'
     # end
     
   end

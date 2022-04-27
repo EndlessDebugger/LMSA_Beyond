@@ -97,6 +97,23 @@ class UsersController < ApplicationController
     # end
   end
 
+  def remove_member
+    if current_user.admin?
+      other_user = User.find_by(email: params[:email])
+      if current_user.id != other_user.id
+        Referral.where(old_member: other_user.id).destroy_all
+        EventHist.where(user_id: other_user.id).destroy_all
+        PoinEvent.where(user_id: other_user.id).destroy_all
+        other_user.delete
+        redirect_to(admin_root_path, alert: "The removed member email: " + String(other_user.email))
+      else 
+        redirect_to(admin_root_path, alert: "Cannot remove yourself!")
+      end
+    else 
+      redirect_to(root_path, alert: "You're not allowed to do this!") 
+    end
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
