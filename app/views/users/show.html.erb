@@ -126,7 +126,11 @@
                   <th scope="row"><%= poin_event.balance %></td>
                   <% admin_points += poin_event.balance %>
                   <td scope="row"><%= poin_event.created_at.strftime("%m/%d/%Y %l:%M %p") %></td>
-                  <td scope="row"><%= User.find_by("id=?",poin_event.admin_award_id).email %></td>
+                  <%temp = User.find_by("id=?", poin_event.admin_award_id)%>
+                  <td scope="row"><% if temp.present? %>
+                              <%=temp.email %>
+                        <% end %>
+                  </td>
                   <td><%= link_to 'Show', poin_event %> <%= link_to 'Edit', edit_poin_event_path(poin_event) %> <%= link_to 'Destroy', poin_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                 </tr>
               <% end %>
