@@ -35,7 +35,8 @@
       <% if current_user.admin? %>
         <%= link_to 'Edit', edit_poin_event_path(@poin_event), class:"btn btn-secondary text-light" %>
       <% end %>
-      <%= link_to 'Back', poin_events_path, class:"btn btn-secondary text-light" %>
+      <%= link_to 'Point Histories', poin_events_path, class:"btn btn-secondary text-light" %>
+      <%= link_to 'Leaderboard', myhistory_points_leaderboard, class:"btn btn-secondary text-light" %>
     </div>
   </div>
 </div>

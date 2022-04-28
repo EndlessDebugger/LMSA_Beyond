@@ -64,9 +64,7 @@
         </div>
       </div>
 
-      <div class="col">
-        <h1 class="display-5 fw-bold text-light">Something needs to be here!!!</h1>
-      </div>
+      
     </div>
   </div>
 
@@ -89,7 +87,7 @@
               <% attendance_points = 0 %>
               <% Event.joins(:event_hists).where(event_hists: {user_id: @user.id}).order("event_date DESC").each do |hist| %>
                 <tr>
-                  <td scope="row"><%= link_to hist.event_name, EventHist.find_by(id: hist.event_hists), class:"nav-link"  %></td>
+                  <td scope="row"><%= link_to hist.event_name, EventHist.find_by(id: hist.event_hists), class:"link"  %></td>
                   <td scope="row"><%= hist.point_val %></td>
                   <% attendance_points += hist.point_val %>
                   <td scope="row"><%= hist.event_date.strftime("%m/%d/%Y") + " "+hist.event_date.strftime("%l:%M %p")  %></td>
@@ -131,7 +129,7 @@
                               <%=temp.email %>
                         <% end %>
                   </td>
-                  <td><%= link_to 'Show', poin_event %> <%= link_to 'Edit', edit_poin_event_path(poin_event) %> <%= link_to 'Destroy', poin_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  <td><%= link_to 'Show', poin_event, class:"link" %> <%= link_to 'Edit', edit_poin_event_path(poin_event), class:"link" %> <%= link_to 'Destroy', poin_event, method: :delete, data: { confirm: 'Are you sure?' }, class:"link" %></td>
                 </tr>
               <% end %>
             </tbody>
