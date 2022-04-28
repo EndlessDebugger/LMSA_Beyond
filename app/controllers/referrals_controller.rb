@@ -77,8 +77,13 @@ class ReferralsController < ApplicationController
     @referral.destroy!
 
     respond_to do |format|
-      format.html { redirect_to(referrals_url, notice: 'Referral was successfully destroyed.') }
-      format.json { head(:no_content) }
+      if current_user.admin
+        format.html { redirect_to(admin_approve_path, notice: 'Referral was successfully destroyed.') }
+        format.json { head(:no_content) }
+      else
+        format.html { redirect_to(referrals_url, notice: 'Referral was successfully destroyed.') }
+        format.json { head(:no_content) }
+      end
     end
   end
 
