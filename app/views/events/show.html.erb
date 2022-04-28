@@ -9,16 +9,6 @@
 
     <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
 
-      <% if current_user.admin %>
-
-        <div class="p-2 bd-highlight">
-          <strong>Event ID: </strong> 
-          <%= @event.id %>
-        </div>
-        
-
-      <% end %>
-
       <div class="p-2 bd-highlight">
           <strong>Event type: </strong> 
           <%= Event.e_types[@event.e_type] %>

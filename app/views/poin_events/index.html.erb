@@ -34,7 +34,11 @@
               <tr>
                 <th scope="row"><%= poin_event.balance %></td>
                 <td><%= poin_event.created_at.strftime("%m/%d/%Y %l:%M %p") %></td>
-                <td><%= User.find_by("id=?",poin_event.admin_award_id).email %></td>
+                <%tempAdmin2 = User.find_by("id=?",poin_event.admin_award_id)%>
+                <td><% if tempAdmin2.present? %>
+                            <%=tempAdmin2.email %>
+                      <% end %>
+                </td>
               </tr>
             <% end %>
           </tbody>
