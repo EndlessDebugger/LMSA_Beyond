@@ -1,8 +1,11 @@
-<% @title = "LMSA Officers" %>
+<% @title = "TAMU LMSA Plus Officers" %>
 <%= stylesheet_link_tag "home.css" %>
 
-<%= render :partial =>"newadminmodal" %>
-<%= render :partial =>"reset_modal" %>
+<%= render :partial=>"newadminmodal" %>
+<%= render :partial=>"resultmodal" %>
+<%= render :partial=>"removeModal" %>
+<%= render :partial=>"activemodal" %>
+
 
 <% if !current_user.admin? %>
   <meta http-equiv="refresh" content="0; URL=<%= root_path %>" />
@@ -62,17 +65,21 @@
 
       <div class ="grid">
 
-        <a type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#pointsmodal">
-         Update Points Policy
-        </a>
+        <button type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#removeModal">
+          Remove Member
+        </button>
 
-        <%=link_to "Member Managment", points_path, {class: "btn btn-lg btn-outline-secondary text-dark", type: "button"}%>
-
-        <a type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Make A New Officer
-        </a>
+        </button>
 
-        <%=link_to "Semester Point Reset", points_path, {class: "btn btn-lg btn-outline-secondary text-dark", type: "button"}%>
+        <button type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#resultmodal">
+          Semester Point Reset
+        </button>
+
+        <button type="button" class="btn btn-lg btn-outline-secondary text-dark" data-bs-toggle="modal" data-bs-target="#activemodal">
+          View all Active Members
+        </button>
 
       </div>
       

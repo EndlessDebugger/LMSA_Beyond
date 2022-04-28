@@ -12,11 +12,12 @@
         <h1 class="display-5 fw-bold text-light"><%= @user.first_name %>'s Page</h1>
         <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
           <div class="row">
-            <div class="p-2 col">
-              <% if current_user.avatar_url.present? %> 
+            <% if @user.avatar_url.present? %> 
+              <div class="p-2 col">
                 <%= image_tag(@user.avatar_url, :size => "200x200" ) %>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
+            
             <div class="p-2 col">
               <p>
                 <strong>First name:</strong>
@@ -63,14 +64,12 @@
         </div>
       </div>
 
-      <div class="col">
-        <h1 class="display-5 fw-bold text-light">Something needs to be here!!!</h1>
-      </div>
+      
     </div>
   </div>
 
 
-  <% if current_user.admin%>
+  <% if current_user.admin %>
     <div class="container">
       <h1 class="display-5 fw-bold text-light"><%= @user.first_name %>'s Event Attendance</h1>
       <div class="p-5 mb-4 bg-light rounded-3">
@@ -86,9 +85,9 @@
             </thead>
             <tbody>
               <% attendance_points = 0 %>
-              <% Event.joins(:event_hists).where(event_hists: {user_id: current_user.id}).order("event_date DESC").each do |hist| %>
+              <% Event.joins(:event_hists).where(event_hists: {user_id: @user.id}).order("event_date DESC").each do |hist| %>
                 <tr>
-                  <td scope="row"><%= link_to hist.event_name, EventHist.find_by(id: hist.event_hists), class:"nav-link"  %></td>
+                  <td scope="row"><%= link_to hist.event_name, EventHist.find_by(id: hist.event_hists), class:"link"  %></td>
                   <td scope="row"><%= hist.point_val %></td>
                   <% attendance_points += hist.point_val %>
                   <td scope="row"><%= hist.event_date.strftime("%m/%d/%Y") + " "+hist.event_date.strftime("%l:%M %p")  %></td>
@@ -104,7 +103,7 @@
 
     <div class="container">
 
-      <h1 class="display-5 fw-bold text-light"><%= @user.first_name %>'s Admin Awards</h1>
+      <h1 class="display-5 fw-bold text-light"><%= @user.first_name %>'s Officer Awards</h1>
       <div class="p-5 mb-4 bg-light rounded-3">
 
         <div class="container-fluid py-5" style="text-align: center;">
@@ -114,30 +113,35 @@
                 <th scope="col">Points given</th>
                 <th scope="col">Date</th>
                 <th scope="col">Admin</th>
-                  <% if current_user.admin? %>
-                    <th scope="col">Options</th>
-                  <%end%>
+                <th scope="col">Options</th>
               </tr>
             </thead>
 
             <tbody>
               <% admin_points = 0 %>
-              <% PoinEvent.where(user_id: current_user.id).find_each do |poin_event| %>
-                <tr>
-                  <th scope="row"><%= poin_event.balance %></td>
-                  <% admin_points += poin_event.balance %>
-                  <td scope="row"><%= poin_event.created_at.strftime("%m/%d/%Y %l:%M %p") %></td>
-                  <td scope="row"><%= User.find_by("id=?",poin_event.admin_award_id).email %></td>
-                  <% if current_user.admin? %>
-                    <td><%= link_to 'Show', poin_event %> <%= link_to 'Edit', edit_poin_event_path(poin_event) %> <%= link_to 'Destroy', poin_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                  <% end %>
-                </tr>
+              <% PoinEvent.where(user_id: @user.id).each do |poin_event| %>
+                <%if poin_event.description.nil? || (poin_event.description.present? && !(poin_event.description.include? "referred")) %>
+                  <tr>
+                    <th scope="row"><%= poin_event.balance %></td>
+                    <% admin_points += poin_event.balance %>
+                    <td scope="row"><%= poin_event.created_at.strftime("%m/%d/%Y %l:%M %p") %></td>
+                    <%temp = User.find_by("id=?", poin_event.admin_award_id)%>
+
+                    <td scope="row">
+                      <% if temp.present? %>
+                        <%=temp.email %>
+                      <% end %>
+                    </td>
+
+                    <td><%= link_to 'Show', poin_event, class:"link" %> <%= link_to 'Edit', edit_poin_event_path(poin_event), class:"link" %> <%= link_to 'Destroy', poin_event, method: :delete, data: { confirm: 'Are you sure?' }, class:"link" %></td>
+                  </tr>
+                <% end %>
               <% end %>
             </tbody>
           </table>
         </div>
 
-      <h2> Points For Admin Awards: <%= admin_points %> </h2>
+      <h2> Points For Officer Awards: <%= admin_points %> </h2>
       </div>
     </div>
 
@@ -151,8 +155,8 @@
           <table class="table table-striped">
             <thead>
               <tr>
+                <th scope="col">Point Value</th>
                 <th scope="col">Medical Professional</th>
-                <th scope="col">Email</th>
                 <th scope="col">Date</th>
                 <th scope="col">Admin</th>
               </tr>
@@ -160,21 +164,18 @@
 
             <tbody>
               <% referral_points = 0 %>
-              <% Referral.where(old_member: current_user.id).each do |referral| %>
-                <tr>
-                  <td scope="row"><%= referral.prof %></td>
-                  <td scope="row"><%= referral.email %></td>
-                  <td scope="row"><%= referral.date_referred.strftime("%m/%d/%Y") %></td>
-                  <td scope="row"><%= referral.approved %></td>
-                  <% if referral.medical_prof == true %>
-                    <% if referral.admin_approved == true %>
-                      <% referral_points += Rails.configuration.points.med_prof_ref %>
-                    <% end %>
-                  <% else %>
-                    <% referral_points += Rails.configuration.points.referral %>
-                  <% end %>
-                  <td scope="row"><%= link_to 'More Details', referral %></td>
-                </tr>
+              <% Referral.where(old_member: @user.id).each do |referral| %>
+                <%temp = PoinEvent.find_by(id: referral.poin_events_id)%>
+                <% if temp.present?%>
+                  <tr>
+                    <td scope="row"><%= temp.balance %></td>
+                    <td scope="row"><%= referral.prof %></td>
+                    <td scope="row"><%= referral.date_referred.strftime("%m/%d/%Y") %></td>
+                    <td scope="row"><%= referral.approved %></td>
+                    <% referral_points += temp.balance %>
+                    <td scope="row"><%= link_to 'More Details', referral %></td>
+                  </tr>
+                <% end %>
               <% end %>
             </tbody>
           </table>
@@ -182,6 +183,13 @@
 
         <h2> Points For Referrals: <%= referral_points %> </h2>
       </div> 
+    </div>
+
+    <div class="container">
+      <%= form_with url: "/remove_member" do |form| %>
+        <%= form.hidden_field :email, value: @user.email %>
+        <%= form.submit "Remove Member", {class:"btn btn-secondary btn-lg"} %>
+      <% end %>
     </div>
 
   <%end%>

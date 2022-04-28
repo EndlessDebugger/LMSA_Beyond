@@ -33,7 +33,7 @@ class PoinEventsController < ApplicationController
       @poin_event = PoinEvent.new(new_poin_event_params)
       respond_to do |format|
         if @poin_event.save
-          format.html { redirect_to(poin_event_url(@poin_event), notice: 'Poin event was successfully created.') }
+          format.html { redirect_to(poin_event_url(@poin_event), notice: 'Point Award was successfully created.') }
           format.json { render(:show, status: :created, location: @poin_event) }
         else
           format.html { render(:new, status: :unprocessable_entity) }
@@ -41,7 +41,7 @@ class PoinEventsController < ApplicationController
         end
       end
     else 
-      redirect_to(poin_events_path, notice: 'The email does not exist!')
+      redirect_to(poin_events_path, alert: 'The email does not exist!')
     end
 
   end
@@ -77,8 +77,14 @@ class PoinEventsController < ApplicationController
       @poin_event.destroy!
 
       respond_to do |format|
-        format.html { redirect_to(poin_events_url, notice: 'Poin event was successfully destroyed.') }
-        format.json { head(:no_content) }
+        if current_user.admin
+          format.html { redirect_to(poin_events_url, notice: 'Point history was successfully deleted.') }
+          format.json { head(:no_content) }
+        else
+          format.html { redirect_to(poin_events_url, notice: 'Point history was successfully destroyed.') }
+          format.json { head(:no_content) }
+        end
+
       end
     else
       redirect_to(poin_events_url)
@@ -139,10 +145,12 @@ class PoinEventsController < ApplicationController
 
   def reset
     if current_user.admin
-      if(rest_params[:new_date]!=Rails.configuration.points.reset_date)
-        Rails.configuration.points.reset_date=rest_params[:new_date]
-      end
-
+      # Poinevent.connection.truncate("poin_events")  
+      Event.destroy_all
+      EventHist.destroy_all
+      PoinEvent.destroy_all
+      Announcement.destroy_all
+      Referral.destroy_all
       respond_to do |format|
         format.html { redirect_to(admin_root_path, notice: "Semester Reset Successful") }
         format.json { head(:no_content) }

@@ -1,42 +1,38 @@
-<%= form_with(model: point) do |form| %>
-  <% if point.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(point.errors.count, "error") %> prohibited this point from being saved:</h2>
+<%= stylesheet_link_tag "home.css" %>
 
-      <ul>
-        <% point.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
+  <%= form_with(model: @point) do |form| %>
+    <% if point.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(point.errors.count, "error") %> prohibited this point from being saved:</h2>
+
+        <ul>
+          <% point.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= form.label "Name", class: "form-label" %>
+      <%= form.text_field :name, {class: "form-control", placeholder: "Name"} %>
     </div>
+
+    <div class="mb-3">
+      <%= form.label "Value", class: "form-label" %>
+      <%= form.number_field :val, {class: "form-control", placeholder: "Value"} %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label "Description", class: "form-label" %>
+      <%= form.text_field :desc, {class: "form-control", placeholder: "Description"} %>
+    </div>
+
+    <div class="d-flex">
+      <%= form.submit "Submit", class:"btn btn-secondary" %>
+      <%= link_to 'Back', points_path , class:"btn btn-secondary"%>
+    </div>
+
   <% end %>
-
-  <div class="field">
-    <%= form.label :referrals %>
-    <%= form.number_field :referrals %>
-  </div>
-
-  <div class="field">
-    <%= form.label :prof_referrals %>
-    <%= form.number_field :prof_referrals %>
-  </div>
-
-  <div class="field">
-    <%= form.label :gen_event %>
-    <%= form.number_field :gen_event %>
-  </div>
-
-  <div class="field">
-    <%= form.label :fund_event %>
-    <%= form.number_field :fund_event %>
-  </div>
-
-  <div class="field">
-    <%= form.label :vol_event %>
-    <%= form.text_field :vol_event %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

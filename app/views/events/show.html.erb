@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></div>
-<% @title = "TAMU LMSA Events" %>
+<% @title = "TAMU LMSA Plus "+@event.event_name %>
 <%= stylesheet_link_tag "home.css" %>
 
 <div class="container row">
@@ -10,21 +9,17 @@
 
     <div class="d-flex flex-column bd-highlight p-5 mb-4 bg-light rounded-3">
 
-      <% if current_user.admin %>
-
-        <div class="p-2 bd-highlight">
-          <strong>Event ID: </strong> 
-          <%= @event.id %>
-        </div>
-
-      <% end %>
-
-    <% if @event.virtual? && @event.meeting_link.present? %>
       <div class="p-2 bd-highlight">
-        <strong>Meeting link:</strong>
-        <a herf="<%= @event.meeting_link %>"><%= @event.meeting_link %></a>
+          <strong>Event type: </strong> 
+          <%= Event.e_types[@event.e_type] %>
       </div>
-    <%end%>
+
+      <% if @event.meeting_link.present?%>
+        <div class="p-2 bd-highlight">
+          <strong>Meeting link:</strong>
+          <a href="<%= @event.meeting_link %>" target="_blank"><%= @event.meeting_link %></a>
+        </div>
+      <%end%>
 
       <div class="p-2 bd-highlight">
         <strong>Event date:</strong>
@@ -34,23 +29,6 @@
             <p>No date given</p>
         <%end%>
       </div>
-
-    <div class="p-2 bd-highlight">
-      <%alas= @event%>
-      <% if alas.graphics.present?%>
-        <iframe class="responsive-iframe" src="<%= alas.driveImage %>" class="imgbox">
-            <p>Graphics failed to render</p>
-        </iframe>
-        <%puts(alas.driveImage)%>
-      <%end%>
-    </div>
-
-      <% if @event.virtual? %>
-        <div class="p-2 bd-highlight">
-          <strong>Meeting link:</strong>
-          <%= @event.meeting_link %>
-        </div>
-      <% end %>
 
       <div class="p-2 bd-highlight">
         <strong>Signin time:</strong>
@@ -71,6 +49,13 @@
         <%= @event.total_event_hr %>
       </div>
 
+      <% if @event.description.present? %>
+        <div class="p-2 bd-highlight">
+          <strong>Description:</strong>
+          <%= @event.description %>
+        </div>
+      <% end %>
+      
       <% if current_user.admin? %>
 
         <div class="p-2 bd-highlight">
@@ -168,8 +153,18 @@
     </div>
   </div>
 
+  <div class="container col">
+   <h1 class="display-10 fw-bold text-light">Graphics</h1>
+      
+    <%alas= @event%>
+    <% if alas.graphics.present?%>
+      <img class="rounded img-fluid img-thumbnail" src="<%= alas.driveImage %>">
+    <%end%>
+
+  </div>
+
   <% if current_user.admin? %>
-    <div class="container col">
+    <div class="container row">
 
       <h1 class="display-10 fw-bold text-light">Attendance</h1>
       
@@ -199,3 +194,4 @@
     </div>
   <% end %>
 </div>
+

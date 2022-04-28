@@ -25,7 +25,7 @@
   <div class="mb-3">
 
     <%= form.label :e_type, 'Type', class: "form-label" %>
-    <%= form.select :e_type, Event.e_types.values, {class: "form-control", placeholder: "Event Type"} %>
+    <%= form.select :e_type, Event.e_types.values, {class: "form-control", placeholder: "Event Type", value: event.e_type} %>
     
   </div>
 
@@ -73,8 +73,15 @@
 
   <div class="mb-3">
 
-    <%= form.label "Other Event Points value", class: "form-label" %>
+    <%= form.label "Event Points value", class: "form-label" %>
     <%= form.number_field :point_val,{class: "form-control", placeholder: "Value"} %>
+
+  </div>
+  
+  <div class="mb-3">
+
+    <%= form.label "Total event hours", class: "form-label" %>
+    <%= form.text_field :total_event_hr, {class: "form-control", placeholder: "Hours"} %>
 
   </div>
 
@@ -82,13 +89,6 @@
 
     <%= form.label :graphics, class: "form-label" %>
     <%= form.text_field :graphics, {class: "form-control", placeholder: "Graphics Drive URL"} %>
-
-  </div>
-
-  <div class="mb-3">
-
-    <%= form.label "Total event hours", class: "form-label" %>
-    <%= form.text_field :total_event_hr, {class: "form-control", placeholder: "Hours"} %>
 
   </div>
 

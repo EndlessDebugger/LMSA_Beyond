@@ -1,6 +1,5 @@
-<p id="notice"><%= notice %></p>
 
-<% @title = "Showing Referral" %>
+<% @title = "TAMU LMSA Plus: Showing Referral" %>
 <%= stylesheet_link_tag "home.css" %>
 
 <div class="container py-4">
@@ -13,7 +12,7 @@
       <strong>Referring member:</strong>
       <% that_user=User.find_by(id: @referral.old_member)%>
       <%=if that_user.present?
-          link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), class:"nav-link"
+          link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), class:"link"
          end%>
     </div>
 
@@ -29,7 +28,7 @@
 
     <div class="p-2 bd-highlight">
       <strong>Medical prof:</strong>
-      <%= @referral.medical_prof %>
+      <%= @referral.prof %>
     </div>
 
     <div class="p-2 bd-highlight">

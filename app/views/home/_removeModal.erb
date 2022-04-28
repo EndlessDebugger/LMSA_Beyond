@@ -1,21 +1,21 @@
-<div class="modal fade" id="resultmodal" tabindex="-1" aria-labelledby="result_modal_label" aria-hidden="true">
+<div class="modal fade" id="removeModal" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
 
     <div class="modal-dialog modal-lg">
 
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="result_modal_label">Reset</h5>
+                <h5 class="modal-title" id="removeModalLabel">Remove Member</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <%= form_with url: "/reset_semester" do |form| %>
+            <%= form_with url: "/remove_member" do |form| %>
                 <div class="modal-body">
-                    <h3>Are you Sure? This will clear every member's point history, referral history, and event attendance</h3>
+                    <% form.label :email, class: "form-label" %>
+                    <%= form.text_field :email, {class: "form-control", placeholder: "Email"} %>
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <%= form.submit "RESET", {class:"btn btn-secondary", "data-bs-dismiss":"modal"} %>
+                    <%= form.submit "Remove Member", {class:"btn btn-secondary", "data-bs-dismiss":"modal"} %>
                 </div>
             <% end %>
 

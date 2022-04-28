@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= @title || "LMSA Plus" %></title>
+    <title><%= @title || "TAMU LMSA Plus" %></title>
     <%= favicon_link_tag asset_path("logo.png") %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -16,14 +16,26 @@
   </head>
 
   <body>
-    <%= render "home/adminHeader" if user_signed_in? and current_user.admin==true and action_name!="edit" and :controller != 'users'%>
-    <%= render "home/header" if user_signed_in? and current_user.admin==false and action_name!="edit" and :controller != 'users'%>
+    <%= render "home/adminHeader" if user_signed_in? and current_user.admin==true and action_name!="edit" and controller != 'users'%>
+    <%= render "home/header" if user_signed_in? and current_user.admin==false and action_name!="edit" and controller != 'users'%>
     
-    <% if flash.any? %>
+
+    <div>
+      <% if alert %>
+        <br>
+        <p class="alert alert-danger w-50"><%= alert %></p>
+      <% end %>
+
+      <% if notice %>
+        <br>
+        <p class="alert alert-success w-50"><%= notice %></p>
+      <% end %>
+    </div>
+    <!--<% if flash.any? %>
       <% flash.each do |key, value| -%>
         <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
       <% end -%>
-    <% end %>
+    <% end %>-->
     <%= yield %>
   </body>
 </html>

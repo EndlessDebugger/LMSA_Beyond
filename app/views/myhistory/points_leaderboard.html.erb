@@ -1,6 +1,5 @@
-<p id="notice"><%= notice %></p>
 
-<% @title = "LMSA Leaderboard" %>
+<% @title = "TAMU LMSA Plus Leaderboard" %>
 <%= stylesheet_link_tag "home.css" %>
 
 <div class="container py-4">
@@ -16,7 +15,9 @@
       <p>Welcome to the Leaderboard, here you can compare your point earnings to everyone else.</p>
       <p> My Points: <%= current_user.sum_points %> </p>
       <p> My rank: <%= current_user.get_rank %> </p>
+      <p>* next to a member's name means they're an active member</p>
       <a href="#you" class= "btn btn-outline-secondary text-dark" type = "button">See your current spot</a>
+      
 
       <table class="table table-striped" style= "font-size:1.5rem;">
           <thead>
@@ -33,15 +34,14 @@
                 <%if that_user.id ==current_user.id%>
                   <tr class="curr">
                     <td><%= @count += 1 %></td>
-
-                    <td><p id="you"><%= link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), {class:"link"}%> </p></td>
+                    <td><p id="you"><%= link_to that_user.first_name+ " "+ that_user.last_name + (that_user.active_mem ? "*" : ""), user_path(that_user), {class:"link"}%> </p></td>
                     
                     <td><%= that_user.sum_points %></td>
                   </tr>
                 <%else%>
                   <tr>
                     <td><%= @count += 1 %></td>
-                    <td><p><%= link_to that_user.first_name+ " "+ that_user.last_name, user_path(that_user), {class:"link"}%> </p></td>
+                    <td><p><%= link_to that_user.first_name+ " "+ that_user.last_name + (that_user.active_mem ? "*" : ""), user_path(that_user), {class:"link"}%> </p></td>
                     <td><%= that_user.sum_points %></td>
                   </tr>
                 <% end %>
@@ -53,3 +53,6 @@
     </div> 
   </div> 
 </div> 
+
+
+                
