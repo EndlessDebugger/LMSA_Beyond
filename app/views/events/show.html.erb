@@ -15,8 +15,14 @@
           <strong>Event ID: </strong> 
           <%= @event.id %>
         </div>
+        
 
       <% end %>
+
+      <div class="p-2 bd-highlight">
+          <strong>Event type: </strong> 
+          <%= Event.e_types[@event.e_type] %>
+      </div>
 
       <% if @event.meeting_link.present?%>
         <div class="p-2 bd-highlight">

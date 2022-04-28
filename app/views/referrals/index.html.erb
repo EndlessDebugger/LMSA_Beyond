@@ -31,13 +31,13 @@
               <td scope="row"><%= referral.prof %></td>
               <td scope="row"><%= referral.email %></td>
               <td scope="row"><%= referral.approved %></td>
-              <td scope="row"><%= link_to 'More Details', referral %></td>
+              <td scope="row"><%= link_to 'More Details', referral, class:"link" %></td>
 
               <%if !referral.admin_approved && referral.medical_prof%>
-                <td><%= link_to 'Edit', edit_referral_path(referral) %></td>
+                <td><%= link_to 'Edit', edit_referral_path(referral), class:"link" %></td>
               <%end%>
 
-              <td scope="row"><%= link_to 'Delete', referral, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td scope="row"><%= link_to 'Delete', referral, method: :delete, data: { confirm: 'Are you sure?' }, class:"link" %></td>
             </tr>
           <% end %>
         </tbody>
