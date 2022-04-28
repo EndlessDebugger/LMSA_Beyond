@@ -37,7 +37,7 @@
   <%= form.hidden_field :old_member, value:  referral.old_member%>
   <%if current_user.admin?%>
     <div class="field">
-      <%= form.label :admin_approved %>
+      <%= form.label "Officer Approved" %>
       <%= form.select :admin_approved, [[' ', nil], ['No', false], ['Yes', true]] %>
     </div>
   <%end%>
