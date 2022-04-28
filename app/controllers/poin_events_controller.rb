@@ -77,8 +77,14 @@ class PoinEventsController < ApplicationController
       @poin_event.destroy!
 
       respond_to do |format|
-        format.html { redirect_to(poin_events_url, notice: 'Poin event was successfully destroyed.') }
-        format.json { head(:no_content) }
+        if current_user.admin
+          format.html { redirect_to(poin_events_url, notice: 'Point history was successfully deleted.') }
+          format.json { head(:no_content) }
+        else
+          format.html { redirect_to(poin_events_url, notice: 'Point history was successfully destroyed.') }
+          format.json { head(:no_content) }
+        end
+
       end
     else
       redirect_to(poin_events_url)

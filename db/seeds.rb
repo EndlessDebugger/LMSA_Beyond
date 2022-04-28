@@ -11,7 +11,7 @@ starter = Point.create([{name: 'General Meeting' , val: 4, desc:'Meetings that w
                         {name: 'Familia Social' , val: 3, desc:'Hang out meetings'},
                         {name: 'Study Social' , val: 3, desc:'Study meetings'},
                         {name: 'Othere Meeting' , val: 3, desc:'One-off meetings'},
-                        {name: 'Friend Referral',   val: 3, desc:'bringing friends to the org'},
+                        {name: 'Friend Referral',   val: 1, desc:'bringing friends to the org'},
                         {name: 'Professional Referral',  val: 4, desc:'Bringing a medical profession to the org'},
                         {name: 'Merchandise',  val: 3, desc:'buying merch'},
                         {name: 'Volunteering Meeting', val: 3, desc:'Outreach meetings'},
