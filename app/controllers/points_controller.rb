@@ -1,5 +1,5 @@
 class PointsController < ApplicationController
-  before_action :set_point, only: %i[ show edit update destroy ]
+  before_action :set_point, only: %i[show edit update destroy]
 
   # GET /points or /points.json
   def index
@@ -7,8 +7,7 @@ class PointsController < ApplicationController
   end
 
   # GET /points/1 or /points/1.json
-  def show
-  end
+  def show; end
 
   # GET /points/new
   def new
@@ -16,8 +15,7 @@ class PointsController < ApplicationController
   end
 
   # GET /points/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /points or /points.json
   def create
@@ -25,11 +23,11 @@ class PointsController < ApplicationController
 
     respond_to do |format|
       if @point.save
-        format.html { redirect_to point_url(@point), notice: "Point type was successfully created." }
-        format.json { render :show, status: :created, location: @point }
+        format.html { redirect_to(point_url(@point), notice: 'Point type was successfully created.') }
+        format.json { render(:show, status: :created, location: @point) }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @point.errors, status: :unprocessable_entity }
+        format.html { render(:new, status: :unprocessable_entity) }
+        format.json { render(json: @point.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -38,7 +36,7 @@ class PointsController < ApplicationController
   def update
     respond_to do |format|
       if @point.update(point_params)
-        format.html { redirect_to(point_url(@point), notice: "Point was successfully updated.") }
+        format.html { redirect_to(point_url(@point), notice: 'Point was successfully updated.') }
         format.json { render(:show, status: :ok, location: @point) }
       else
         format.html { render(:edit, status: :unprocessable_entity) }
@@ -52,20 +50,20 @@ class PointsController < ApplicationController
     @point.destroy
 
     respond_to do |format|
-      format.html { redirect_to points_url, notice: "Point was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to(points_url, notice: 'Point was successfully destroyed.') }
+      format.json { head(:no_content) }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_point
-      @point = Point.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def point_params
-      params.require(:point).permit(:name, :val, :desc)
+  # Use callbacks to share common setup or constraints between actions.
+  def set_point
+    @point = Point.find(params[:id])
+  end
 
-    end
+  # Only allow a list of trusted parameters through.
+  def point_params
+    params.require(:point).permit(:name, :val, :desc)
+  end
 end

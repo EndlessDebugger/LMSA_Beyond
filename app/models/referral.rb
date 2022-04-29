@@ -1,7 +1,7 @@
 class Referral < ApplicationRecord
   validates :old_member, presence: true
   validates :email, presence: true
-  validates_format_of :email,:with => Devise::email_regexp
+  validates :email, format: { with: Devise.email_regexp }
   validates :guest_first_name, presence: true
   validates :guest_last_name, presence: true
 
@@ -19,10 +19,9 @@ class Referral < ApplicationRecord
 
   def prof
     if medical_prof
-      "Yes"
+      'Yes'
     else
-      "No"
+      'No'
     end
   end
-
 end

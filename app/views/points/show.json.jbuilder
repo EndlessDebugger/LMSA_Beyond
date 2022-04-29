@@ -1,1 +1,1 @@
-json.partial! "points/point", point: @point
+json.partial!('points/point', point: @point)

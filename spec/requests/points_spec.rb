@@ -13,66 +13,60 @@ require 'faker'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe('/poin_events', type: :request) do
+RSpec.describe('/points', type: :request) do
   before do
     lmsa_sign_in
     lmsa_make_admin
   end
   # This should return the minimal set of attributes required to create a valid
-  # PoinEvent. As you add validations to PoinEvent, be sure to
+  # Point. As you add validations to Point, be sure to
   # adjust the attributes here as well.
 
   let(:valid_attributes) do
     # skip('Add a hash of attributes valid for your model')
     {
-      user_id: 1,
-      balance: Faker::Number.number(digits: 3),
-      #date: Faker::Date.backward(days: 7),
-      description: Faker::ChuckNorris.fact,
-      admin_award_id: 1,
-      #hours_attend: Faker::Number.decimal(l_digits: 1)
+      name: "test",
+      val: Faker::Number.number(digits: 3),
+      desc: Faker::ChuckNorris.fact
     }
   end
 
   let(:invalid_attributes) do
     # skip('Add a hash of attributes invalid for your model')
     {
-      user_id: nil,
-      balance: nil,
-      date: nil,
-      description: nil,
-      admin_award_id: nil,
-      hours_attend: nil
+      name: nil,
+      val: nil,
+      desc: nil
     }
   end
 
   describe 'GET /index' do
     it 'renders a successful response' do
-      PoinEvent.create!(valid_attributes)
-      get poin_events_url
+      Point.create!(valid_attributes)
+      get points_url
       expect(response).to(be_successful)
     end
   end
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      poin_event = PoinEvent.create!(valid_attributes)
-      get poin_event_url(poin_event)
+      point = Point.create!(valid_attributes)
+      get point_url(point)
       expect(response).to(be_successful)
     end
   end
 
   describe 'GET /new' do
     it 'renders a successful response' do
-      get new_poin_event_url
+      get new_point_url
       expect(response).to(be_successful)
     end
   end
 
   describe 'GET /edit' do
     it 'renders a successful response' do
-      poin_event = PoinEvent.create!(valid_attributes)
-      get edit_poin_event_url(poin_event)
+      point = Point.create!(valid_attributes)
+      get edit_point_url(point)
       expect(response).to(be_successful)
     end
   end
@@ -80,27 +74,27 @@ RSpec.describe('/poin_events', type: :request) do
   describe 'POST /create' do
     skip()
     context 'with valid parameters' do
-      it 'creates a new PoinEvent' do
+      it 'creates a new Point' do
         skip()
         expect do
-          post(poin_events_url, params: { poin_event: valid_attributes })
+          post(points_url, params: { point: valid_attributes })
         puts response.body
-        end.to(change(PoinEvent, :count).by(1))
+        end.to(change(Point, :count).by(1))
       end
 
-      it 'redirects to the created poin_event' do
+      it 'redirects to the created point' do
         skip()
-        post poin_events_url, params: { poin_event: valid_attributes }
-        expect(response).to(redirect_to(poin_event_url(PoinEvent.last)))
+        post points_url, params: { point: valid_attributes }
+        expect(response).to(redirect_to(point_url(Point.last)))
       end
     end
 
     context 'with invalid parameters' do
-      it 'does not create a new PoinEvent' do
+      it 'does not create a new Point' do
         skip()
         expect do
-          post(poin_events_url, params: { poin_event: invalid_attributes })
-        end.to(change(PoinEvent, :count).by(0))
+          post(points_url, params: { point: invalid_attributes })
+        end.to(change(Point, :count).by(0))
       end
     end
   end
@@ -110,16 +104,17 @@ RSpec.describe('/poin_events', type: :request) do
       let(:new_attributes) do
         # skip('Add a hash of attributes valid for your model')
         {
-          balance: Faker::Number.number(digits: 3),
-          description: Faker::ChuckNorris.fact
+          name: "test",
+          val: Faker::Number.number(digits: 3),
+          desc: Faker::ChuckNorris.fact
         }
       end
 
-      it 'updates the requested poin_event' do
+      it 'updates the requested point' do
         skip()
-        poin_event = PoinEvent.create!(valid_attributes)
-        patch poin_event_url(poin_event), params: { poin_event: new_attributes }, as: :json
-        poin_event.reload
+        point = Point.create!(valid_attributes)
+        patch point_url(point), params: { point: new_attributes }, as: :json
+        point.reload
         # skip('Add assertions for updated state')
         expect(response.body).to(include(new_attributes[:user_id].to_s))
         expect(response.body).to(include(new_attributes[:balance].to_s))
@@ -132,25 +127,25 @@ RSpec.describe('/poin_events', type: :request) do
     context 'with invalid parameters' do
       it 'does not create a new event' do
         skip()
-        poin_event = PoinEvent.create!(valid_attributes)
-        patch poin_event_url(poin_event), params: { poin_event: invalid_attributes }, as: :json
+        point = Point.create!(valid_attributes)
+        patch point_url(point), params: { point: invalid_attributes }, as: :json
         expect(response).not_to(be_successful)
       end
     end
   end
 
   describe 'DELETE /destroy' do
-    it 'destroys the requested poin_event' do
-      poin_event = PoinEvent.create!(valid_attributes)
+    it 'destroys the requested point' do
+      point = Point.create!(valid_attributes)
       expect do
-        delete(poin_event_url(poin_event))
-      end.to(change(PoinEvent, :count).by(-1))
+        delete(point_url(point))
+      end.to(change(Point, :count).by(-1))
     end
 
-    it 'redirects to the poin_events list' do
-      poin_event = PoinEvent.create!(valid_attributes)
-      delete poin_event_url(poin_event)
-      expect(response).to(redirect_to(poin_events_url))
+    it 'redirects to the points list' do
+      point = Point.create!(valid_attributes)
+      delete point_url(point)
+      expect(response).to(redirect_to(points_url))
     end
   end
 end
