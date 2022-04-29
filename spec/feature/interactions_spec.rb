@@ -137,11 +137,12 @@ RSpec.describe('creating new announcement', type: :feature) do
     expect(page).to(have_http_status(:ok))
     click_on 'New Announcement'
     fill_in 'Name', with: 'Test Announcement'
-    fill_in 'Description', with: Faker::ChuckNorris.fact
+    #fill_in 'Rich_Description', with: Faker::ChuckNorris.fact
+    find_field(id: "announcement_Rich_Description_trix_input_announcement", type: :hidden).set(Faker::ChuckNorris.fact)
     click_on 'Announce'
     expect(page).to(have_text('Announcement was successfully created'))
     visit announcements_path
-    click_on 'Destroy'
+    click_on 'Delete'
     expect(page).to(have_text('Announcement was successfully destroyed'))
   end
 end

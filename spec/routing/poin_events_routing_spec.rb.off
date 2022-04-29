@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe(PoinEventsController, type: :routing) do
   describe 'routing' do
     it 'routes to #index' do
-      expect(get: '/poin_events').to(route_to('poin_events#index'))
+      expect(get: '/point_history').to(route_to('point_history#index'))
     end
 
     it 'routes to #new' do
