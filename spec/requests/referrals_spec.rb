@@ -154,7 +154,7 @@ RSpec.describe('/referrals', type: :request) do
     it 'redirects to the referrals list' do
       referral = Referral.create!(valid_attributes)
       delete referral_url(referral)
-      expect(response).to(redirect_to(referrals_url))
+      expect(response).to(redirect_to("/officers/approval_list"))
     end
   end
 end

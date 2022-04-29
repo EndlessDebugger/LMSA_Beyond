@@ -58,7 +58,12 @@ class ReferralsController < ApplicationController
       if @referral.update(referral_params)
 
         if referral_params[:admin_approved] && referral_params[:medical_prof]
-          temp = PoinEvent.create!(user_id: referral_params[:old_member], balance: Point.find_by(name:"Professional Referral").val || 3, date: DateTime.now,
+          val=1
+          ref=Point.find_by(name:"Professional Referral")
+          if ref != nil
+              val=ref.val
+          end
+          temp = PoinEvent.create!(user_id: referral_params[:old_member], balance: val || 3, date: DateTime.now,
                             description: 'You referred professional: x y using email: z'.gsub(/[xyz]/, 'x' => referral_params[:guest_first_name], 'y' => referral_params[:guest_last_name], 'z' => referral_params[:email]),
                             admin_award_id: current_user.id
                           )
