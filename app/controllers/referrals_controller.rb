@@ -1,9 +1,9 @@
 class ReferralsController < ApplicationController
   before_action :set_referral, only: %i[show edit update destroy]
-  rescue_from ActiveRecord::RecordNotUnique, :with => :error_render_method
+  rescue_from ActiveRecord::RecordNotUnique, with: :error_render_method
 
   def error_render_method
-      redirect_to(referrals_path, { alert: 'Duplicate referrals are not allowed' })
+    redirect_to(referrals_path, { alert: 'Duplicate referrals are not allowed' })
   end
 
   # GET /referrals or /referrals.json
@@ -34,14 +34,14 @@ class ReferralsController < ApplicationController
       respond_to do |format|
         if @referral.save
 
-          if @referral.medical_prof == true
-            message = "Referral was successfully created. You will recieve the points once an admin approves it."
-          else
-            message = "Referral was successfully created. You will recieve the points once your friend signs into this website."
-          end
+          message = if @referral.medical_prof == true
+                      'Referral was successfully created. You will recieve the points once an admin approves it.'
+                    else
+                      'Referral was successfully created. You will recieve the points once your friend signs into this website.'
+                    end
 
-          format.html { redirect_to(referrals_path, notice: "#{message}") }
-          format.json { render :show, status: :created, location: @referral }
+          format.html { redirect_to(referrals_path, notice: message.to_s) }
+          format.json { render(:show, status: :created, location: @referral) }
 
         else
           format.html { render(:new, status: :unprocessable_entity) }
@@ -58,16 +58,14 @@ class ReferralsController < ApplicationController
       if @referral.update(referral_params)
 
         if referral_params[:admin_approved] && referral_params[:medical_prof]
-          val=1
-          ref=Point.find_by(name:"Professional Referral")
-          if ref != nil
-              val=ref.val
-          end
+          val = 1
+          ref = Point.find_by(name: 'Professional Referral')
+          val = ref.val unless ref.nil?
           temp = PoinEvent.create!(user_id: referral_params[:old_member], balance: val || 3, date: DateTime.now,
-                            description: 'You referred professional: x y using email: z'.gsub(/[xyz]/, 'x' => referral_params[:guest_first_name], 'y' => referral_params[:guest_last_name], 'z' => referral_params[:email]),
-                            admin_award_id: current_user.id
-                          )
-                          
+                                   description: 'You referred professional: x y using email: z'.gsub(/[xyz]/, 'x' => referral_params[:guest_first_name], 'y' => referral_params[:guest_last_name], 'z' => referral_params[:email]),
+                                   admin_award_id: current_user.id
+          )
+
           @referral.update_attribute(:poin_events_id, temp.id)
         end
 
@@ -86,9 +84,7 @@ class ReferralsController < ApplicationController
 
     @referral.destroy!
 
-    if temp.present?
-      PoinEvent.destroy(@referral.poin_events_id)
-    end
+    PoinEvent.destroy(@referral.poin_events_id) if temp.present?
 
     respond_to do |format|
       if current_user.admin
