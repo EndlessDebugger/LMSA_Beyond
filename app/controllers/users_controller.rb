@@ -100,17 +100,17 @@ class UsersController < ApplicationController
   def remove_member
     if current_user.admin?
       other_user = User.find_by(email: params[:email])
-      if current_user.id != other_user.id
+      if current_user.id == other_user.id
+        redirect_to(admin_root_path, alert: 'Cannot remove yourself!')
+      else
         Referral.where(old_member: other_user.id).destroy_all
         EventHist.where(user_id: other_user.id).destroy_all
         PoinEvent.where(user_id: other_user.id).destroy_all
         other_user.delete
-        redirect_to(admin_root_path, alert: "The removed member email: " + String(other_user.email))
-      else 
-        redirect_to(admin_root_path, alert: "Cannot remove yourself!")
+        redirect_to(admin_root_path, alert: 'The removed member email: ' + String(other_user.email))
       end
-    else 
-      redirect_to(root_path, alert: "You're not allowed to do this!") 
+    else
+      redirect_to(root_path, alert: "You're not allowed to do this!")
     end
   end
 

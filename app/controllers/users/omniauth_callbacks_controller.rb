@@ -28,14 +28,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       # not the best way as a user could make a ton of referrals for random emails and if those emails sign up w/o knowledge of being referred then it would be unjust points
       # maybe auto email for being referred could help, or a referral code? -Daniel
       reffed = Referral.find_by(email: current_user.email)
-      unless reffed.nil?
-        if reffed.admin_approved.nil? && !reffed.admin_approved && !reffed.medical_prof
-          temp = PoinEvent.create!(user_id: reffed.old_member, balance: (Point.find_by(name:"Friend Referral").val || 1), date: DateTime.now,
-                            description: 'You referred friend x y using email: z'.gsub(/[xyz]/, 'x' => reffed.guest_first_name, 'y' => reffed.guest_last_name, 'z' => reffed.email),
-                            admin_award_id: 0
-          )
-          reffed.update_attribute(:poin_events_id, temp.id)
-        end
+      if !reffed.nil? && (reffed.admin_approved.nil? && !reffed.admin_approved && !reffed.medical_prof)
+        temp = PoinEvent.create!(user_id: reffed.old_member, balance: (Point.find_by(name: 'Friend Referral').val || 1), date: DateTime.now,
+                                 description: 'You referred friend x y using email: z'.gsub(/[xyz]/, 'x' => reffed.guest_first_name, 'y' => reffed.guest_last_name, 'z' => reffed.email),
+                                 admin_award_id: 0
+        )
+        reffed.update_attribute(:poin_events_id, temp.id)
       end
 
       # this statement is for first time users to fill out their profiles
@@ -68,7 +66,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def formatUserImg(input)
-    input.sub! '=s96-c' , '=s200-c'
+    input.sub!('=s96-c', '=s200-c')
   end
-  
 end

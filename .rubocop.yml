@@ -72,6 +72,8 @@ Metrics/ParameterLists:
   Enabled: false
 Lint/UnusedMethodArgument:
   Enabled: false
+Style/IdenticalConditionalBranches:
+  Enabled: false
 ###########################################################
 ####################### Gemspec ###########################
 ###########################################################
@@ -451,7 +453,7 @@ Style/StringChars: # (new in 1.12)
     Enabled: true
 
 Style/StringConcatenation:
-    Enabled: true
+    Enabled: false
 
 Style/SwapValues: # (new in 1.1)
     Enabled: true
